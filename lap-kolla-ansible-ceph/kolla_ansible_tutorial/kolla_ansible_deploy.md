@@ -165,4 +165,5 @@ restore_discard_excess_bytes = true
 - kolla-ansible prechecks -i multinode
 - kolla-ansible deploy -i multinode
 - kolla-ansible post-deploy -i multinode
+- kolla-ansible reconfigure -i multinode --tags neutron
 
