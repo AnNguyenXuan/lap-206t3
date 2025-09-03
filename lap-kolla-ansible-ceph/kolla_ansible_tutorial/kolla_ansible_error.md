@@ -27,3 +27,16 @@
 3. [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: 
 IP address mismatch, certificate is not valid for '10.10.210.11
 - Lỗi này do SSL certificate không hợp lệ với IP
+- Task này của tôi lỗi do lưu SSL cũ tích hợp với IP khác, do đó trong quá trình build San file cert đã trỏ nhầm
+- Xóa toàn bộ key cũ và build lại key mới
+
+4. RUNNING HANDLER [mariadb : Wait for first MariaDB service to sync WSREP]
+- Task này tùy thuộc vào error trả về sẽ có 2 phương án xử lý
+- Nếu database chưa kịp khởi động thành công, thì deploy lại là xong
+- Nếu lỗi không check được Mariadb, kiểm tra xem đã khai báo trong inventory biến Mariadb tại Group common chưa
+
+
+### Lỗi sau khi đã triển khai
+1. Lỗi SSL/TLS
+- Lỗi không đúng đường dẫn SSL của Debian, kiểm tra các file login và đổi lại đường dẫn export OS_CACERT=/etc/ssl/certs/ca-certificates.crt
+

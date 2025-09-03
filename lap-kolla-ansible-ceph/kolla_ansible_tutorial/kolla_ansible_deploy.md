@@ -42,7 +42,7 @@ Copy các file cấu hình mẫu vào thư mục cấu hình
 Cài đặt một số thư viện cần thiết
 - kolla-ansible install-deps
 ```
-#### Giới thiệu Openstack
+#### Giới thiệu Openstack, kiến trúc triển khai
 1. Cấu trúc dịch vụ
 ```
 Trong kiến trúc build của kolla-ansible, mặc định sẽ có các dịch vụ của Openstack sau :
@@ -59,8 +59,23 @@ Ngoài ra, ta còn cần một số dịch vụ :
 3. Rabbitmq : giao tiêp hàng đợi, trung gian giúp phân phối quá trình liên lạc giữa các dịch vụ của Openstack
 ```
 
+2. Kiến trúc triển khai
+```
+Hệ thống bao gồm 9 node, trong đó có :
+- 2 node controller
+- 2 node computer
+- 3 node ceph
+- 1 node database
+- 1 node deploy
+
+Thiết kế mạng mô phỏng sẽ là
+- ens192 : giao tiếp bên ngoài cụm ceph
+- ens224 : giao tiếp nội bộ cụm
+- ens256 : giao tiếp bên ngoài cụm openstack
+```
+
 #### Cấu hình Kolla-ansible với cụm Ceph, yêu cầu đã có cụm Ceph
-1. Cấu hình
+1. Cấu hình inventory file
 
 2. Copy các thông tin cần thiết từ cụm Ceph về node deploy
 
