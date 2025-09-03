@@ -31,8 +31,13 @@ Lưu ý, bất kì khi nào làm việc với kolla-ansible, ta cần truy cập
 ```
 3. Clone mã nguồn, thiết lập nhánh triển khai
 ```
-Cài mã nguồn về máy
-- pip install git+https://opendev.org/openstack/kolla-ansible@master
+Cài mã nguồn về máy, cài bản theo nhu cầu
+- git clone https://opendev.org/openstack/kolla-ansible.git
+- cd kolla-ansible
+- git branch -a
+- git checkout stable/2025.1
+- pip install .
+- kolla-ansible --version
 Tạo thư mục cấu hình
 - mkdir -p /etc/kolla
 - chown $USER:$USER /etc/kolla
