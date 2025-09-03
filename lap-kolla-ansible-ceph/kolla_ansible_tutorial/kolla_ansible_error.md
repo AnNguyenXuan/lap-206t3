@@ -35,6 +35,9 @@ IP address mismatch, certificate is not valid for '10.10.210.11
 - Nếu database chưa kịp khởi động thành công, thì deploy lại là xong
 - Nếu lỗi không check được Mariadb, kiểm tra xem đã khai báo trong inventory biến Mariadb tại Group common chưa
 
+5. TASK [service-ks-register : keystone | Creating/deleting services] :
+Could not find versioned identity endpoints when attempting to authenticate. Please check that your auth_url is correct. SSL exception connecting to https://10.10.210.9:5000: HTTPSConnectionPool(host='10.10.210.9', port=5000): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:992)')))\n", "module_stdout": "", "msg": "MODULE FAILURE: No start of json char found\nSee stdout/stderr for the exact error", "rc": 1}
+
 
 ### Lỗi sau khi đã triển khai
 1. Lỗi SSL/TLS

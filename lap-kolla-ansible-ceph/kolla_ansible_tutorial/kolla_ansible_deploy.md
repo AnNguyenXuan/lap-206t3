@@ -165,7 +165,7 @@ backup_ceph_stripe_count = 0
 restore_discard_excess_bytes = true
 ```
 #### Khởi tạo dự án
-- kolla-ansible certificates -i multinode
+- kolla-ansible certificates -i multinode : không nên dùng lệnh này nếu config Let’s Encrypt
 - kolla-ansible bootstrap-servers -i multinode
 - kolla-ansible prechecks -i multinode
 - kolla-ansible deploy -i multinode
