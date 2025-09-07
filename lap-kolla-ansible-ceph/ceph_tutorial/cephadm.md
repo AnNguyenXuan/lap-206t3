@@ -12,9 +12,7 @@ apt-get update
 Lệnh triển khai trên node monitor ceph
 cephadm bootstrap --mon-ip 10.10.210.20 --cluster-network 10.10.210.0/24 --initial-dashboard-user admin --initial-dashboard-password Ohm_HN2506@
 
-cephadm add-repo --release squid
 cephadm install ceph-common
-
 
 Orchestrator (ceph orch …) cần SSH không mật khẩu để deploy container sang các host mới
 ssh-copy-id -f -i /etc/ceph/ceph.pub root@10.10.210.18
@@ -37,7 +35,7 @@ ceph orch host label add openstack-data-2 _admin
 
 Add 2 node mon còn lại
 ceph orch daemon add mon openstack-data-1:10.10.210.18
-ceph orch daemon add mon openstack-data-1:10.10.210.19
+ceph orch daemon add mon openstack-data-2:10.10.210.19
 ceph orch apply mon --placement="openstack-data-1,openstack-data-2" --dry-run
 ceph orch apply mon --placement="openstack-data-1,openstack-data-2"
 
@@ -46,6 +44,7 @@ ceph orch ls --service_type=mon --format yaml
 Tạo OSD quản lý các ổ cứng
 ceph orch host label add openstack-data-1 osd
 ceph orch host label add openstack-data-2 osd
+ceph orch host label add openstack-mon-1 osd
 ceph orch host label add openstack-data-3 osd
 
 Xem danh sách thiết bị
@@ -59,6 +58,9 @@ ceph orch daemon add osd openstack-data-1:/dev/sdd
 ceph orch daemon add osd openstack-data-2:/dev/sdb  
 ceph orch daemon add osd openstack-data-2:/dev/sdc  
 ceph orch daemon add osd openstack-data-2:/dev/sdd    
+ceph orch daemon add osd openstack-mon-1:/dev/sdb  
+ceph orch daemon add osd openstack-mon-1:/dev/sdc  
+ceph orch daemon add osd openstack-mon-1:/dev/sdd 
 ceph orch daemon add osd openstack-data-3:/dev/sdb  
 ceph orch daemon add osd openstack-data-3:/dev/sdc  
 ceph orch daemon add osd openstack-data-3:/dev/sdd   
@@ -84,9 +86,11 @@ Tạo pool cho OPS
 ceph osd pool create volumes 64 64
 ceph osd pool create images 16 16
 ceph osd pool create backups 16 16
+ceph osd pool create vms 32 32
 rbd pool init volumes
 rbd pool init images
 rbd pool init backups
+rbd pool init vms
 
 Truy cập /etc/ceph/ceph.conf và xóa khoảng trắng
 

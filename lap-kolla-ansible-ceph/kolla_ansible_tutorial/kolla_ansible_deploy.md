@@ -100,24 +100,26 @@ rbd pool init vms
 ```
 Copy file cấu hình cụm Ceph tới node deploy
 ```
-ssh 10.10.210.32 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.conf < /etc/ceph/ceph.conf
-ssh 10.10.210.32 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.conf < /etc/ceph/ceph.conf
-ssh 10.10.210.32 sudo tee /etc/kolla/config/nova/ceph.conf < /etc/ceph/ceph.conf
-ssh 10.10.210.32 sudo tee /etc/kolla/config/glance/ceph.conf < /etc/ceph/ceph.conf
+ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.conf < /etc/ceph/ceph.conf
+ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.conf < /etc/ceph/ceph.conf
+ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/ceph.conf < /etc/ceph/ceph.conf
+ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.conf < /etc/ceph/ceph.conf
 ```
 Tạo key cho user Openstack ứng với mỗi RDB Ceph để xác thực CephX
 ```
 ceph auth get-or-create client.glance mon 'profile rbd' osd 'profile rbd pool=images' mgr 'profile rbd pool=images'
 ceph auth get-or-create client.cinder mon 'profile rbd' osd 'profile rbd pool=volumes, profile rbd pool=vms, profile rbd-read-only pool=images' mgr 'profile rbd pool=volumes, profile rbd pool=vms'
 ceph auth get-or-create client.cinder-backup mon 'profile rbd' osd 'profile rbd pool=backups' mgr 'profile rbd pool=backups'
+
+- Sau khi tạo key xong, nhớ xóa khoảng trắng trong file khi copy sang các node
 ```
 Copy key sang node deploy
 ```
-ceph auth get-or-create client.cinder | ssh 10.10.240.32 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.client.cinder.keyring
-ceph auth get-or-create client.cinder | ssh 10.10.240.32 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder.keyring
-ceph auth get-or-create client.cinder-backup | ssh 10.10.240.32 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring
-ceph auth get-or-create client.cinder | ssh 10.10.240.32 sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring
-ceph auth get-or-create client.glance | ssh 10.10.240.32 sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring
+ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.client.cinder.keyring
+ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder.keyring
+ceph auth get-or-create client.cinder-backup | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring
+ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring
+ceph auth get-or-create client.glance | ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring
 ```
 3. Cấu hình dịch vụ Openstack tại node deploy
 
@@ -164,7 +166,12 @@ backup_ceph_stripe_unit = 0
 backup_ceph_stripe_count = 0
 restore_discard_excess_bytes = true
 ```
-#### Khởi tạo dự án
+4. Cấu hình cho Kolla-Ansible
+```
+Tạo key cho các dịch vụ
+- kolla-genpwd
+```
+#### Lệnh tạo, kiểm tra, tái cấu hình dự án
 - kolla-ansible certificates -i multinode : không nên dùng lệnh này nếu config Let’s Encrypt
 - kolla-ansible bootstrap-servers -i multinode
 - kolla-ansible prechecks -i multinode

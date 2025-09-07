@@ -37,9 +37,16 @@ IP address mismatch, certificate is not valid for '10.10.210.11
 
 5. TASK [service-ks-register : keystone | Creating/deleting services] :
 Could not find versioned identity endpoints when attempting to authenticate. Please check that your auth_url is correct. SSL exception connecting to https://10.10.210.9:5000: HTTPSConnectionPool(host='10.10.210.9', port=5000): Max retries exceeded with url: / (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:992)')))\n", "module_stdout": "", "msg": "MODULE FAILURE: No start of json char found\nSee stdout/stderr for the exact error", "rc": 1}
+- SSL chưa reset, build lại file ssl
+
+6. Fail build cinder-backup 
+- Fix bằng cách copy key user cinder vào thư mục của cinder-backup
 
 
 ### Lỗi sau khi đã triển khai
 1. Lỗi SSL/TLS
 - Lỗi không đúng đường dẫn SSL của Debian, kiểm tra các file login và đổi lại đường dẫn export OS_CACERT=/etc/ssl/certs/ca-certificates.crt
+
+2. Lỗi driver cinder-volume kết nối ceph : ERROR cinder.service [-] Manager for service cinder-volume openstack-controller-1@ceph is reporting problems, not sending heartbeat. Service will appear "down".2025-09-06, WARNING cinder.volume.manager [None req-1d76503b-ad6c-494f-97d4-04634873b021 - - - - - -] Update driver status failed: (config name ceph) is uninitialized.
+- 
 

@@ -3,6 +3,15 @@
 ceph osd pool create <pool_name> <pg_num> <pgp_num>
 ceph osd pool create images 256 256
 
+<pg_num>, viết tắt của Placement Group Number
+PG là một tập hợp các đối tượng (objects) được Ceph gộp lại để phân phối trên các OSD. Số lượng PG ảnh hưởng trực tiếp đến hiệu suất và khả năng cân bằng dữ liệu của cluster
+
+<pgp_num>, viết tắt của Placement Group for Placement Number
+Về cơ bản, pgp_num phải bằng hoặc lớn hơn pg_num
+
+pg_num = Số lượng PG đã tạo.
+pgp_num = Số lượng PG đang được sử dụng để lưu trữ dữ liệu.
+
 rbd pool init volumes : khởi tạo metadata cho pool
 
 #### Kiểm tra quyền bảo mật cephx authenticatio

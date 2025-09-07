@@ -11,5 +11,5 @@
 - systemctl restart chrony
 ```
 ### Tổng hợp lệnh Chrony
-- chronyc sources : kiểm tra trạng thái đồng bộ thời gian node, kết quả hiển thị như đây là ok
-`^* 10.10.210.20                  4   6    17     3    -29us[-1119us] +/-   24ms`
+chronyc sources : kiểm tra trạng thái đồng bộ thời gian node, kết quả hiển thị như đây là ok
+``^* 10.10.210.20 4 6 17 3    -29us[-1119us] +/-   24ms``
