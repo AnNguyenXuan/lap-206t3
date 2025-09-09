@@ -48,5 +48,8 @@ Could not find versioned identity endpoints when attempting to authenticate. Ple
 - Lỗi không đúng đường dẫn SSL của Debian, kiểm tra các file login và đổi lại đường dẫn export OS_CACERT=/etc/ssl/certs/ca-certificates.crt
 
 2. Lỗi driver cinder-volume kết nối ceph : ERROR cinder.service [-] Manager for service cinder-volume openstack-controller-1@ceph is reporting problems, not sending heartbeat. Service will appear "down".2025-09-06, WARNING cinder.volume.manager [None req-1d76503b-ad6c-494f-97d4-04634873b021 - - - - - -] Update driver status failed: (config name ceph) is uninitialized.
-- 
+- Lỗi này do cấu hình trong [ceph] chưa đủ
+
+3. Lỗi ERROR nova.servicegroup.drivers.db [-] The services table record for the nova-compute service on host openstack-computer-1 is gone. You either need to stop this service if it should be deleted or restart it to recreate the record in the database.: nova.exception_Remote.ServiceNotFound_Remote
+- Lỗi này do
 

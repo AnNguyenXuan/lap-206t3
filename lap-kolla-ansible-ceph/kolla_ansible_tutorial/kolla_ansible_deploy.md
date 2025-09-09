@@ -120,6 +120,7 @@ ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/con
 ceph auth get-or-create client.cinder-backup | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring
 ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring
 ceph auth get-or-create client.glance | ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring
+ceph auth get-key client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/client.cinder.key
 ```
 3. Cấu hình dịch vụ Openstack tại node deploy
 
@@ -154,9 +155,11 @@ rbd_flatten_volume_from_snapshot = false
 rbd_max_clone_depth = 5
 rbd_store_chunk_size = 4
 rados_connect_timeout = -1
+rbd_user = cinder
+rbd_secret_uuid = <cấu hình tham số này sau>, copy theo [rbd1]
 
 nano /etc/kolla/config/cinder/cinder-backup.conf
-[ceph]
+[default]
 backup_driver = cinder.backup.drivers.ceph
 backup_ceph_conf = /etc/ceph/ceph.conf
 backup_ceph_user = cinder-backup

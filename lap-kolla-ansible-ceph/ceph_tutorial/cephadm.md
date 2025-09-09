@@ -65,7 +65,6 @@ ceph orch daemon add osd openstack-data-3:/dev/sdb
 ceph orch daemon add osd openstack-data-3:/dev/sdc  
 ceph orch daemon add osd openstack-data-3:/dev/sdd   
 
-
 Bỏ auto scale
 ceph config set global osd_pool_default_pg_autoscale_mode off
 
@@ -93,27 +92,6 @@ rbd pool init backups
 rbd pool init vms
 
 Truy cập /etc/ceph/ceph.conf và xóa khoảng trắng
-
-ceph osd pool create <pool_name> <pg_num> <pgp_num>
-
-<pg_num>, viết tắt của Placement Group Number
-PG là một tập hợp các đối tượng (objects) được Ceph gộp lại để phân phối trên các OSD. Số lượng PG ảnh hưởng trực tiếp đến hiệu suất và khả năng cân bằng dữ liệu của cluster
-
-<pgp_num>, viết tắt của Placement Group for Placement Number
-Về cơ bản, pgp_num phải bằng hoặc lớn hơn pg_num
-
-pg_num = Số lượng PG đã tạo.
-pgp_num = Số lượng PG đang được sử dụng để lưu trữ dữ liệu.
-
-Ceph yêu cầu ổ cứng sạch, nếu trong quá trình cài ổ cứng có dữ liệu, rất dễ bị lỗi khi ceph sẽ đọc được bảng phân vùng gpt
-
-Ceph yêu cầu key docker sạch nên cần xóa bỏ key docker cũ, trong quá trình cài đặt nếu thấy docker thì ansible sẽ tự động xóa 
-rm /etc/apt/sources.list.d/docker.list 
-
-Bật 
-#containerized_deployment: True
-
-osd_auto_discovery
 
 
 
