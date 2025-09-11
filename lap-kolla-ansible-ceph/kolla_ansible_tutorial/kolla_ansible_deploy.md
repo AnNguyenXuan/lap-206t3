@@ -1,6 +1,6 @@
-### Tài liệu triển khai kolla-ansible
-#### Chuẩn bị môi trường
-1. Yêu cầu
+# Tài liệu triển khai kolla-ansible
+## Chuẩn bị môi trường
+### 1. Yêu cầu
 - Chuẩn bị một node deploy cài kolla-ansible, các node còn lại được gọi là node setup. Sử dụng quyền root tại node deploy, đảm bảo /etc/hosts có nội dung sau:
 ```
 <tên_node_setup> < ip_node_setup>
@@ -16,7 +16,7 @@
 ```
 - apt install -y chrony ufw
 ```
-2. Tạo môi trường ảo để tránh xung đột
+### 2. Tạo môi trường ảo để tránh xung đột
 ```
 Cài đặt một số thư viện cần thiết
 - apt update
@@ -29,7 +29,7 @@ Truy cập môi trường ảo
 - deactivate
 Lưu ý, bất kì khi nào làm việc với kolla-ansible, ta cần truy cập môi trường ảo
 ```
-3. Clone mã nguồn, thiết lập nhánh triển khai
+### 3. Clone mã nguồn, thiết lập nhánh triển khai
 ```
 Cài mã nguồn về máy, cài bản theo nhu cầu
 - git clone https://opendev.org/openstack/kolla-ansible.git
@@ -47,8 +47,8 @@ Copy các file cấu hình mẫu vào thư mục cấu hình
 Cài đặt một số thư viện cần thiết
 - kolla-ansible install-deps
 ```
-#### Giới thiệu Openstack, kiến trúc triển khai
-1. Cấu trúc dịch vụ
+## Giới thiệu Openstack, kiến trúc triển khai
+### 1. Cấu trúc dịch vụ
 ```
 Trong kiến trúc build của kolla-ansible, mặc định sẽ có các dịch vụ của Openstack sau :
 1. Keystone : dịch vụ xác thực danh tính
@@ -64,14 +64,14 @@ Ngoài ra, ta còn cần một số dịch vụ :
 3. Rabbitmq : giao tiêp hàng đợi, trung gian giúp phân phối quá trình liên lạc giữa các dịch vụ của Openstack
 ```
 
-2. Kiến trúc triển khai
+### 2. Kiến trúc triển khai
 ```
 Hệ thống bao gồm 9 node, trong đó có :
-- 2 node controller
-- 2 node computer
-- 3 node ceph
-- 1 node database
-- 1 node deploy
+- 2 node controller : 10.10.210.14-15
+- 2 node computer : 10.10.210.16-17
+- 3 node ceph : 10.10.210.18-20
+- 1 node database : 10.10.210.13
+- 1 node deploy : 10.10.210.10
 
 Thiết kế mạng mô phỏng sẽ là
 - ens192 : giao tiếp bên ngoài cụm ceph
@@ -79,10 +79,8 @@ Thiết kế mạng mô phỏng sẽ là
 - ens256 : giao tiếp bên ngoài cụm openstack
 ```
 
-#### Cấu hình Kolla-ansible với cụm Ceph, yêu cầu đã có cụm Ceph
-1. Cấu hình inventory file
-
-2. Copy các thông tin cần thiết từ cụm Ceph về node deploy
+## Cấu hình Kolla-ansible với cụm Ceph, yêu cầu đã có cụm Ceph
+### 1. Copy các thông tin cần thiết từ cụm Ceph về node deploy
 
 Đảm bảo đã tạo 4 pool trên cụm Ceph
 ```
@@ -110,9 +108,9 @@ Tạo key cho user Openstack ứng với mỗi RDB Ceph để xác thực CephX
 ceph auth get-or-create client.glance mon 'profile rbd' osd 'profile rbd pool=images' mgr 'profile rbd pool=images'
 ceph auth get-or-create client.cinder mon 'profile rbd' osd 'profile rbd pool=volumes, profile rbd pool=vms, profile rbd-read-only pool=images' mgr 'profile rbd pool=volumes, profile rbd pool=vms'
 ceph auth get-or-create client.cinder-backup mon 'profile rbd' osd 'profile rbd pool=backups' mgr 'profile rbd pool=backups'
-
-- Sau khi tạo key xong, nhớ xóa khoảng trắng trong file khi copy sang các node
 ```
+### Lưu ý : Sau khi tạo key xong, nhớ xóa khoảng trắng trong file khi copy sang các node
+
 Copy key sang node deploy
 ```
 ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.client.cinder.keyring
@@ -122,7 +120,7 @@ ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/con
 ceph auth get-or-create client.glance | ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring
 ceph auth get-key client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/client.cinder.key
 ```
-3. Cấu hình dịch vụ Openstack tại node deploy
+### 2. Cấu hình dịch vụ Openstack tại node deploy
 
 Cấu hình glance.conf
 ```
@@ -169,13 +167,29 @@ backup_ceph_stripe_unit = 0
 backup_ceph_stripe_count = 0
 restore_discard_excess_bytes = true
 ```
-4. Cấu hình cho Kolla-Ansible
+Cấu hình neutron
+```
+nano /etc/kolla/config/neutron/dnsmasq.conf 
+dhcp-option-force=26,1450
+
+nano /etc/kolla/config/neutron/ml2_conf.ini
+[ml2_type_vlan]
+network_vlan_ranges = physnet1
+
+nano /etc/kolla/config/neutron/dhcp_agent.ini
+[DEFAULT]
+dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+enable_isolated_metadata = true
+interface_driver = openvswitch
+```
+
+### 3. Cấu hình cho Kolla-Ansible
 ```
 Tạo key cho các dịch vụ
 - kolla-genpwd
+- kolla-ansible certificates -i multinode
 ```
-#### Lệnh tạo, kiểm tra, tái cấu hình dự án
-- kolla-ansible certificates -i multinode : không nên dùng lệnh này nếu config Let’s Encrypt
+## Lệnh tạo, kiểm tra, tái cấu hình dự án
 - kolla-ansible bootstrap-servers -i multinode
 - kolla-ansible prechecks -i multinode
 - kolla-ansible deploy -i multinode
