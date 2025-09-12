@@ -154,7 +154,7 @@ rbd_max_clone_depth = 5
 rbd_store_chunk_size = 4
 rados_connect_timeout = -1
 rbd_user = cinder
-rbd_secret_uuid = <cấu hình tham số này sau>, copy theo [rbd1]
+rbd_secret_uuid = <cấu hình tham số này sau>, copy theo [rbd1] trong cinder.conf
 
 nano /etc/kolla/config/cinder/cinder-backup.conf
 [default]
@@ -185,6 +185,9 @@ interface_driver = openvswitch
 
 ### 3. Cấu hình cho Kolla-Ansible
 ```
+Khai báo nội dung inventory
+
+
 Tạo key cho các dịch vụ
 - kolla-genpwd
 - kolla-ansible certificates -i multinode
