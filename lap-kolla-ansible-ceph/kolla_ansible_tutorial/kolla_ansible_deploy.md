@@ -12,7 +12,7 @@
 - ssh-keygen
 - ssh-copy-id root@<tên_node_setup>
 ```
-- Đảm bảo cài đặt chrony, ufw tại tất cả các node setup
+- Đảm bảo cài đặt chrony, ufw , sudo tại tất cả các node setup
 ```
 - apt install -y chrony ufw
 ```
@@ -32,6 +32,7 @@ Lưu ý, bất kì khi nào làm việc với kolla-ansible, ta cần truy cập
 ### 3. Clone mã nguồn, thiết lập nhánh triển khai
 ```
 Cài mã nguồn về máy, cài bản theo nhu cầu
+- source <tên_môi_trường>/bin/activate
 - git clone https://opendev.org/openstack/kolla-ansible.git
 - cd kolla-ansible
 - git branch -a
@@ -77,6 +78,7 @@ Thiết kế mạng mô phỏng sẽ là
 - ens192 : giao tiếp bên ngoài cụm ceph
 - ens224 : giao tiếp nội bộ cụm
 - ens256 : giao tiếp bên ngoài cụm openstack
+- ens161 : giao tiếp nội bộ giữa các máy ảo
 ```
 
 ## Cấu hình Kolla-ansible với cụm Ceph, yêu cầu đã có cụm Ceph
