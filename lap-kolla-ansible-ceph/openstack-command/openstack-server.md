@@ -2,6 +2,8 @@
 ```
 Đổi password máy ảo : openstack server set --root-password <id-server>
 
+Tạo flavor cho máy ảo : openstack flavor create --vcpus 4 --ram 8192 --disk 10 --ephemeral 10 m2.large
+
 Tạo image cho máy ảo : openstack image create "Debian12" --file /path/images/debian12.img --disk-format qcow2 --container-format bare --public 
 
 Tạo boot volume : openstack volume create --image <IMAGE_ID> --size <SIZE_GB> <VOLUME_NAME>
@@ -21,6 +23,8 @@ Tao subnet : openstack subnet create --subnet-range 10.10.240.0/24 --gateway 10.
 --dns-nameserver 1.1.1.1 provider1-v4
 
 Tao external network : openstack network set --external provider1
+
+Add external router : openstack router set router1 --external-gateway provider1
 
 Tao rule : openstack security group rule create --proto icmp default
 
