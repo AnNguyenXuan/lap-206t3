@@ -89,7 +89,7 @@ Tùy thuộc vào nhu cầu người dùng, ta sẽ cài đặt các dịch vụ
 ```
 #### Cấu hình triển khai Ceph block device
 ```
-- Tạo một file hosts tại thư mục ceph-ansible và cấu hình. Ở đây ta khai báo tên các node được sử dụng để cài đặt các dịch vụ của Ceph. Một kiến trúc cụm nhỏ cần ít nhất số node Mons là lẻ (1,3,5,..), Mgrs thường triển khai số lượng bằng với Mons và nằm cùng node Mons. Osds là dịch vụ quản lý ổ đĩa, có thể triển khai chung hoặc riêng tùy vai trò
+- Tạo một file hosts tại thư mục ceph-ansible và cấu hình. Ở đây ta khai báo tên các node được sử dụng để cài đặt các dịch vụ của Ceph. Một kiến trúc cụm nhỏ cần ít nhất số node Mons là lẻ (1,3,5,..) để đạt Quotum, Mgrs thường triển khai số lượng bằng với Mons và nằm cùng node Mons. Osds là dịch vụ quản lý ổ đĩa, có thể triển khai chung hoặc riêng tùy vai trò
 
 [mons]
 <tên_node_setup>

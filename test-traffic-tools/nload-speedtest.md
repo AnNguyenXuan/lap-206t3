@@ -18,4 +18,11 @@ sudo apt-get install speedtest
 
 chay lenh nload 
 chay lenh speedtest -s 2552
+
+
+ip netns list     
+ip a | grep tap 
+tcpdump -i tap<id> icmp -n
+
+Do bang phan mem iperf3
 ```
