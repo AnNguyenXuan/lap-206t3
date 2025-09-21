@@ -25,4 +25,5 @@ ip a | grep tap
 tcpdump -i tap<id> icmp -n
 
 Do bang phan mem iperf3
+sudo apt-get install iperf3
 ```

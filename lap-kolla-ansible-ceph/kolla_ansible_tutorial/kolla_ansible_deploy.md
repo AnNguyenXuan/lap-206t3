@@ -65,7 +65,7 @@ Ngoài ra, ta còn cần một số dịch vụ :
 3. Rabbitmq : giao tiêp hàng đợi, trung gian giúp phân phối quá trình liên lạc giữa các dịch vụ của Openstack
 ```
 
-### 2. Kiến trúc triển khai
+### 2. Kiến trúc triển khai (trong lab này)
 ```
 Hệ thống bao gồm 9 node, trong đó có :
 - 2 node controller : 10.10.210.14-15

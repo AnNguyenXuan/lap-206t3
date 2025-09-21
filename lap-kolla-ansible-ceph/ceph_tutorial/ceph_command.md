@@ -23,3 +23,10 @@ Trong đó
 - auth_cluster_required : yêu cầu xác thực khi các monitor giao tiếp trong cụm Ceph
 - auth_service_required : yêu cầu xác thực khi các service giao tiếp trong cụm Ceph
 - auth_client_required : yêu cầu xác thực khi các client giao tiếp với cụm Ceph
+
+#### Kiểm tra trạng thái cụm
+ceph health detail
+ceph osd tree
+ceph osd df tree
+ceph tell osd.* bench
+ceph daemon osd.<id> perf dump | jq '.bluestore'

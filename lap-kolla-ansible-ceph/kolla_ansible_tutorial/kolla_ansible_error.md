@@ -1,7 +1,9 @@
 ### Tổng hợp các lỗi task khi bootstrap-servers
 1. TASK [openstack.kolla.etc_hosts : Ensure hostname does not point to 127.0.1.1 in /etc/hosts]
-- task này do việc cấu hình tên host trong multinode sai tên
+- task này do việc cấu hình tên host trong /etc/hosts
 - Để fix, ta thêm tên node deploy vào /etc/hosts, đồng thời phải trùng với tên cấu hình trong multinode
+- Để fix, loại bỏ cấu hình 127.0.1.1 gán với tên máy
+- Ngoài ra, có thể còn do chưa cài sudo
 
 ### Tổng hợp các lỗi task khi prechecks
 1. Check if cinder_cluster_name is configured for HA configurations
