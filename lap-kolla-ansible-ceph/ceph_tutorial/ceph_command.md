@@ -30,3 +30,10 @@ ceph osd tree
 ceph osd df tree
 ceph tell osd.* bench
 ceph daemon osd.<id> perf dump | jq '.bluestore'
+
+#### Xử lý dữ liệu OSD
+ceph orch device zap openstack-node-2 /dev/sdc --force
+
+#### Các lệnh về Object Storage
+ 
+

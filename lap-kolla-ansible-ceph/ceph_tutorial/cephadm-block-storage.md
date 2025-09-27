@@ -1,20 +1,27 @@
-Yêu cầu môi trường, cài docker, curl trên tất cả các node
+### Các khai niệm về Block Storage Ceph
+```
+Ceph Object Gateway (còn gọi là RADOS Gateway hay RGW) là một thành phần trong hệ thống lưu trữ phân tán Ceph, dùng để cung cấp giao diện object storage (lưu trữ đối tượng) tương tự như Amazon S3 hoặc OpenStack Swift.
 
-Chuẩn bị cài cephadm 
-CEPH_RELEASE=19.2.3
-curl --silent --remote-name --location https://download.ceph.com/rpm-${CEPH_RELEASE}/el9/noarch/cephadm
+Để xây dựng 
+```
+### Cài đặt Block Storage Ceph
+```
+Yêu cầu môi trường, cài docker, curl, lvm2 trên tất cả các node
+
+Tại node đầu tiên, cài cephadm 
+
+curl --silent --remote-name --location \
+https://github.com/ceph/ceph/raw/quincy/src/cephadm/cephadm
 chmod +x cephadm
-./cephadm add-repo --release squid
-apt-get update
-./cephadm install
+sudo ./cephadm add-repo --release squid
+sudo apt update
+sudo ./cephadm install
 
-
-Lệnh triển khai trên node monitor ceph
-cephadm bootstrap --mon-ip 10.10.210.20 --cluster-network 10.10.210.0/24 --initial-dashboard-user admin --initial-dashboard-password Ohm_HN2506@
-
+Tạo node monitor đầu tiên
+cephadm bootstrap --mon-ip 10.10.210.20 --cluster-network 10.10.210.0/24 --initial-dashboard-user admin --initial-dashboard-password 'Ohm_p2)6T3'
 cephadm install ceph-common
 
-Orchestrator (ceph orch …) cần SSH không mật khẩu để deploy container sang các host mới
+Orchestrator (ceph orch …) cần SSH không mật khẩu để deploy container sang các host mới từ node monitor hiện tại
 ssh-copy-id -f -i /etc/ceph/ceph.pub root@10.10.210.18
 ssh-copy-id -f -i /etc/ceph/ceph.pub root@10.10.210.19
 
@@ -92,6 +99,6 @@ rbd pool init backups
 rbd pool init vms
 
 Truy cập /etc/ceph/ceph.conf và xóa khoảng trắng
-
+```
 
 
