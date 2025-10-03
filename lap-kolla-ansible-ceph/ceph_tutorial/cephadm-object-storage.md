@@ -322,3 +322,9 @@ Admin Ops API : lớp quản trị hệ thống, cần có 1 user admin tạo
 ```
 Chúng ta có user và subuser, 
 ```
+# Quản lý cụm
+```
+# Xóa bucket
+radosgw-admin bucket rm --bucket=warp-benchmark-bucket --purge-objects
+
+```
