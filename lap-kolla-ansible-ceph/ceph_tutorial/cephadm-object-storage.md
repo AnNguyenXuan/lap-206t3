@@ -106,7 +106,10 @@ radosgw-admin period update --commit
 ```
 # Deploy rgw
 ```
-ceph orch apply rgw s3.htv --port 8080 --placement="1 openstack-mon-1"
+ceph orch apply rgw s3.htv \
+  --realm=s3 --zone=htv \
+  --port 8080 \
+  --placement="3 openstack-mon-1 openstack-data-1 openstack-data-2"
 
 ceph orch ps --daemon_type rgw
 ```

@@ -17,3 +17,4 @@
 
 6. README
 - cách xây dựng HAProxy từ source
+

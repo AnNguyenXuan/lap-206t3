@@ -16,4 +16,6 @@ ps aux | grep <name> : lọc phiên theo tên
 kill -TERM <pid> : xóa phiên theo pid
 tail -n <số dòng> <file>: xem 50 dòng cuối 1 file
 tail -f <file> : theo dõi file
+du -sh * : xem dung lượng tệp tin và thư mục
+df -h : xem dung lượng phân vùng
 ```

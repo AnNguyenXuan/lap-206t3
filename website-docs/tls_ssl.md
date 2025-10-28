@@ -2,6 +2,11 @@
 #### Giới thiệu TLS/SSL
 ```
 - Chứng chỉ SSL được thiết kế để bảo mật web
++ Hiện nay chứng chỉ này bao gồm 4 phiên bản 
+1. SSL
+2. TLS 1.1
+3. TLS 1.2
+4. TLS 1.3
 - Nó có 3 file quan trọng:
 + crt : tổ chức chứng thực
 + cert : public key
