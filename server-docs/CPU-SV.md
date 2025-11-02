@@ -3,6 +3,24 @@
 Dòng cho máy tính cá nhân : Intel Core Series
 Dòng cho máy trạm (Workstation) : Intel Xeon W-Series
 Dòng cho máy chủ (Server) : Intel Xeon Scalable (Platium, Gold, Silver, Bronze)
+
+Với dòng chip máy tính cá nhân
+Dòng sản phẩm
+CPU Intel Core i có 4 dòng sản phẩm với hiệu năng từ thấp đến cao: i3, i5, i7, i9. Hoặc Intel Core Ultra có Ultra 5, Ultra 7, Ultra 9.
+
+Các sản phẩm bộ vi xử lý của Intel Core i đã trải qua 14 thế hệ nên số ký hiệu sẽ là 14 và Intel Core Ultra mới ra mắt lần đầu nên số ký hiệu sẽ bắt đầu từ 1.
+
+Số ký hiệu sản phẩm (SKU)
+G (G1-G7)	Laptop	Tích hợp nhân đồ họa (iGPU) mạnh mẽ (thường là Intel Iris Xe).
+U	Laptop	Siêu tiết kiệm điện, dành cho laptop mỏng nhẹ.
+P	Laptop	Cân bằng giữa hiệu năng và tiết kiệm điện.
+H	Laptop	Hiệu năng cao, dành cho laptop gaming, đồ họa.
+HK	Laptop	Hiệu năng cao, mở khóa ép xung.
+HX	Laptop	Hiệu năng đỉnh cao, tương đương máy bàn.
+K	PC	Mở khóa ép xung.
+F	PC	Không có iGPU, yêu cầu card đồ họa rời.
+KF	PC	Mở khóa ép xung và không có iGPU.
+T	PC	Tối ưu điện năng, dành cho máy bộ nhỏ gọn.
 ```
 
 ## Phân loại CPU AMD
@@ -10,6 +28,29 @@ Dòng cho máy chủ (Server) : Intel Xeon Scalable (Platium, Gold, Silver, Bron
 Dòng cho máy tính cá nhân : AMD Ryzen 
 Dòng cho máy trạm (workstation) : AMD Ryzen Threadripper
 Dòng cho máy chủ (server) : AMD EPYC
+
+Với dòng chip máy tính cá nhân 
+Dòng sản phẩm
+AMD Ryzen gồm có 4 dòng sản phẩm với hiệu năng tương ứng từ thấp lên cao là AMD Ryzen 3, AMD Ryzen 5, AMD Ryzen 7 và AMD Ryzen 9.
+
+Số thứ tự các thế hệ CPU
+Dựa vào số thứ tự các thế hệ CPU, Chip AMD Ryzen được phân thành 6 đời khác nhau như: Ryzen 1000 Series, Ryzen 2000 Series, Ryzen 3000 Series, Ryzen 4000 Series, Ryzen 5000 Series và Ryzen 6000 Series. Như vậy, trường hợp Chip AMD Ryzen 9 3900X thì chữ số “3” in đậm được xác định là thế hệ chip của 
+
+Sức mạnh CPU
+Các chữ số nằm ở phía sau thế hệ CPU biểu thị cho sức mạnh của chip CPU AMD đó. Quy tắc của những con số này được quy định như sau:
+1, 2, 3: Bộ vi xử lý chip được sản xuất phục vụ cho các công việc văn phòng đơn giản hoặc xem phim, nghe nhạc, lướt web là chủ yếu.
+4, 5, 6: Những con chip này sở hữu sức mạnh và hiệu năng khủng, phục vụ cho các công việc như thiết kế đồ họa, video, chỉnh sửa âm thanh…
+7, 8, 9: Được thiết kế dành riêng cho người dùng chuyên nghiệp có nhu cầu sử dụng thiết bị có hiệu năng mạnh mẽ.
+
+Số ký hiệu sản phẩm (SKU)
+số ký hiệu sản phẩm (SKU) trên chip AMD nhằm biểu thị cho hiệu năng của thiết bị khi được đặt lên bàn cân với hệ và chung dòng. Điều này có thể được nhận thấy qua tốc độ xung nhịp của chip.
+
+G	Chip AMD có tích hợp nhân đồ hợp bên trong
+X	Chip AMD tốn nhiều điện năng, sở hữu xung nhịp cao nhất, hiệu năng mạnh nhất và được hỗ trợ công nghệ XFR
+WX	Chip AMD sử dụng cho các máy dàn workstation hay những công việc nặng
+E	Chip AMD được sử dụng cho các CPU có mức TDP thấp hơn
+U	Chip AMD được sử dụng cho các mẫu laptop mỏng, nhẹ, có xung nhịp thấp so với vi xử lý dành cho PC. Chip tiết kiệm điện năng tốt hơn
+H	Chip AMD sử dụng cho những dòng laptop có hiệu suất cao hơn U, yêu cầu trang bị hệ thống tản nhiệt tốt hơn khiến ngoại hình máy thường cồng kềnh
 ```
 
 ## Phân loại ổ cứng

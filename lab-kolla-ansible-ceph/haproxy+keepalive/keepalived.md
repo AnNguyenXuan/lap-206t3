@@ -63,3 +63,14 @@ VRRP framework
 ---
 ```6. Các kĩ thuật cân bằng tải```
 
+### Hướng dẫn setup 
+```
+OS : Debian 12
+Mô hình : 2 node 1 active 1 standby
+
+Cài đặt 
+apt-get install keepalived
+
+
+```
+
