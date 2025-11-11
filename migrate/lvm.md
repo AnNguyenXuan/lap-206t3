@@ -83,7 +83,7 @@ mount --bind /sys  /mnt/backup/sys
 mount --bind /run  /mnt/backup/run
 chroot /mnt/backup /bin/bash
 
-# Sửa fstab
+# Sửa fstab theo uuid phân vùng
 blkid /dev/backup/backup-host
 grub-install /dev/sda
 update-grub
@@ -142,9 +142,34 @@ chroot /mnt/backup /bin/bash
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ubuntu --recheck
 update-grub
 
-# Sửa fstab
+# Sửa fstab trỏ tới phân vùng boot mới và phân vùng OS mới
 lsblk -f
 
+# Reboot và kiểm tra kết quả
+sda                       8:0    0 558.9G  0 disk 
+├─sda1                    8:1    0  1023M  0 part 
+└─sda2                    8:2    0   100G  0 part /boot/efi
+  └─backup-backup--host 253:0    0    90G  0 lvm  /
+sr0                      11:0    1  1024M  0 rom  
+nvme0n1                 259:0    0   1.7T  0 disk 
+├─nvme0n1p1             259:1    0     1G  0 part
+└─nvme0n1p2             259:2    0   100G  0 part 
+
+# Chuyển đổi sang boot trên efi
+efibootmgr -v
+efibootmgr -o 0006,0005,0008,000A
+
+# Nếu lỗi mount, có thể chroot lại nvme và update lại grub
+mount /dev/nvme0n1p2 /mnt
+mount /dev/nvme0n1p1 /mnt/boot/efi
+mount --bind /dev /mnt/dev
+mount --bind /proc /mnt/proc
+mount --bind /sys  /mnt/sys
+chroot /mnt
+
+grub-install --target=x86_64-efi --efi-directory=/boot/efi \
+             --bootloader-id=ubuntu-nvme --recheck
+update-grub
 
 ----------------------------------------------------
 Chuyển đổi sang máy ảo ESXI với ổ cứng vừa backup

@@ -19,3 +19,11 @@ tail -f <file> : theo dõi file
 du -sh * : xem dung lượng tệp tin và thư mục
 df -h : xem dung lượng phân vùng
 ```
+### Các tools check device
+```
+- ipmitools
+```
+## Tổng hợp các lệnh
+```
+sudo dmidecode -t baseboard 
+```
