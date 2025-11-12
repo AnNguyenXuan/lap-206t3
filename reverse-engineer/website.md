@@ -1,4 +1,6 @@
 ## Link học
 ```
-CRACKME.EXE
+https://crackmes.one/
+
+pass giai nen crackmes.one
 ```
