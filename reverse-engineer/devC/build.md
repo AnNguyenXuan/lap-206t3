@@ -9,6 +9,9 @@
 Biên dịch byte code : objdump -d test.exe
 Lưu ý : File .o với linux
 
+Mã máy Intel : 
+gcc -S -masm=intel test.c
+gcc -m64 -S -masm=intel test.c
 ---
 Quy trình biên dịch từ file .c về .exe
 

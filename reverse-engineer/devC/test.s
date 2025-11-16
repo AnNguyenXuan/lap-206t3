@@ -1,4 +1,5 @@
 	.file	"test.c"
+	.intel_syntax noprefix
 	.text
 	.section .rdata,"dr"
 .LC0:
@@ -10,47 +11,47 @@
 	.def	check;	.scl	2;	.type	32;	.endef
 	.seh_proc	check
 check:
-	pushq	%rbp
-	.seh_pushreg	%rbp
-	movq	%rsp, %rbp
-	.seh_setframe	%rbp, 0
-	subq	$32, %rsp
+	push	rbp
+	.seh_pushreg	rbp
+	mov	rbp, rsp
+	.seh_setframe	rbp, 0
+	sub	rsp, 32
 	.seh_stackalloc	32
 	.seh_endprologue
-	movl	%ecx, 16(%rbp)
-	cmpl	$1234, 16(%rbp)
+	mov	DWORD PTR 16[rbp], ecx
+	cmp	DWORD PTR 16[rbp], 1234
 	jne	.L2
-	leaq	.LC0(%rip), %rax
-	movq	%rax, %rcx
+	lea	rax, .LC0[rip]
+	mov	rcx, rax
 	call	puts
 	jmp	.L3
 .L2:
-	leaq	.LC1(%rip), %rax
-	movq	%rax, %rcx
+	lea	rax, .LC1[rip]
+	mov	rcx, rax
 	call	puts
 .L3:
 	nop
-	addq	$32, %rsp
-	popq	%rbp
+	add	rsp, 32
+	pop	rbp
 	ret
 	.seh_endproc
 	.globl	main
 	.def	main;	.scl	2;	.type	32;	.endef
 	.seh_proc	main
 main:
-	pushq	%rbp
-	.seh_pushreg	%rbp
-	movq	%rsp, %rbp
-	.seh_setframe	%rbp, 0
-	subq	$32, %rsp
+	push	rbp
+	.seh_pushreg	rbp
+	mov	rbp, rsp
+	.seh_setframe	rbp, 0
+	sub	rsp, 32
 	.seh_stackalloc	32
 	.seh_endprologue
 	call	__main
-	movl	$5678, %ecx
+	mov	ecx, 5678
 	call	check
-	movl	$0, %eax
-	addq	$32, %rsp
-	popq	%rbp
+	mov	eax, 0
+	add	rsp, 32
+	pop	rbp
 	ret
 	.seh_endproc
 	.def	__main;	.scl	2;	.type	32;	.endef
