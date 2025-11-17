@@ -18,6 +18,7 @@ tail -n <số dòng> <file>: xem 50 dòng cuối 1 file
 tail -f <file> : theo dõi file
 du -sh * : xem dung lượng tệp tin và thư mục
 df -h : xem dung lượng phân vùng
+screen -S rsync_backup : tạo 1 shell độc lập để chạy tiến trình
 ```
 ### Các tools check device
 ```
