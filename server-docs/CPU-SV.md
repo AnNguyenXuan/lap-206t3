@@ -21,6 +21,8 @@ K	PC	Mở khóa ép xung.
 F	PC	Không có iGPU, yêu cầu card đồ họa rời.
 KF	PC	Mở khóa ép xung và không có iGPU.
 T	PC	Tối ưu điện năng, dành cho máy bộ nhỏ gọn.
+
+Với dòng chip cho máy trạm
 ```
 
 ## Phân loại CPU AMD
