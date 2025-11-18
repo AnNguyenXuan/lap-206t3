@@ -19,6 +19,10 @@ tail -f <file> : theo dõi file
 du -sh * : xem dung lượng tệp tin và thư mục
 df -h : xem dung lượng phân vùng
 screen -S rsync_backup : tạo 1 shell độc lập để chạy tiến trình
+ps aux | egrep 'litespeed|lshttpd'
+pkill -f litespeed
+pkill -f lshttpd
+
 ```
 ### Các tools check device
 ```
