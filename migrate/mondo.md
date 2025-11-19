@@ -2,8 +2,8 @@
 ```
 Link cài đặt http://www.mondorescue.org/ftp/
 Note : 
-- Do link các dependency của Debian 12 không đầy đủ, và sau 7749 cách cài với các dependency của Debian 12 không thành công, em thử nghiệm cài dependency của Debian 11 và nó thành công (Ảo thật :V)
-- Phương pháp này chưa thử nghiệm trên các distro khác, tuy nhiên em nghĩ thì vẫn áp dụng được
+- Do link các dependency của Debian 12 không đầy đủ, và sau 7749 cách cài với các dependency của Debian 12 không thành công, tôi thử nghiệm cài dependency của Debian 11 và nó thành công (Ảo thật :V)
+- Phương pháp này chưa thử nghiệm trên các distro khác, tuy nhiên tôi nghĩ thì vẫn áp dụng được
 - Hiện nay mới chỉ dừng ở việc cài đặt, chưa thử nghiệm các tính năng của công cụ
 ```
 
