@@ -22,7 +22,9 @@ screen -S rsync_backup : tạo 1 shell độc lập để chạy tiến trình
 ps aux | egrep 'litespeed|lshttpd'
 pkill -f litespeed
 pkill -f lshttpd
-
+ssh -J annx-t66 -N -f -L 2000:172.16.0.205:80 nguyenxuanan@172.16.0.205
+systemctl --failed
+arp -a :
 ```
 ### Các tools check device
 ```
@@ -31,4 +33,10 @@ pkill -f lshttpd
 ## Tổng hợp các lệnh
 ```
 sudo dmidecode -t baseboard 
+```
+## GlusterFS
+```
+mount -t glusterfs 172,16,255,1:/home /home
+
+GlusterFS cung cấp một giải pháp lưu trữ phân tán và khả năng mở rộng.
 ```
