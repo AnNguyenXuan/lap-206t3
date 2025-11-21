@@ -75,10 +75,17 @@ Hệ thống bao gồm 9 node, trong đó có :
 - 1 node deploy : 10.10.210.10
 
 Thiết kế mạng mô phỏng sẽ là
-- ens192 : giao tiếp bên ngoài cụm ceph
-- ens224 : giao tiếp nội bộ cụm
+- ens192 : MGMT
+- ens224 : public
 - ens256 : giao tiếp bên ngoài cụm openstack
 - ens161 : giao tiếp nội bộ giữa các máy ảo
+
+
+VLAN 210 → 10.10.210.0/24 (mgmt/internet)
+
+VLAN 30 → 10.10.30.0/24 (internal/LB backend)
+
+VLAN 240 → 10.10.240.0/24 (public/VIP)
 ```
 
 ## Cấu hình Kolla-ansible với cụm Ceph, yêu cầu đã có cụm Ceph
