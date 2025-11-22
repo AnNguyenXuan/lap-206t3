@@ -25,6 +25,7 @@ pkill -f lshttpd
 ssh -J annx-t66 -N -f -L 2000:172.16.0.205:80 nguyenxuanan@172.16.0.205
 systemctl --failed
 arp -a :
+systemd-resolve --flush-caches (Linux) : xóa cache dns
 ```
 ### Các tools check device
 ```
