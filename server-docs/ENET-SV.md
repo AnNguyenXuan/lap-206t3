@@ -8,6 +8,4 @@ VD : Dòng 10G Cisco chỉ dùng để cắm cho thiết bị của Cisco
 | ------------ | ------------------------------- |
 | **GNR 10G**  | Tốc độ link = 10Gbps            |
 | **ACT/LNKA** | Có link + nháy khi có lưu lượng |
-
-
 ```
