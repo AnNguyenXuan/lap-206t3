@@ -6,6 +6,22 @@ Log error có từ khóa GPT
 Ceph yêu cầu ổ cứng sạch, nếu trong quá trình cài ổ cứng có dữ liệu, rất dễ bị lỗi khi ceph sẽ đọc được bảng phân vùng gpt
 
 Fix lỗi bằng cách làm sạch dữ liệu ổ cứng, trong trường hợp ổ đĩa ảo như Exsi thì phải chọn type Thick Erosin
+# Ví dụ trên ceph1:
+apt install gdisk
+apt install parted
+
+sgdisk --zap-all /dev/sde
+sgdisk --zap-all /dev/sdf
+sgdisk --zap-all /dev/sdg
+wipefs -a /dev/sde
+wipefs -a /dev/sdf
+wipefs -a /dev/sdg
+
+# reboot hoặc chạy
+partprobe /dev/sde
+partprobe /dev/sdf
+partprobe /dev/sdg
+
 ```
 2. Lỗi tồn tại key Docker
 ```

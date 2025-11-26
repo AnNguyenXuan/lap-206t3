@@ -26,6 +26,7 @@ ssh -J annx-t66 -N -f -L 2000:172.16.0.205:80 nguyenxuanan@172.16.0.205
 systemctl --failed
 arp -a :
 systemd-resolve --flush-caches (Linux) : xóa cache dns
+grep -vE '^\s*(#|$)' <tên_file> : lấy các dòng không có dấu #, xuống dòng
 ```
 ### Các tools check device
 ```

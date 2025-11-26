@@ -7,6 +7,15 @@
 <tên_node_setup> < ip_node_setup>
 <tên_node_setup> < ip_node_setup>
 ```
+- Cấu hình mẫu
+```
+10.10.240.18 ceph1
+10.10.240.19 ceph2
+10.10.240.20 ceph3
+10.10.240.165 lb1
+10.10.240.166 lb2
+```
+
 - Sau đó thực hiện copy-ssh key cho các node setup
 ```
 - ssh-keygen
@@ -14,6 +23,7 @@
 ```
 2. Tạo môi trường ảo để tránh xung đột
 ```
+- apt install -y python3-venv git
 - python3 -m venv <tên_môi_trường>
 Truy cập môi trường ảo
 - source <tên_môi_trường>/bin/activate
@@ -29,6 +39,7 @@ Chuyển sang nhánh mong muốn và cài đặt các dependency
 - git checkout <tên-nhánh>
 - pip install -r requirements.txt
 - ansible-galaxy install -r requirements.yml
+- ansible all -m ping -i inventory.ini
 ```
 #### Các phiên bản tại thời điểm viết tài liệu
 ```
@@ -47,6 +58,13 @@ stable-6.0 Supports Ceph version pacific. This branch requires Ansible version 2
 stable-7.0 Supports Ceph version quincy. This branch requires Ansible version 2.15.
 
 main Supports the main (devel) branch of Ceph. This branch requires Ansible version 2.15 or 2.16.
+```
+#### Fix lỗi callback
+```
+nano ansible.cfg
+[default]
+stdout_callback = default
+result_format = yaml
 ```
 #### Các thư mục cần lưu ý
 ```
@@ -91,16 +109,112 @@ Tùy thuộc vào nhu cầu người dùng, ta sẽ cài đặt các dịch vụ
 ```
 - Tạo một file hosts tại thư mục ceph-ansible và cấu hình. Ở đây ta khai báo tên các node được sử dụng để cài đặt các dịch vụ của Ceph. Một kiến trúc cụm nhỏ cần ít nhất số node Mons là lẻ (1,3,5,..) để đạt Quotum, Mgrs thường triển khai số lượng bằng với Mons và nằm cùng node Mons. Osds là dịch vụ quản lý ổ đĩa, có thể triển khai chung hoặc riêng tùy vai trò
 
+nano hosts.ini
+
 [mons]
-<tên_node_setup>
-...
-[osds]
-<tên_node_setup>
-...
+ceph1 ansible_host=10.10.240.18
+ceph2 ansible_host=10.10.240.19
+ceph3 ansible_host=10.10.240.20
+
 [mgrs]
-<tên_node_setup>
-...
+ceph1
+ceph2
+ceph3
+
+[osds]
+ceph1
+ceph2
+ceph3
+
+[rgws]
+ceph1
+ceph2
+ceph3
+
+[rgwloadbalancers]
+lb1 ansible_host=10.10.240.165
+lb2 ansible_host=10.10.240.166
+
 [monitoring]
-<tên_node_setup>
-...
+ceph1   # hoặc 1 node riêng nếu bạn muốn tách
+
+[all:vars]
+ansible_user=root
+ansible_become=true
+
+
+- Cấu hình all.yml triển khai 
+
+nano group_vars/all.yml
+
+dummy:
+mon_group_name: mons
+osd_group_name: osds
+rgw_group_name: rgws
+mgr_group_name: mgrs
+rgwloadbalancer_group_name: rgwloadbalancers
+monitoring_group_name: monitoring
+ceph_origin: repository
+valid_ceph_origins:
+  - repository
+ceph_repository: community
+valid_ceph_repository:
+  - community
+ceph_mirror: https://download.ceph.com
+ceph_stable_key: https://download.ceph.com/keys/release.asc
+ceph_stable_release: squid
+ceph_stable_repo: "{{ ceph_mirror }}/debian-{{ ceph_stable_release }}"
+ip_version: ipv4
+monitor_interface: ens224
+public_network: "10.10.210.0/24"
+public_interface: ens224
+cluster_network: "10.10.20.0/24"
+cluster_interface: ens256
+radosgw_frontend_type: beast # For additional frontends see: https://docs.ceph.com/en/latest/radosgw/frontends/
+radosgw_frontend_port: 8080
+radosgw_interface: ens224
+radosgw_num_instances: 1
+containerized_deployment: false
+dashboard_enabled: true
+dashboard_admin_user: admin
+dashboard_admin_password: "Ohm_p2)6T3"
+grafana_admin_user: admin
+grafana_admin_password: "Ohm_p2)6T3"
+
+nano group_vars/osds.yml
+
+dummy:
+devices:
+   - /dev/sdb
+   - /dev/sdd
+dedicated_devices:
+   - /dev/sdc
+   - /dev/sdc
+osd_auto_discovery: false
+crush_device_class: "hdd"
+osds_per_device: 2
+crush_rule_config: true
+crush_rule_hdd:
+  name: HDD
+  root: default
+  type: host
+  class: hdd
+  default: false
+crush_rules:
+  - "{{ crush_rule_hdd }}"
+
+nano group_vars/rgwloadbalancers.yml 
+
+dummy:
+haproxy_frontend_port: 80
+haproxy_frontend_ssl_port: 443
+virtual_ips:
+   - 10.10.240.167
+virtual_ip_netmask: 24
+virtual_ip_interface: ens192
+```
+
+### Deploy
+```
+setsid ansible-playbook -i inventory.ini site.yml -e 'yes_i_know=true' > deploy.logs 2>&1 &
 ```
