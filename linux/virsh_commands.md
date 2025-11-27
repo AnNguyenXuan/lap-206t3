@@ -13,7 +13,7 @@ virsh console <tên_hoặc_UUID_VM> : xem console máy ảo
 ```
 setsid <task> > <file_logs> 2>&1 & : tạo 1 phiên chạy nền
 ps aux | grep <name> : lọc phiên theo tên
-kill -TERM <pid> : xóa phiên theo pid
+kill -TERM <pid> : xóa phiên theo pid (TERM : 9 "kill cứng" 15 "dừng bình thường")
 tail -n <số dòng> <file>: xem 50 dòng cuối 1 file
 tail -f <file> : theo dõi file
 du -sh * : xem dung lượng tệp tin và thư mục
