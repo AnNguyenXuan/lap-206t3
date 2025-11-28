@@ -23,3 +23,8 @@ openssl x509 -in /etc/kolla/certificates/mariadb-cert.pem -noout -text
 ```
 2. Kiểm tra với Curl
 - curl -vk https://10.10.210.9:5000/v3
+
+#### Cấu trúc của một chứng chỉ ssl trên linux
+```
+
+```

@@ -1,4 +1,4 @@
-## Tài liệu quản trị Window
+## Tổng hợp một số mẹo quản trị Window
 
 ### Các thư mục quan  trọng
 
