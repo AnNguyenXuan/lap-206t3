@@ -22,7 +22,9 @@ F	PC	Không có iGPU, yêu cầu card đồ họa rời.
 KF	PC	Mở khóa ép xung và không có iGPU.
 T	PC	Tối ưu điện năng, dành cho máy bộ nhỏ gọn.
 
-Với dòng chip cho máy trạm
+Với dòng chip cho máy trạm, máy chủ
+Dòng sản phẩm 
+CPU Intel Xeon có 4 dòng là Xeon E, Xeon W, Xeon D, Xeon Scalable (Platinum, Gold, Silver, Bronze)
 ```
 
 ## Phân loại CPU AMD

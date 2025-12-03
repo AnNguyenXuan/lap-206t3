@@ -1,4 +1,0 @@
-## Phân loại Boot Option
-```
-
-```
