@@ -24,7 +24,17 @@ openssl x509 -in /etc/kolla/certificates/mariadb-cert.pem -noout -text
 2. Kiểm tra với Curl
 - curl -vk https://10.10.210.9:5000/v3
 
-#### Cấu trúc của một chứng chỉ ssl trên linux
+#### Cấu hình ssl trên các dịch vụ web
 ```
+Thông thường khi cấu hình ssl cho website trên các web cần 3 file
 
+Đối với apache2
+SSLCertificateFile <domain>.crt 
+SSLCertificateKeyFile <private_key>.key
+SSLCertificateChainFile <Chain_key>.crt : Gộp của các crt nhà cung cấp
+
+Đối với nginx
+ssl_certificate     /path/to/cert.crt;
+ssl_certificate_key /path/to/privkey.key;
+ssl_trusted_certificate /path/to/ca_bundle.crt;
 ```
