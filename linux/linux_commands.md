@@ -1,4 +1,4 @@
-# Tổng hợp các lệnh và tham số để điều khiển máy ảo
+## Tổng hợp các lệnh và tham số để điều khiển máy ảo
 ```
 virsh reboot <tên_hoặc_UUID_VM> : khởi động lại mềm
 virsh start <tên_hoặc_UUID_VM> : khởi chạy
@@ -9,7 +9,8 @@ virsh domstate <tên_hoặc_UUID_VM> : xem trạng thái
 virsh dominfo <tên_hoặc_UUID_VM> : xem thông tin
 virsh console <tên_hoặc_UUID_VM> : xem console máy ảo
 ```
-### Một số lệnh hữu ích
+
+## Một số lệnh vận hành hữu ích
 ```
 setsid <task> > <file_logs> 2>&1 & : tạo 1 phiên chạy nền
 ps aux | grep <name> : lọc phiên theo tên
@@ -28,17 +29,8 @@ arp -a :
 systemd-resolve --flush-caches (Linux) : xóa cache dns
 grep -vE '^\s*(#|$)' <tên_file> : lấy các dòng không có dấu #, xuống dòng
 ```
-### Các tools check device
-```
-- ipmitools
-```
-## Tổng hợp các lệnh
-```
-sudo dmidecode -t baseboard 
-```
-## GlusterFS
-```
-mount -t glusterfs 172,16,255,1:/home /home
 
-GlusterFS cung cấp một giải pháp lưu trữ phân tán và khả năng mở rộng.
+## Tổng hợp các lệnh kiểm tra phần cứng
+```
+sudo dmidecode -t baseboard : kiểm tra mainboard của máy 
 ```

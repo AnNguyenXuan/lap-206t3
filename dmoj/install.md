@@ -1,22 +1,26 @@
 ## Hướng dẫn cài đặt dmoj
 ```
+# Đăng nhập bằng user root
+adduser dmoj
+usermod -aG sudo dmoj 
+
 # Cài các gói cần thiết
 apt update
-apt install git gcc g++ make python3-dev python3-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl redis-server python3-venv
+apt install -y git gcc g++ make python3-dev python3-pip libxml2-dev libxslt1-dev zlib1g-dev gettext curl redis-server python3-venv
 curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 apt install nodejs
 npm install -g sass postcss-cli postcss autoprefixer
 
 # Cài database
 apt update
-apt install mariadb-server libmariadb-dev libmariadb-dev-compat
+apt install -y mariadb-server libmariadb-dev libmariadb-dev-compat
 
 # Tạo database
-sudo mariadb
+mariadb
 CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci;
 GRANT ALL PRIVILEGES ON dmoj.* TO 'dmoj'@'localhost' IDENTIFIED BY 'Ohm_p2)6T3';
 exit
-mariadb-tzinfo-to-sql /usr/share/zoneinfo | sudo mariadb -u root mysql  # Add time zone data to the database. A few pages require this.
+mariadb-tzinfo-to-sql /usr/share/zoneinfo | mariadb -u root mysql  # Add time zone data to the database. A few pages require this.
 
 # Tạo môi trường ảo
 python3 -m venv dmojsite
@@ -30,13 +34,12 @@ git submodule init
 git submodule update
 
 # Cài các thư viện
+sudo apt install python3-dev default-libmysqlclient-dev build-essential pkg-config
 pip3 install -r requirements.txt
-apt install python3-dev default-libmysqlclient-dev build-essential pkg-config
-pip3 install mysqlclient
-pip3 install pymysql
+pip3 install mysqlclient redis pymysql
 
 # Cấu hình dmoj/local_settings.py
-# Cpoy https://github.com/DMOJ/docs/blob/master/sample_files/local_settings.py
+# Copy https://github.com/DMOJ/docs/blob/master/sample_files/local_settings.py
 
 nano dmoj/local_settings.py
 
@@ -55,7 +58,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dmoj',
         'USER': 'dmoj',
-        'PASSWORD': '<mariadb user password>',
+        'PASSWORD': 'Ohm_p2)6T3',
         'HOST': '127.0.0.1',
         'OPTIONS': {
             'charset': 'utf8mb4',
@@ -65,10 +68,15 @@ DATABASES = {
 }
 LANGUAGE_CODE = 'vi'
 DEFAULT_USER_TIME_ZONE = 'Asia/Ho_Chi_Minh'
+USE_TZ = False
+
 
 EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
 EVENT_DAEMON_GET = 'ws://10.10.240.171/event/'
 EVENT_DAEMON_POLL = '/channels/'
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 
 # Kiểm tra cấu hình
@@ -93,32 +101,12 @@ python3 manage.py loaddata demo
 python3 manage.py createsuperuser
 
 # Chạy redis
-service redis-server start
-
-# Sửa config local_settings.py
-CELERY_BROKER_URL
-CELERY_RESULT_BACKEND
+systemctl start redis-server
 
 # Chạy thử nhiệm
 python3 manage.py runserver 0.0.0.0:8000
 python3 manage.py runbridged
-
-pip install redis
 celery -A dmoj_celery worker
-
-# Di chuyển thư mục, sửa lại cấu hình
-mkdir -p /opt/dmoj
-mv /root/site/* /opt/dmoj/
-chown -R dmoj:dmoj /opt/dmoj
-
-mkdir -p /opt/dmojsite
-supervisorctl stop all || true
-mv /root/dmojsite /opt/dmojsite
-chown -R dmoj:dmoj /opt/dmojsite
-
-mkdir -p /var/log/uwsgi
-chown -R dmoj:dmoj /var/log/uwsgi
-chmod 755 /var/log/uwsgi
 
 # Cài đặt  uwsgi
 pip3 install uwsgi
@@ -138,9 +126,9 @@ uid = dmoj
 gid = dmoj
 
 # Paths.
-chdir = /opt/site
-pythonpath = /opt/site
-virtualenv = /opt/dmojsite
+chdir = /home/dmoj/site
+pythonpath = /home/dmoj/site
+virtualenv = /home/dmoj/dmojsite
 
 # Details regarding DMOJ application.
 protocol = uwsgi
@@ -164,25 +152,27 @@ workers = 7
 uwsgi --ini uwsgi.ini
 
 # Tải supervisord
-apt install supervisor
+sudo apt install supervisor
 
 # Copy https://github.com/DMOJ/docs/blob/master/sample_files/site.conf
-nano /etc/supervisor/conf.d/site.conf
+sudo nano /etc/supervisor/conf.d/site.conf
 ----
 [program:site]
-command=/opt/dmojsite/bin/uwsgi --ini uwsgi.ini
-directory=/opt/site
+command=/home/dmoj/dmojsite/bin/uwsgi --ini uwsgi.ini
+directory=/home/dmoj/site
+user=dmoj
+group=dmoj
 stopsignal=QUIT
 stdout_logfile=/tmp/site.stdout.log
 stderr_logfile=/tmp/site.stderr.log
 ----
 
 # Copy https://github.com/DMOJ/docs/blob/master/sample_files/bridged.conf
-nano /etc/supervisor/conf.d/bridged.conf
+sudo nano /etc/supervisor/conf.d/bridged.conf
 ----
 [program:bridged]
-command=/opt/dmojsite/bin/python manage.py runbridged
-directory=/opt/site
+command=/home/dmoj/dmojsite/bin/python manage.py runbridged
+directory=/home/dmoj/site
 stopsignal=INT
 # You should create a dedicated user for the bridged to run under.
 user=dmoj
@@ -192,11 +182,11 @@ stderr_logfile=/tmp/bridge.stderr.log
 ----
 
 # Copy https://github.com/DMOJ/docs/blob/master/sample_files/celery.conf
-nano /etc/supervisor/conf.d/celery.conf
+sudo nano /etc/supervisor/conf.d/celery.conf
 ----
 [program:celery]
-command=/opt/dmojsite/bin/celery -A dmoj_celery worker
-directory=/opt/site
+command=/home/dmoj/dmojsite/bin/celery -A dmoj_celery worker
+directory=/home/dmoj/site
 # You should create a dedicated user for celery to run under.
 user=dmoj
 group=dmoj
@@ -205,31 +195,25 @@ stderr_logfile=/tmp/celery.stderr.log
 ----
 
 # Cập nhập 
-supervisorctl update
+sudo supervisorctl update
 supervisorctl status
 
 # Check logs
-supervisorctl tail -f site stderr
-supervisorctl tail -f site stdout
+sudo supervisorctl tail -f site stderr
+sudo supervisorctl tail -f site stdout
 
 # Nếu lỗi có thể fix một số hướng sau
 rm -f /tmp/dmoj-site.sock /tmp/dmoj-site.pid
-chown -R dmoj:dmoj /opt/site
-chown -R dmoj:dmoj /opt/dmojsite
-chmod 755 /opt
-chmod 755 /opt/dmojsite
-chmod 755 /opt/dmojsite/bin
-chmod +x /opt/dmojsite/bin/celery
-sed -i '1s|^#!.*|#!/opt/dmojsite/bin/python3|' /opt/dmojsite/bin/celery
 
 # Reload
-supervisorctl update
-supervisorctl restart celery
-supervisorctl restart site
+sudo supervisorctl update
+sudo supervisorctl restart celery
+sudo supervisorctl restart site
+sudo supervisorctl status
 
 # Setup Nginx
-apt install nginx
-nano /etc/nginx/sites-enabled/dmoj-web
+sudo apt install nginx
+sudo nano /etc/nginx/sites-enabled/dmoj-web
 ----
 server {
     listen       80;
@@ -251,11 +235,11 @@ server {
     error_page 502 504 /502.html;
 
     location ~ ^/502\.html$|^/logo\.png$|^/robots\.txt$ {
-        root /opt/site;
+        root /home/dmoj/site;
     }
 
     location @icons {
-        root /opt/site/resources/icons;
+        root /home/dmoj/site/resources/icons;
         error_page 403 = @uwsgi;
         error_page 404 = @uwsgi;
     }
@@ -271,10 +255,10 @@ server {
     location /static {
         gzip_static on;
         expires max;
-        root /;
+        # root /;
         # root <django setting STATIC_ROOT, without the final /static>;
         # Comment out root, and use the following if it doesn't end in /static.
-        #alias <STATIC_ROOT>;
+        alias /tmp/static/;
     }
 
     # Uncomment if you are using PDFs and want to serve it faster.
@@ -312,12 +296,12 @@ server {
 ----
 
 # Kiểm tra
-ln -s /etc/nginx/sites-enabled/dmoj-web /etc/nginx/sites-available/dmoj-web
-nginx -t
-service nginx reload
+sudo ln -s /etc/nginx/sites-enabled/dmoj-web /etc/nginx/sites-available/dmoj-web
+sudo nginx -t
+sudo service nginx reload
 
 # Cấu hình websocket
-nano /opt/site/websocket/config.js
+nano /home/dmoj/site/websocket/config.js
 ----
 module.exports = {
     get_host: '127.0.0.1',
@@ -335,11 +319,11 @@ pip3 install websocket-client
 
 # Cấu hình wsevent
 # Copy https://github.com/DMOJ/docs/blob/master/sample_files/wsevent.conf
-nano /etc/supervisor/conf.d/wsevent.conf
+sudo nano /etc/supervisor/conf.d/wsevent.conf
 ----
 [program:wsevent]
-command=/usr/bin/node /opt/site/websocket/daemon.js
-environment=NODE_PATH="/opt/site/node_modules"
+command=/usr/bin/node /home/dmoj/site/websocket/daemon.js
+environment=NODE_PATH="/home/dmoj/site/node_modules"
 # Should create a dedicated user.
 user=dmoj
 group=dmoj
@@ -347,8 +331,11 @@ stdout_logfile=/tmp/wsevent.stdout.log
 stderr_logfile=/tmp/wsevent.stderr.log
 ----
 
-supervisorctl update
-supervisorctl restart bridged
-supervisorctl restart site
-service nginx restart
+sudo supervisorctl update
+sudo supervisorctl restart bridged
+sudo supervisorctl restart site
+sudo service nginx restart
+sudo supervisorctl status
+
+
 ```
