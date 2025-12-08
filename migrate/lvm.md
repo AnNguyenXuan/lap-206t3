@@ -175,7 +175,13 @@ update-grub
 Chuyển đổi sang máy ảo ESXI với ổ cứng vừa backup
 
 ----------------------------------------------------
-Backup lvm bằng snapshot
+```
 
+## Backup lvm bằng snapshot 
+```
+lvcreate --size 50G --snapshot --name os-snap /dev/Volume-data/os
 
+# Rollback
+lvconvert --merge /dev/Volume-data/os-snap
+reboot
 ```

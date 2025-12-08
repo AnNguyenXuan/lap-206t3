@@ -27,3 +27,9 @@ notepad $PROFILE
 Thêm dòng
 Set-PSReadLineOption -BellStyle None
 ```
+### Kiểm tra bản ghi dns
+```
+nslookup dcjourneys.com dnssec1.pavietnam.vn
+nslookup dcjourneys.com dnssec2.pavietnam.vn
+nslookup dcjourneys.com dnssecbak.pavietnam.net
+```
