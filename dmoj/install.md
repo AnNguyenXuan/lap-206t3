@@ -66,9 +66,13 @@ DATABASES = {
         },
     },
 }
+
 LANGUAGE_CODE = 'vi'
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
 DEFAULT_USER_TIME_ZONE = 'Asia/Ho_Chi_Minh'
-USE_TZ = False
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
 
 
 EVENT_DAEMON_POST = 'ws://127.0.0.1:15101/'
@@ -336,6 +340,4 @@ sudo supervisorctl restart bridged
 sudo supervisorctl restart site
 sudo service nginx restart
 sudo supervisorctl status
-
-
 ```

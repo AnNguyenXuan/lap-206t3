@@ -179,7 +179,15 @@ Chuyển đổi sang máy ảo ESXI với ổ cứng vừa backup
 
 ## Backup lvm bằng snapshot 
 ```
+lvs -a
 lvcreate --size 50G --snapshot --name os-snap /dev/Volume-data/os
+
+lvcreate --size 50G --snapshot --name dmoj-manual-snap /dev/Volume-data/os
+
+lvremove /dev/Volume-data/os-snap
+
+# Trong một số TH bị lỗi remove do merge thì chạy lệnh
+lvchange --refresh Volume-data
 
 # Rollback
 lvconvert --merge /dev/Volume-data/os-snap
