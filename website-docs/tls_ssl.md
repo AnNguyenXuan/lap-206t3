@@ -1,5 +1,5 @@
-### Tài liệu SSL/TLS cấu hinh nội bộ
-#### Giới thiệu TLS/SSL
+## Tài liệu SSL/TLS cấu hinh nội bộ
+### Giới thiệu TLS/SSL
 ```
 - Chứng chỉ SSL được thiết kế để bảo mật web
 + Hiện nay chứng chỉ này bao gồm 4 phiên bản 
@@ -24,7 +24,7 @@ openssl x509 -in /etc/kolla/certificates/mariadb-cert.pem -noout -text
 2. Kiểm tra với Curl
 - curl -vk https://10.10.210.9:5000/v3
 
-#### Cấu hình ssl trên các dịch vụ web
+### Cấu hình ssl trên các dịch vụ web
 ```
 Thông thường khi cấu hình ssl cho website trên các web cần 3 file
 
@@ -37,4 +37,14 @@ SSLCertificateChainFile <Chain_key>.crt : Gộp của các crt nhà cung cấp
 ssl_certificate     /path/to/cert.crt;
 ssl_certificate_key /path/to/privkey.key;
 ssl_trusted_certificate /path/to/ca_bundle.crt;
+```
+
+### Cài đặt TLS/SSL trên linux với certboot
+```
+apt update
+apt install -y nginx curl git
+apt install -y certbot python3-certbot-nginx
+
+# Cài đặt với web chạy nginx
+certbot --nginx -d 123trading.vn -d www.123trading.vn
 ```
