@@ -20,4 +20,8 @@ journalctl --list-boots :
 
 Địa chỉ UEFI System Partition trên MBR : 0xEF
 Địa chỉ UEFI System Partition trên GPT : C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+
+Quy trình boot
+Power On - BIOS/UEFI - Bootloader - Kernel - initramfs - systemd (PID 1) - Services - Login
+
 ```

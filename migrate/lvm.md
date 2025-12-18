@@ -87,6 +87,7 @@ chroot /mnt/backup /bin/bash
 blkid /dev/backup/backup-host
 grub-install /dev/sda
 update-grub
+update-initramfs -u -k all
 
 # Reboot lại hệ thống
 # Sau khi reboot, hệ thống đã chuyển sang lvm
@@ -141,6 +142,7 @@ mount --bind /run  /mnt/backup/run
 chroot /mnt/backup /bin/bash
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=ubuntu --recheck
 update-grub
+update-initramfs -u -k all
 
 # Sửa fstab trỏ tới phân vùng boot mới và phân vùng OS mới
 lsblk -f
@@ -170,6 +172,7 @@ chroot /mnt
 grub-install --target=x86_64-efi --efi-directory=/boot/efi \
              --bootloader-id=ubuntu-nvme --recheck
 update-grub
+update-initramfs -u -k all
 
 ----------------------------------------------------
 Chuyển đổi sang máy ảo ESXI với ổ cứng vừa backup
