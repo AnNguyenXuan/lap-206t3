@@ -1,9 +1,5 @@
 ## Lệnh quản trị phần cứng
 ```
-for host in /sys/class/scsi_host/host*; do
-    echo "- - -" > "$host/scan"
-done
-
 lspci -nn | grep -i -E 'raid|sas|sata|smart|perc|lsi|megaraid|mpt|pqi|adaptec|areca'
 lspci -nnk | grep -A3 -i -E 'raid|sas|smart|perc|lsi|megaraid|mpt|pqi|adaptec|areca'
 lsmod | grep -E 'megaraid_sas|mpt3sas|hpsa|smartpqi|aacraid|aic94xx|isci'
@@ -18,20 +14,26 @@ JBOD là viết tắt của “Just a Bunch Of Disks” — nghĩa là từng �
 # Cài đặt công cụ quản lý raid của Broadcom / LSI
 # storcli hỗ trợ tất cả các loại LSI MegaRAID SAS (SAS2–SAS4)
 # Lên trang chủ cài đặt file zip
+wget -O Storcli.zip https://docs.broadcom.com/docs-and-downloads/007.3205.0000.0000_MR7.32_Storcli.zip
 
-# Với lệnh cài đặt
-sudo dpkg -i storcli_1.21.12-2_all.deb
+# Chạy cài đặt
+unzip Storcli.zip 
+cd storcli_rel
+unzip Unified_storcli_all_os.zip
+cd Unified_storcli_all_os
+cd Ubuntu
+dpkg -i storcli_007.3205.0000.0000_all.deb
 
-# Với lệnh update
-dpkg -i ./storcli_007.3503.0000.0000_all.deb
+# Kiểm tra
+which storcli storcli64
 
-# Nạp vào môi trường
-sudo chmod +x /opt/MegaRAID/storcli/storcli64
+# Nếu chưa có kiểm tra đường dẫn và nạp
 sudo ln -s /opt/MegaRAID/storcli/storcli64 /usr/local/bin/storcli
 hash -r
 storcli show
 
 # Bộ lệnh
+storcli /c0/vall show
 storcli /c0 show all : Xem thông tin chi tiết trạng thái
 storcli /c0 /fall show : Xem danh sách cấu hình của key cũ
 storcli /c0 /eall /sall show : Xem danh sách mọi ổ với EID:slot

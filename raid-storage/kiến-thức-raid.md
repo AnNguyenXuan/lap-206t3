@@ -73,6 +73,12 @@ Hạn Chế / Điểm Cần Lưu Ý (Đặc thù HDD):
 - Yêu cầu số ổ chẵn (tối thiểu là 4 ổ).
 - Chi phí đầu tư cao cho mỗi GB dung lượng thực tế.
 ```
+## Một số tính năng card RAID
+```
+write-back : Ghi dữ liệu vào RAM cache trên card RAID, trả ACK ngay cho OS, sau đó mới flush xuống disk nên IOPS & latency tăng mạnh
+write-through: Chỉ ACK sau khi disk ghi xong nên an toàn hơn nhưng chậm
+```
+
 ## Các khái niệm liên quan
 ```
 A. Các Khái Niệm Hiệu Năng Cốt Lõi
@@ -143,5 +149,97 @@ HDD là loại ổ cứng cơ học, do đó trong quá trình hoạt động s�
 
 ## Bài toán
 ```
-Tùy thuộc vào bài toán  
+Nhóm A — Database / VM / OLTP (ngẫu nhiên, block nhỏ)
+
+1. **OLTP balanced**: Random 4K **70/30** (read/write)
+
+   * Mô phỏng DB/VM chung nhất
+   * Chỉ số chính: **IOPS + p95/p99 latency**
+
+2. **Write-heavy OLTP/log/index**: Random 4K **10/90**
+
+   * Mô phỏng ghi log, index build, ingest
+   * Chỉ số chính: **write IOPS + latency**
+
+3. **Read-heavy OLTP/search**: Random 4K **90/10**
+
+   * Mô phỏng search/cache-miss, query read nhiều
+   * Chỉ số chính: **read IOPS + latency**
+
+4. **Pure random read 4K**
+
+   * Đo “trần” read IOPS và latency tối thiểu
+   * Chỉ số chính: **read IOPS + latency**
+
+5. **Pure random write 4K**
+
+   * Đo “trần” write IOPS (đặc biệt nhạy với cache)
+   * Chỉ số chính: **write IOPS + latency**
+
+Nhóm B — General app / Object / file service (ngẫu nhiên, block vừa)
+
+6. **Random 16K 70/30**
+
+   * App phổ thông, object workload nhẹ hơn 4K
+   * Chỉ số chính: **IOPS + latency**
+
+7. **Random 64K 70/30**
+
+   * NAS/file share, object/chunk lớn hơn
+   * Chỉ số chính: **BW + latency** (IOPS vẫn có ý nghĩa)
+
+Nhóm C — Streaming / Backup / Media / ETL (tuần tự)
+
+8. **Sequential read 1M**
+
+   * Restore/scan, đọc file lớn, backup verify
+   * Chỉ số chính: **Throughput (MB/s)**
+
+9. **Sequential write 1M**
+
+   * Backup repository, ghi file lớn
+   * Chỉ số chính: **Throughput (MB/s)**
+
+10. **Sequential read/write 128K**
+
+* File server copy nhiều file lớn-vừa, ETL
+* Chỉ số chính: **Throughput + CPU overhead**
+
+Nhóm D — Metadata / “Nhiều file nhỏ” (đo VFS + FS rõ nhất)
+
+11. **Create/delete nhiều file nhỏ (metadata-heavy)**
+
+* `untar`, `git checkout`, build source, maildir
+* Chỉ số chính: **ops/s** + thời gian hoàn tất
+* (fio có test file create, hoặc dùng `fs_mark`, `mdtest`)
+
+12. **stat/list directory (metadata read-heavy)**
+
+* `ls -R`, scanning antivirus/indexer
+* Chỉ số chính: **ops/s** + latency metadata
+* (thường dùng `find`, `fd`, hoặc `mdtest`)
+
+Nhóm E — Durability / Sync (đo “ghi thật xuống đĩa”)
+
+13. **fsync-heavy (4K write + fsync)**
+
+* DB WAL, journaling, ứng dụng cần commit bền vững
+* Chỉ số chính: **sync ops/s + p99 latency**
+
+14. **Direct write but forced flush theo batch**
+
+* Gần thực tế hơn fsync mỗi IO, nhưng vẫn đo durability
+* Chỉ số chính: **stable write BW/IOPS**
+
+Nhóm F — Latency-sensitive / Queue tuning (đo theo độ sâu hàng đợi)
+
+15. **Same workload nhưng QD thấp (iodepth 1–4)**
+
+* App realtime, API, interactive
+* Chỉ số chính: **latency** (IOPS không phải ưu tiên)
+
+16. **Same workload QD cao (iodepth 16–64)**
+
+* Batch, background jobs
+* Chỉ số chính: **IOPS/BW** (latency chấp nhận cao hơn)
 ```

@@ -101,3 +101,37 @@ Hiệu suất IOPS cơ bản được xác định bởi thiết kế vật lý 
 4. **Scalability và chi phí:**
    Block storage thường có chi phí/GB cao hơn và phù hợp với performance-sensitive workloads; object storage cung cấp khả năng mở rộng gần như vô hạn với chi phí thấp hơn, thích hợp cho dữ liệu lớn không nhạy latency; file storage nằm giữa hai loại này về mặt truy cập và metadata support.
 ```
+
+## Test IOPS
+
+### Test RAW
+```
+Ở đây chúng ta kiểm tra tốc độ IOPS với RAW disk, tức là chưa có các lớp phần mềm phía trên.
+Tức là ta chỉ test driver và phần cứng.
+
+Bài toán Nhóm A — Database / VM / OLTP (ngẫu nhiên, block nhỏ)
+A1 – Pure random read 4K (randread 4k)
+A2 – Pure random write 4K (randwrite 4k)
+A3 – Mixed OLTP 70/30 (randrw 4k r=70)
+A4 – Read-heavy 90/10 (randrw 4k r=90)
+A5 – Write-heavy 10/90 (randrw 4k r=10)
+
+Trong bài toán này ta sẽ kiểm tra ảnh hưởng của cả page cache (RAM) trong linux với tham số direct=1 là bỏ qua, direct=0 là sử dụng 
+Các thông số của lệnh test
+--ioengine=libaio : linux native async I/O 
+--invalidate=1 : loại bỏ cache liên quan trước khi chạy
+--bs=4k : kích thước block
+--iodepth=16 : độ sâu hàng đợi
+--numjobs=4 : số job song song
+--ramp_time=30 : warp up 30s
+--randrepeat=0 : không lặp lại chuỗi random
+
+Các thông số kết quả
+IOPS : Số I/O mỗi giây với block size = 4kb
+BW : IOPS x block size
+
+Latency
+slat (submission latency) : Thời gian fio/kernel chuẩn bị + submit request xuống kernel.
+clat (completion latency) : Thời gian từ lúc request vào kernel đến khi thiết bị báo hoàn thành.
+lat = slat + clat
+```
