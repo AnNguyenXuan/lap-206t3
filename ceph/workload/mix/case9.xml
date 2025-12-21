@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="mô phỏng hệ thống backup, media có bổ sung xóa và list" description="PUT lớn + GET + LIST + DELETE">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="4" config="containers=r(1,50)"/>
+    </workstage>
+
+    <workstage name="prepare_old">
+      <work type="prepare" workers="8" config="containers=r(1,50);objects=r(1,2000);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="main">
+      <work name="main" type="normal" workers="16" interval="10" division="none" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="75" config="containers=u(1,50);objects=u(2001,3500);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+        <operation type="read" ratio="10" config="containers=u(1,50);objects=u(2001,3500);hashCheck=false"/>
+        <operation type="list" ratio="10" config="containers=u(1,50);objects=u(1,3500)"/>
+        <operation type="delete" ratio="5" config="containers=u(1,50);objects=u(1,2000)"/>
+      </work>
+    </workstage>
+
+    <workstage name="cleanup">
+      <work type="cleanup" workers="8" config="containers=r(1,50);objects=r(1,3500);deleteContainer=false"/>
+    </workstage>
+
+    <workstage name="dispose">
+      <work type="dispose" workers="4" config="containers=r(1,50)"/>
+    </workstage>
+  </workflow>
+</workload>
