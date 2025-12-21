@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test đọc theo kích thước, giảm số object và workers cho phù hợp" description="test hiệu năng đọc với từng kích thước file, size lớn giảm object">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="8" config="containers=r(1,200)"/>
+    </workstage>
+
+    <workstage name="prepare_64k">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(1,250000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="prepare_256k">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(250001,312500);sizes=c(256)KB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="prepare_1m">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(312501,328500);sizes=c(1)MB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="prepare_4m">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(328501,332500);sizes=c(4)MB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="prepare_16m">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(332501,333500);sizes=c(16)MB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="prepare_64m">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(333501,333756);sizes=c(64)MB;chunked=true;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="prepare_128m">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(333757,333884);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="read_64k">
+      <work name="read_64k" type="normal" workers="128" interval="3" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(1,250000);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_256k">
+      <work name="read_256k" type="normal" workers="128" interval="3" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(250001,312500);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_1m">
+      <work name="read_1m" type="normal" workers="128" interval="3" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(312501,328500);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_4m">
+      <work name="read_4m" type="normal" workers="128" interval="3" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(328501,332500);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_16m">
+      <work name="read_16m" type="normal" workers="64" interval="5" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(332501,333500);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_64m">
+      <work name="read_64m" type="normal" workers="32" interval="10" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(333501,333756);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_128m">
+      <work name="read_128m" type="normal" workers="16" interval="10" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(333757,333884);hashCheck=false"/>
+      </work>
+    </workstage>
+
+  </workflow>
+</workload>

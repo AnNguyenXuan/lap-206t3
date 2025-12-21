@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test write 128MB theo runtime, tăng dần workers" description="test write 128MB (chunked=true) theo runtime, tăng dần workers">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+    <workstage name="init"><work type="init" workers="4" config="containers=r(1,200)"/></workstage>
+
+    <workstage name="write_128m_w2">
+      <work name="write_128m_w2" type="normal" workers="2" interval="10" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(1,200000);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_128m_w4">
+      <work name="write_128m_w4" type="normal" workers="4" interval="10" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(200001,400000);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_128m_w8">
+      <work name="write_128m_w8" type="normal" workers="8" interval="10" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(400001,600000);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_128m_w16">
+      <work name="write_128m_w16" type="normal" workers="16" interval="10" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(600001,800000);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+  </workflow>
+</workload>

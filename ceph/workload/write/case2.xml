@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test hiệu năng ghi file nặng khi có phân mảnh và không phân mảnh" description="test hiệu năng ghi file nặng khi có phân mảnh và không phân mảnh">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="4" config="containers=r(1,10)"/>
+    </workstage>
+
+    <workstage name="write_64m_chunked">
+      <work name="write_64m" type="normal" workers="16" interval="10" runtime="600" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,10);objects=u(1,1000);sizes=c(64)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64m_singer">
+      <work name="write_64m" type="normal" workers="16" interval="10" runtime="600" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,10);objects=u(1001,2000);sizes=c(64)MB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+  </workflow>
+</workload>

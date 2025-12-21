@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test hiệu năng đọc ghi file vừa" description="test hiệu năng đọc ghi file vừa">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="8" config="containers=r(1,200)"/>
+    </workstage>
+
+    <workstage name="prepare">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(1,10000000);sizes=u(8,128)MB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="main">
+      <work name="main" type="normal" workers="128" interval="3" division="none" runtime="2400" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="70" config="containers=u(1,200);objects=u(1,10000000);hashCheck=false"/>
+        <operation type="write" ratio="30" config="containers=u(1,200);objects=u(10000001,15000000);sizes=u(8,128)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="cleanup">
+      <work type="cleanup" workers="32" config="containers=r(1,200);objects=r(1,15000000);deleteContainer=false"/>
+    </workstage>
+
+    <workstage name="dispose">
+      <work type="dispose" workers="8" config="containers=r(1,200)"/>
+    </workstage>
+
+  </workflow>
+</workload>

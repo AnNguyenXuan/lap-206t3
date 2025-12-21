@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test CRUD theo vòng đời" description="CRUD theo vòng đời: write -> read -> delete (tách stage)">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="4" config="containers=r(1,200)"/>
+    </workstage>
+
+    <workstage name="main_write">
+      <work name="main_write" type="normal" workers="32" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(20000001,23000000);sizes=c(256)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="main_read">
+      <work name="main_read" type="normal" workers="64" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(20000001,23000000);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="main_delete">
+      <work name="main_delete" type="normal" workers="16" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="delete" ratio="100" config="containers=u(1,200);objects=u(20000001,23000000)"/>
+      </work>
+    </workstage>
+
+    <workstage name="cleanup">
+      <work type="cleanup" workers="16" config="containers=r(1,200);objects=r(20000001,23000000);deleteContainer=false"/>
+    </workstage>
+
+    <workstage name="dispose">
+      <work type="dispose" workers="4" config="containers=r(1,200)"/>
+    </workstage>
+  </workflow>
+</workload>

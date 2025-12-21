@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="mô phỏng hệ thống backup, media" description="PUT lớn (chunked) + GET verify ít">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="4" config="containers=r(1,50)"/>
+    </workstage>
+
+    <workstage name="main">
+      <work name="main" type="normal" workers="16" interval="10" division="none" runtime="1800" rampup="60" rampdown="60" afr="200000">
+        <operation type="write" ratio="90" config="containers=u(1,50);objects=u(1,3000);sizes=c(128)MB;chunked=true;content=random;hashCheck=false"/>
+        <operation type="read" ratio="10" config="containers=u(1,50);objects=u(1,3000);hashCheck=false"/>
+      </work>
+    </workstage>
+  </workflow>
+</workload>

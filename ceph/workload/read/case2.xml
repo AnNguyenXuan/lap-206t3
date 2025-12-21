@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="Test đọc 8MB tăng dần workers" description="Đọc 1 loại kích thước (8MB) và tăng dần workers theo runtime">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="8" config="containers=r(1,200)"/>
+    </workstage>
+
+    <workstage name="prepare_8m">
+      <work type="prepare" workers="16" config="containers=r(1,200);objects=r(1,50000);sizes=c(8)MB;chunked=false;content=random;hashCheck=false"/>
+    </workstage>
+
+    <workstage name="read_8m_w16">
+      <work name="read_8m_w16" type="normal" workers="16" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(1,50000);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_8m_w32">
+      <work name="read_8m_w32" type="normal" workers="32" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(1,50000);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_8m_w64">
+      <work name="read_8m_w64" type="normal" workers="64" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(1,50000);hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="read_8m_w128">
+      <work name="read_8m_w128" type="normal" workers="128" interval="5" runtime="900" rampup="60" rampdown="60" afr="200000">
+        <operation type="read" ratio="100" config="containers=u(1,200);objects=u(1,50000);hashCheck=false"/>
+      </work>
+    </workstage>
+
+  </workflow>
+</workload>

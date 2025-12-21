@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test ngưỡng kết nối tăng dần totalOps" description="test hiệu năng ghi file nhỏ với số lượng kết nối tăng dần theo totalOps">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+    <workstage name="init">
+      <work type="init" workers="4" config="containers=r(1,100)"/>
+    </workstage>
+
+    <workstage name="write_64k_16">
+      <work name="write_64k_16" type="normal" workers="16" interval="5" totalOps="163840" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,100);objects=u(1,2000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_32">
+      <work name="write_64k_32" type="normal" workers="32" interval="5" totalOps="163840" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,100);objects=u(2000001,4000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_64">
+      <work name="write_64k_64" type="normal" workers="64" interval="5" totalOps="163840" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,100);objects=u(4000001,6000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_128">
+      <work name="write_64k_128" type="normal" workers="128" interval="5" totalOps="163840" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,100);objects=u(6000001,8000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+  </workflow>
+</workload>

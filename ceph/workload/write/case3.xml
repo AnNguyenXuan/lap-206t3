@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test ngưỡng kết nối tăng dần file nhỏ runtime" description="test hiệu năng ghi file nhỏ với số lượng kết nối tăng dần theo runtime">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="4" config="containers=r(1,200)"/>
+    </workstage>
+
+    <workstage name="write_64k_w16">
+      <work name="write_64k_w16" type="normal" workers="16" interval="5" runtime="300" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(1,2000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_w32">
+      <work name="write_64k_w32" type="normal" workers="32" interval="5" runtime="300" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(2000001,4000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_w64">
+      <work name="write_64k_w64" type="normal" workers="64" interval="5" runtime="300" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(4000001,6000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_w128">
+      <work name="write_64k_w128" type="normal" workers="128" interval="5" runtime="300" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(6000001,8000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64k_w256">
+      <work name="write_64k_w256" type="normal" workers="256" interval="5" runtime="300" rampup="20" rampdown="20" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(8000001,10000000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+  </workflow>
+</workload>

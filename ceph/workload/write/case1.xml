@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workload name="test hiệu năng ghi từng loại file trong 1 khoảng thời gian cố định" description="test hiệu năng ghi từng loại file trong 1 khoảng thời gian cố định">
+  <storage type="s3" config="accesskey=16OZWI4OZCB2K8DSCNLK;secretkey=XY6MgdHyESgeAhAWhoLk0sOyEJB1FrsP2pd5EIHj;endpoint=phitt-cephs3.hostingviet.com.vn;path_style_access=true"/>
+  <workflow>
+
+    <workstage name="init">
+      <work type="init" workers="8" config="containers=r(1,200)"/>
+    </workstage>
+
+    <workstage name="write_64k">
+      <work name="write_64k" type="normal" workers="16" interval="5" runtime="600" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(1,500000);sizes=c(64)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_256k">
+      <work name="write_256k" type="normal" workers="16" interval="5" runtime="600" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(500001,700000);sizes=c(256)KB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_1m">
+      <work name="write_1m" type="normal" workers="16" interval="5" runtime="600" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(700001,800000);sizes=c(1)MB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_4m">
+      <work name="write_4m" type="normal" workers="16" interval="5" runtime="600" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(800001,820000);sizes=c(4)MB;chunked=false;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+    <workstage name="write_64m">
+      <work name="write_64m" type="normal" workers="16" interval="15" runtime="1200" rampup="30" rampdown="30" afr="200000">
+        <operation type="write" ratio="100" config="containers=u(1,200);objects=u(820001,821000);sizes=c(64)MB;chunked=true;content=random;hashCheck=false"/>
+      </work>
+    </workstage>
+
+  </workflow>
+</workload>
