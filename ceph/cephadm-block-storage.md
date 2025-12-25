@@ -1,8 +1,6 @@
 ### Các khai niệm về Block Storage Ceph
 ```
-Ceph Object Gateway (còn gọi là RADOS Gateway hay RGW) là một thành phần trong hệ thống lưu trữ phân tán Ceph, dùng để cung cấp giao diện object storage (lưu trữ đối tượng) tương tự như Amazon S3 hoặc OpenStack Swift.
 
-Để xây dựng 
 ```
 ### Cài đặt Block Storage Ceph
 ```

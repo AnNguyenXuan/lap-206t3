@@ -1,4 +1,4 @@
-## Kiểm tra hiệu năng
+## Kiểm tra hiệu năng ssd
 ```
 # Random Read
 fio --name=randread_4k --filename=/dev/sdd --ioengine=libaio --direct=1 \

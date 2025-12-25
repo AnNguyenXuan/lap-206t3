@@ -102,9 +102,7 @@ Hiệu suất IOPS cơ bản được xác định bởi thiết kế vật lý 
    Block storage thường có chi phí/GB cao hơn và phù hợp với performance-sensitive workloads; object storage cung cấp khả năng mở rộng gần như vô hạn với chi phí thấp hơn, thích hợp cho dữ liệu lớn không nhạy latency; file storage nằm giữa hai loại này về mặt truy cập và metadata support.
 ```
 
-## Test IOPS
-
-### Test RAW
+### Test
 ```
 Ở đây chúng ta kiểm tra tốc độ IOPS với RAW disk, tức là chưa có các lớp phần mềm phía trên.
 Tức là ta chỉ test driver và phần cứng.
