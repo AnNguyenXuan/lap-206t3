@@ -120,9 +120,4 @@ fio --name=randrw_3070_256k --filename=/dev/sdd --ioengine=libaio --direct=1 \
     --rwmixread=30 --bs=256k --time_based --runtime=180 --ramp_time=20 \
     --randrepeat=0 --norandommap --group_reporting  \
     --output=randrw_3070_256k.txt
-
-
-Lệnh chạy tất cả trong 1 cấu hình 
-fio --output-format=json+ --output=ssd_test.json ssd.fio
-
 ```

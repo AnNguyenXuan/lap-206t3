@@ -1,10 +1,10 @@
-## Test hiệu năng cụm RAID 0 HDD
+## Test hiệu năng cụm RAID HDD
 ```
 - Read ngẫu nhiên, test nhiều ứng dụng
-fio --name=randread_4k --filename=/dev/sdb --ioengine=libaio --direct=1 --invalidate=1 --iodepth=64 --numjobs=4 --size=4G --rw=randread --bs=4k --time_based --runtime=180 --ramp_time=20 --randrepeat=0 --norandommap --group_reporting
+fio --name=randread_4k --filename=/dev/sdb --ioengine=libaio --direct=1 --invalidate=1 --iodepth=64 --numjobs=4 --size=100G --rw=randread --bs=4k --time_based --runtime=180 --ramp_time=0 --randrepeat=0 --norandommap --group_reporting
 
 - Write ngẫu nhiên, test nhiều ứng dụng
-fio --name=randwrite_4k --filename=/dev/sdb --ioengine=libaio --direct=1 --invalidate=1 --iodepth=64 --numjobs=4 --size=4G --rw=randwrite --bs=4k --time_based --runtime=180 --ramp_time=20 --randrepeat=0 --norandommap --group_reporting
+fio --name=randwrite_4k --filename=/dev/sdb --ioengine=libaio --direct=1 --invalidate=1 --iodepth=64 --numjobs=4 --size=100G --rw=randwrite --bs=4k --time_based --runtime=180 --ramp_time=0 --randrepeat=0 --norandommap --group_reporting
 
 - Read tuần tự, test nhiều ứng dụng
 fio --name=seqread_4k --filename=/dev/sdb --ioengine=libaio --direct=1 --invalidate=1 --iodepth=64 --numjobs=4 --size=4G --rw=read --bs=4k --time_based --runtime=180 --ramp_time=20       --randrepeat=0 --norandomma --group_reporting
@@ -44,7 +44,7 @@ RAID 0 HDD tối ưu việc khai thác băng thông tổng của nhiều ổ c�
 ```
 Trong hệ thống RAID HDD, page cache của hệ điều hành có ảnh hưởng rất lớn đến kết quả đo hiệu năng, đặc biệt với các bài toán đọc ghi ngẫu nhiên và workload hỗn hợp (mixed read/write).
 
-Về bản chất, page cache hoạt động như một lớp đệm bộ nhớ trung gian giữa ứng dụng và block device. Khi sử dụng buffered I/O (direct=0), các thao tác ghi thường được hoàn thành ngay khi dữ liệu được ghi vào page cache, trong khi việc ghi xuống disk vật lý được thực hiện bất đồng bộ ở phía sau. Điều này có thể tạo ra cảm giác hiệu năng ghi rất cao, dù backend HDD thực tế vẫn có giới hạn lớn về độ trễ và IOPS.
+Về bản chất, page cache hoạt động như một lớp đệm bộ nhớ trung gian giữa ứng dụng và block device. Khi sử dụng buffered I/O (direct=0), các thao tác ghi thường được hoàn thành ngay khi dữ liệu được ghi vào page cache, trong khi việc ghi xuống disk vật lý được thực hiện bất đồng bộ ở phía sau. Điều nà y có thể tạo ra cảm giác hiệu năng ghi rất cao, dù backend HDD thực tế vẫn có giới hạn lớn về độ trễ và IOPS.
 
 Đối với các bài toán đọc, page cache chỉ mang lại lợi ích khi workload có tính tái sử dụng dữ liệu (locality). Trong các bài test có working set nhỏ hoặc pattern truy cập lặp lại, dữ liệu có thể được phục vụ trực tiếp từ RAM, dẫn đến băng thông đọc “ảo”, vượt xa khả năng thực của RAID HDD. Ngược lại, với workload có phạm vi truy cập lớn và truy cập ngẫu nhiên rộng, page cache nhanh chóng bị thay thế (cache thrashing), tỷ lệ cache hit thấp, và hiệu năng đo được tiến gần hơn đến giới hạn vật lý của disk.
 
@@ -52,7 +52,6 @@ Khi RAID HDD bị bão hòa băng thông hoặc IOPS, page cache không làm tă
 
 Kết luận : page cache không làm RAID HDD nhanh hơn, mà chỉ thay đổi thời điểm và cách chi phí I/O được bộc lộ. Trong các phép đo hiệu năng backend lưu trữ, việc bật page cache có thể dẫn đến kết quả sai lệch nếu không kiểm soát chặt chẽ pattern truy cập và kích thước working set.
 ```
-
 
 ## Bài toán page cache
 ```
@@ -89,4 +88,65 @@ Các tham số dirty_ratio và dirty_background_ratio quyết định lượng d
 
 cat /sys/block/sdb/queue/read_ahead_kb
 Dùng cho scan, backup, sequential read
+```
+
+## Thông số RAID 0
+```
+Stripe size ảnh hưởng khá mạnh đến kết quả đầu ra, với Strip size lớn, các bài test có kích thước file lớn cho kết quả tốt hơn,
+
+Thông số Strip size = 64k
+Băng thông max (bs=1M):
+random_read khoảng 250-300 MB
+random_write khoảng 300 MB
+sqential_read khoảng 400-500 MB
+sqential_write khoảng 500-600 MB
+random_rw khoảng khoảng 150-250 MB (tổng cả 2)
+
+IOPS max (Bs=16k):
+random_read khoảng 3000 IOPS với kích thước nhỏ
+random_write khoảng 3000 IOPS với kích thước nhỏ
+sqential_read khoảng 20k IOPS với kích thước 16k
+sqential_write khoảng 8k IOPS với kích thước 16k
+random_rw khoảng khoảng 2000-2500 IOPS với kích thước nhỏ (tổng cả 2)
+```
+
+## Đánh giá RAID 10
+```
+Stripe size ảnh hưởng khá mạnh đến kết quả đầu ra, với Strip size lớn, các bài test có kích thước file lớn cho kết quả tốt hơn 
+
+Thông số Strip size = 128k, bs=1M
+Băng thông max (bs=1M):
+random_read khoảng 350-400 MB
+random_write khoảng 200 MB
+sqential_read khoảng 500-600 MB
+sqential_write khoảng 250-350 MB
+random_rw khoảng khoảng 250-300 MB (tổng cả 2)
+
+IOPS max (Bs=16k):
+random_read khoảng 2600 IOPS với kích thước nhỏ
+random_write khoảng 1100 IOPS với kích thước nhỏ
+sqential_read khoảng 20k IOPS với kích thước 16k
+sqential_write khoảng 20k IOPS với kích thước 16k
+random_rw khoảng giao động, tuy nhiên với write nhiều thì IOPS thấp hơn read nhiều (tổng cả 2)
+```
+
+## Đánh giá RAID 5
+```
+Stripe size ảnh hưởng khá mạnh đến kết quả đầu ra, với Strip size lớn, các bài test có kích thước file lớn cho kết quả tốt hơn 
+
+Thông số Strip size = 128k
+Băng thông max (bs=1M):
+random_read khoảng 280-320 MB
+random_write khoảng 70-90 MB
+sqential_read khoảng 650-950 MB
+sqential_write khoảng 400 MB
+random_rw khoảng khoảng 200 MB (tổng cả 2)
+
+IOPS max (Bs=16k):
+random_read khoảng 2500 IOPS với kích thước nhỏ
+random_write khoảng 500 IOPS với kích thước nhỏ
+sqential_read khoảng 15k IOPS với kích thước 16k
+sqential_write khoảng 19k IOPS với kích thước 16k (?)
+random_rw khoảng giao động, tuy nhiên với write nhiều thì IOPS thấp hơn read nhiều (tổng cả 2) do phải tính parity
+kết quả random_rw giao động 600-1000 với tỉ lệ 30-70 và 70-30
 ```
