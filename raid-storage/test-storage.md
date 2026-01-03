@@ -28,9 +28,8 @@ Lỗi truyền tải dữ liệu
 
 ### 2. Hard Disk Sentinel 
 ```
-
+Hard Disk Sentinel là công cụ giám sát và chẩn đoán ổ cứng/SSD chuyên sâu, giúp theo dõi tình trạng sức khỏe, nhiệt độ, hiệu suất và cảnh báo sớm nguy cơ lỗi. Phần mềm hỗ trợ nhiều chuẩn lưu trữ (HDD, SSD, NVMe), giúp người dùng chủ động sao lưu và bảo vệ dữ liệu trước khi sự cố xảy ra.
 ```
-
 
 ## Tổng Quan Về IOPS (Input/Output Operations Per Second)
 ```
