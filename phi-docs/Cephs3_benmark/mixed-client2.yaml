@@ -1,0 +1,15 @@
+warp:
+  api: v1
+  benchmark: put
+  host: phitt-cephs3.hostingviet.com.vn
+  access-key: BPTMY6SAEP73ZMP0B343  # KEY ben user2
+  secret-key: GmWDWTCZCdvmjha2JirzM9aVUV6psITcUfdQfbkP
+  tls: false
+  bucket: benchmark-write-put  # Bucket riêng cho PUT
+  duration: 32m  # Chạy lâu hơn 2 phút để client 3 có dữ liệu đọc
+  concurrent: 100
+  warp-client:
+    - 10.10.210.121:6000
+  obj:
+    size: 16MiB
+    randsize: true

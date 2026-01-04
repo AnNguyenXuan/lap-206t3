@@ -1,0 +1,19 @@
+warp:
+  api: v1
+  benchmark: mixed
+  host: phitt-cephs3.hostingviet.com.vn
+  access-key: X0K3BGMVFU2V1FPWUNC3  # Ben user4
+  secret-key: ZC79pQimULu9mz0eyfUmIbZvF08UQU5kPL7QQtA7
+  tls: false
+  bucket: benchmark-small-1  # Bucket riêng
+  duration: 30m
+  concurrent: 100
+  distribution:
+    get: 40
+    put: 40
+    stat: 20
+  warp-client:
+    - 10.10.210.127:6000
+  obj:
+    size: 512KiB
+    randsize: true

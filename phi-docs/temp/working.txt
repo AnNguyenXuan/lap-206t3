@@ -1,0 +1,57 @@
+adduser phitt
+adduser manhhc
+adduser ngockb
+
+0AlNeJuPxahop7TZ
+gOa7voSoo3QwdP6g
+YKcQgsp01TQtryZw
+
+usermod -L htv
+usermod -aG sudo phitt
+usermod -aG sudo manhhc
+usermod -aG sudo ngockb
+
+mkdir /home/phitt/.ssh
+mkdir /home/manhhc/.ssh
+mkdir /home/ngockb/.ssh
+
+echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINxDUd3HZJDxV9U+3ae1xt6v0rvMnf0kGfVzggfCVKnM ad\trongphi@Friday' >> /home/phitt/.ssh/authorized_keys
+echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCv0O0zIYvp8Bx2Ns0ozFeKfDzU/DjkXBydgkNQz/neFHf++TqFjsfOdXMZ6r8+qBcIK6LUhbjiP4UEaUo8Met8JQMkIqQhD8OiH+eNEC+UxPp1wbCSgxBI8FKZX+EzHk85YqVWzsOdKfj8ZU6ga0xz4w2XUtUcLd2jVDoS2d3qUv0feJb68osntDItQndtcHUbdugFo1FSTTAZuvbBd/dYEaTUV1kcJx0tpihZ3SScEXnUFWOxZa1O0bQg+Wr5wUb+e5QuGBmKk/1VzNCEto7Yeba++FdYFb+bQ3uOw3Jpq5bGMOlESvcZe1BY2hO2jUtH2ZwlPLEcLyH00Fuy+PWF rsa-key-manhhc' >> /home/manhhc/.ssh/authorized_keys
+echo 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCK1fEyhED4HLU0ryOsKAcj2QUiCN81cJ2DTTh4RKI/9mYFmdrcx9rRwEFtabS+IfvlzMSfz/k7RZ1AH772Jcz51ykOEgLNkxaNdWmHYCXEtd5YR66OZc2pS1nAKwQbpCdeR/1x0yc8zzbV3bV7k1521frAeNbgDeN24brnBsMNdwCKgzdMvZRfOULHyoGCUaRgNp2q1T8141+mhPfwv0p0sChLK5hEH3TeXeMyMnwoBwS4XU1AWjowwVfWCrm7MSfKdFGDYudZ2AZv1/Ai4JxjyD+5YjCEd3JXHAR/ZncWTMMarDdTICaBX8q9D8PoSGLE9B9MwlnlDpiopq7VBHgX ngockb-pub-key-20240419' >> /home/ngockb/.ssh/authorized_keys
+
+chmod 600 /home/phitt/.ssh/authorized_keys
+chmod 600 /home/manhhc/.ssh/authorized_keys
+chmod 600 /home/ngockb/.ssh/authorized_keys
+
+chown -R phitt:phitt /home/phitt/.ssh/
+chown -R manhhc:manhhc /home/manhhc/.ssh/
+chown -R ngockb:ngockb /home/ngockb/.ssh/
+
+mkdir /etc/pam_scripts/
+nano /etc/pam_scripts/login-notify.sh
+
+chmod +x /etc/pam_scripts/login-notify.sh
+
+nano /etc/pam.d/sshd
+
+# Telegram SSH Login Notification
+session optional pam_exec.so seteuid /etc/pam_scripts/login-notify.sh
+
+systemctl restart ssh
+
+
+docker run -d --name alertmanager-telegram \
+  --restart always \
+  -e TELEGRAM_TOKEN="6073261344:AAEWZ83zFaVYEXW_vAQB0jLiNyl2pmV-E5k" \
+  -e TELEGRAM_CHAT_ID="-5000713182" \
+  -v /root/alert-template/telegram-template.html \
+  -p 9165:8080 \
+  ghcr.io/janw/alertmanager-telegram
+  
+docker run -d --name alertgram \
+  --restart always \
+  -p 9165:8080 \
+  -e ALERTGRAM_TELEGRAM_API_TOKEN="6073261344:AAEWZ83zFaVYEXW_vAQB0jLiNyl2pmV-E5k" \
+  -e ALERTGRAM_TELEGRAM_CHAT_ID="-5000713182" \
+  -v /root/alert-templates:/templates \
+  slok/alertgram:latest
