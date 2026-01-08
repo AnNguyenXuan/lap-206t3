@@ -69,13 +69,19 @@ Gợi ý vận hành:
 
 ### Cài đặt Block Storage Ceph
 ```
-
+Thiết lập số replicate per osd
+ceph config set global osd_pool_default_size 2
+ceph config set global osd_pool_default_min_size 1
 
 Tạo pool cho OPS
 ceph osd pool create volumes 64 64
-ceph osd pool create images 16 16
-ceph osd pool create backups 16 16
+ceph osd pool create images 32 32
+ceph osd pool create backups 32 32
 ceph osd pool create vms 32 32
+ceph osd pool set volumes target_size_ratio 0.55
+ceph osd pool set images target_size_ratio 0.30
+ceph osd pool set backups target_size_ratio 0.10
+ceph osd pool set vms target_size_ratio 0.05
 rbd pool init volumes
 rbd pool init images
 rbd pool init backups

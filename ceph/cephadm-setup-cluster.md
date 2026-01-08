@@ -1,4 +1,4 @@
-### Cài đặt Block Storage Ceph
+### Cài đặt và cấu hình ban đầu
 ```
 Môi trường triển khai Debian12 , đấu nối cụm Ceph với Openstack kolla-ansible triển khai container trên distro Debian12
 Trước khi triển khai cần kiểm tra version 
@@ -83,13 +83,38 @@ Cấu hình OSD
 ceph orch device ls
 apt -y install ceph-volume
 
+Dọn data trong ổ trước
+sgdisk --zap-all /dev/sdb || true
+wipefs -a /dev/sdb || true
+ceph orch device ls --refresh
+
+Nếu cấu hình DB/WAL ra các ổ riêng, tốt nhất cần chạy RAID 1 cho cụm SSD đó
+
 Nếu thích cấu hình nhanh
 ceph orch daemon add osd openstack-data-1:data_devices=/dev/sdd,/dev/sde,/dev/sdf,/dev/sdg,db_devices=/dev/sdb,/dev/sdc
 ceph orch daemon add osd openstack-data-2:data_devices=/dev/sdd,/dev/sde,/dev/sdf,/dev/sdg,db_devices=/dev/sdb,/dev/sdc
 ceph orch daemon add osd openstack-data-3:data_devices=/dev/sdd,/dev/sde,/dev/sdf,/dev/sdg,db_devices=/dev/sdb,/dev/sdc
 
 Cấu hình chuẩn docs
-cephadm shell --
+vgcreate ceph-block-0 /dev/sdb
+vgcreate ceph-block-1 /dev/sde
+vgcreate ceph-block-2 /dev/sdf
+vgcreate ceph-block-3 /dev/sdg
+lvcreate -l 100%FREE -n block-0 ceph-block-0
+lvcreate -l 100%FREE -n block-1 ceph-block-1
+lvcreate -l 100%FREE -n block-2 ceph-block-2
+lvcreate -l 100%FREE -n block-3 ceph-block-3
+vgcreate ceph-db-0 /dev/sdc
+vgcreate ceph-db-1 /dev/sdd
+lvcreate -l 50%VG -n db-0 ceph-db-0
+lvcreate -l 50%VG -n db-1 ceph-db-0
+lvcreate -l 50%VG -n db-2 ceph-db-1
+lvcreate -l 50%VG -n db-3 ceph-db-1
+
+ceph-volume lvm create --bluestore --data ceph-block-0/block-0 --block.db ceph-db-0/db-0
+ceph-volume lvm create --bluestore --data ceph-block-1/block-1 --block.db ceph-db-0/db-1
+ceph-volume lvm create --bluestore --data ceph-block-2/block-2 --block.db ceph-db-0/db-2
+ceph-volume lvm create --bluestore --data ceph-block-3/block-3 --block.db ceph-db-0/db-3
 
 Kiểm tra nhanh
 cephadm shell -- ceph -s

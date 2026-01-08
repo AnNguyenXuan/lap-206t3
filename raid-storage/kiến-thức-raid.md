@@ -77,6 +77,10 @@ Hạn Chế / Điểm Cần Lưu Ý (Đặc thù HDD):
 ```
 write-back : Ghi dữ liệu vào RAM cache trên card RAID, trả ACK ngay cho OS, sau đó mới flush xuống disk nên IOPS & latency tăng mạnh
 write-through: Chỉ ACK sau khi disk ghi xong nên an toàn hơn nhưng chậm
+read-ahead : Đọc trước, khi có một yêu dữ liệu đọc 12k, OS sẽ cố gằng đọc trước 128k (tùy cấu hình) và lưu vào RAM gây tốm RAM
+strip size : Kích thước dữ liệu đọc/ghi 1 vòng seek trong 1 ổ cứng trước khi chuyển sang ổ khác (seek càng nhiều latency càng cao)
+stripe width : Số data disk tham gia chứa dữ liệu
+stripe size : Tổng băng thông đọc/ghi = strip size * stripe width
 ```
 
 ## Các khái niệm liên quan

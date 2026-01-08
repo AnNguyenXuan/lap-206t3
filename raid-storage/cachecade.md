@@ -80,6 +80,10 @@ cat /sys/block/bcache0/bcache/writeback_percent
 # Để xem số sector/s được xả (1 sector = 512 bytes), bcache thường sẽ tự điều chỉnh
 cat /sys/block/bcache0/bcache/writeback_rate
 
+# Xem thông số readahead
+cat /sys/block/bcache0/queue/read_ahead_kb
+cat /sys/block/sdb/queue/read_ahead_kb
+
 # Lợi ích: bcache writeback có lợi vì nó hấp thụ random write vào SSD, rồi khi xả xuống backing nó xả theo kiểu tuần tự, từ đó cải thiện hiệu năng ghi ngẫu nhiên
 # Điểm lợi nhất là dùng với RAID5/6 bị write penalty vì phải cập nhật parity; với ghi nhỏ/partial write dễ rơi vào chu kỳ kiểu read-modify-write nên chậm
 # Ghi lớn/tuần tự: bcache thường ít hiệu quả (thậm chí cố tình bỏ qua)
