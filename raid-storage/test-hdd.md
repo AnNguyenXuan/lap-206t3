@@ -111,5 +111,31 @@ Nhiều ổ (spindles) trong RAID
 
 Nhiều luồng I/O (queue depth) để các ổ luôn bận
 
-Phân mảnh làm tăng seek -> mỗi ổ bận di chuyển đầu đọc nhiều hơn -> hiệu quả pipeline kém đi, nên bạn cảm giác mất song song. Nhưng bản chất vẫn là: RAID vẫn stripe, vẫn nhiều ổ cùng làm chỉ là mỗi ổ phải nhảy nhiều hơn nên tổng throughput giảm.
+Phân mảnh làm tăng seek -> mỗi ổ bận di chuyển đầu đọc nhiều hơn -> hiệu quả pipeline kém đi, nên ta cảm giác mất song song. Nhưng bản chất vẫn là: RAID vẫn stripe, vẫn nhiều ổ cùng làm chỉ là mỗi ổ phải nhảy nhiều hơn nên tổng throughput giảm.
+
+Trong bài toán đọc ghi tuần tự, do không bận phải di chuyển nhiều -> latency giảm -> throughput tăng
+
+Ngoài ra, phân mảnh trong RAID 5,6 đặc biết ảnh hưởng đến hiệu năng ghi do cần tính toán parity. Nếu dữ liệu ghi là bội số của stripe size, RAID 5,6 sẽ không cần đọc lại data cũ, mà chỉ cần tính parity và ghi data mới, lý do là vì giờ dữ liệu mới sẽ ghi đè lên hết các vùng dữ liệu cũ nên không cần quan tâm. Trong TH dữ liệu ghi không là bội số của stripe size, lúc này RAID sẽ cần đọc dữ liệu cũ và parity cũ, sau đó thay đổi 1 phần dữ liệu cũ, tính lại parity mới. Cơ chế này có 1 cách gọi là Read-Modify-Write (RMW).
+
+Điều này sẽ cho ta đến 1 vấn đề là ghi data = bội số stripe size sẽ đạt hiệu quả cao nhất với RAID 5,6
 ```
+
+## Làm cách nào để cải thiện tính tuần tự
+```
+1. Write-back cache + destage thông minh
+Gom random -> xả tuần tự (bcache, dm-cache, controller cache, ZIL/SLOG của ZFS…).
+
+2. Log-structured / append-only storage
+Ví dụ một số object store / LSM-tree (RocksDB) / WAL + compaction.
+Đổi update in place thành append + merge.
+
+3. I/O scheduler / batching theo vùng
+Gom các request gần nhau trước khi dispatch (elevator, deadline/mq-deadline).
+Đây là tuần tự hoá theo thời gian.
+
+4. Tách workload
+Tách pool/đĩa cho workload random (VM/DB) và workload sequential (backup/archive).
+Vì trộn hai loại trên cùng spindle làm hiệu năng rơi mạnh.
+```
+
+
