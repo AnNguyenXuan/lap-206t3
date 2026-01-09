@@ -13,6 +13,9 @@ Remote memory access: latency cao hơn, băng thông thấp hơn, tốn intercon
 ccNUMA = NUMA nhưng cache coherence được phần cứng đảm bảo, nên toàn hệ vẫn nhìn như một máy thống nhất. Nhưng hiệu năng phụ thuộc bạn có để đúng dữ liệu gần đúng CPU không
 
 Keyword : Processor Affinity
+resync :
+
+o sata va sas
 ```
 
 ## Chiến lược cải thiện hiệu năng với NUMA
