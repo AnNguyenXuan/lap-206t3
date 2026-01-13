@@ -98,6 +98,7 @@ ceph osd pool create images
 ceph osd pool create backups
 ceph osd pool create vms
 ```
+
 Kích hoạt rbd cho các pool
 ```
 rbd pool init volumes
@@ -105,54 +106,66 @@ rbd pool init images
 rbd pool init backups
 rbd pool init vms
 ```
+
 Copy file cấu hình cụm Ceph tới node deploy
 ```
+Truy cập cấu hình và xóa khoảng trắng
+nano /etc/ceph/ceph.conf
+
 ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.conf < /etc/ceph/ceph.conf
 ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.conf < /etc/ceph/ceph.conf
 ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/ceph.conf < /etc/ceph/ceph.conf
 ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.conf < /etc/ceph/ceph.conf
 ```
-Tạo key cho user Openstack ứng với mỗi RDB Ceph để xác thực CephX
+
+Tạo key cho user Openstack ứng với mỗi RDB Ceph để xác thực CephX trên node Mon
 ```
-ceph auth get-or-create client.glance mon 'profile rbd' osd 'profile rbd pool=images' mgr 'profile rbd pool=images'
-ceph auth get-or-create client.cinder mon 'profile rbd' osd 'profile rbd pool=volumes, profile rbd pool=vms, profile rbd-read-only pool=images' mgr 'profile rbd pool=volumes, profile rbd pool=vms'
-ceph auth get-or-create client.cinder-backup mon 'profile rbd' osd 'profile rbd pool=backups' mgr 'profile rbd pool=backups'
+ceph auth get-or-create client.cinder mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=volumes, allow rwx pool=vms, allow rx pool=images'
+ceph auth get-or-create client.cinder-backup mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=backups'
+ceph auth get-or-create client.glance mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=images'
 ```
-### Lưu ý : Sau khi tạo key xong, nhớ xóa khoảng trắng trong file khi copy sang các node
 
 Copy key sang node deploy
 ```
-ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.client.cinder.keyring
-ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder.keyring
-ceph auth get-or-create client.cinder-backup | ssh 10.10.210.10 sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring
-ceph auth get-or-create client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring
-ceph auth get-or-create client.glance | ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring
+ceph auth get-or-create client.cinder | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.client.cinder.keyring >/dev/null'
+ceph auth get-or-create client.cinder-backup | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring >/dev/null'
+ceph auth get-or-create client.cinder | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring >/dev/null'
+ceph auth get-or-create client.glance | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring >/dev/null'
 ceph auth get-key client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/client.cinder.key
 ```
+
+Kích hoạt tính năng exclusive-lock (nghiên cứu sau)
+```
+ceph auth caps client.ID mon 'allow r, allow command "osd blacklist"' osd 'EXISTING_OSD_USER_CAPS'
+```
+
 ### 2. Cấu hình dịch vụ Openstack tại node deploy
 
-Cấu hình glance.conf
+Cài đặt rbd cho toàn cụm
 ```
-nano /etc/kolla/config/glance/glance-api.conf
-[DEFAULT]
-show_image_direct_url = True
+apt install python3-rbd
+apt install ceph-common
+apt install uuid-runtime
+```
 
-[glance_store]
-default_store = rbd
-stores = file,http,rbd
-rbd_store_pool = images
-rbd_store_user = glance
-rbd_store_ceph_conf = /etc/ceph/ceph.conf
-rbd_store_chunk_size = 8
+Tạo uuid tại node deploy chạy và gán pass 
 ```
-Cấu hình cinder
+uuidgen
+uuidgen
+1ddabc08-4694-48ad-86e7-65dc24049829
+ffac422c-130a-494c-a716-db71935bfd43
+kolla-genpwd
+rbd_secret_uuid: 1ddabc08-4694-48ad-86e7-65dc24049829
+cinder_rbd_secret_uuid: ffac422c-130a-494c-a716-db71935bfd43
 ```
-nano /etc/kolla/config/cinder/cinder-volume.conf
+
+Cấu hình cinder.conf
+```
+nano /etc/kolla/config/cinder/cinder.conf
 [DEFAULT]
-...
 enabled_backends = ceph
 glance_api_version = 2
-...
+
 [ceph]
 volume_driver = cinder.volume.drivers.rbd.RBDDriver
 volume_backend_name = ceph
@@ -163,10 +176,8 @@ rbd_max_clone_depth = 5
 rbd_store_chunk_size = 4
 rados_connect_timeout = -1
 rbd_user = cinder
-rbd_secret_uuid = <cấu hình tham số này sau>, copy theo [rbd1] trong cinder.conf
+rbd_secret_uuid = 1ddabc08-4694-48ad-86e7-65dc24049829
 
-nano /etc/kolla/config/cinder/cinder-backup.conf
-[default]
 backup_driver = cinder.backup.drivers.ceph
 backup_ceph_conf = /etc/ceph/ceph.conf
 backup_ceph_user = cinder-backup
@@ -176,6 +187,53 @@ backup_ceph_stripe_unit = 0
 backup_ceph_stripe_count = 0
 restore_discard_excess_bytes = true
 ```
+
+Cấu hình glance.conf
+```
+nano /etc/kolla/config/glance/glance-api.conf
+[DEFAULT]
+show_image_direct_url = True
+
+[glance_store]
+default_store = rbd
+stores = rbd
+rbd_store_pool = images
+rbd_store_user = glance
+rbd_store_ceph_conf = /etc/ceph/ceph.conf
+rbd_store_chunk_size = 8
+
+[cors]
+allowed_origin = https://10.10.210.9
+```
+
+Cấu hình nova.conf
+```
+nano /etc/kolla/config/nova/nova.conf 
+[libvirt]
+images_type = rbd
+images_rbd_pool = vms
+images_rbd_ceph_conf = /etc/ceph/ceph.conf
+rbd_user = cinder
+rbd_secret_uuid = 1ddabc08-4694-48ad-86e7-65dc24049829
+disk_cachemodes="network=writeback"
+inject_password = false
+inject_key = false
+inject_partition = -2
+live_migration_flag="VIR_MIGRATE_UNDEFINE_SOURCE,VIR_MIGRATE_PEER2PEER,VIR_MIGRATE_LIVE,VIR_MIGRATE_PERSIST_DEST,VIR_MIGRATE_TUNNELLED"
+hw_disk_discard = unmap
+```
+
+Cấu hình nova với ceph.conf
+```
+nano /etc/kolla/config/nova/ceph.conf
+[client]
+rbd cache = true
+rbd cache writethrough until flush = true
+rbd concurrent management ops = 20
+admin socket = /var/run/ceph/guests/$cluster-$type.$id.$pid.$cctid.asok
+log file = /var/log/ceph/qemu-guest-$pid.log
+```
+
 Cấu hình neutron
 ```
 nano /etc/kolla/config/neutron/dnsmasq.conf 
@@ -194,17 +252,21 @@ interface_driver = openvswitch
 
 ### 3. Cấu hình cho Kolla-Ansible
 ```
-Khai báo nội dung inventory
-
-
-Tạo key cho các dịch vụ
-- kolla-genpwd
-- kolla-ansible certificates -i multinode
+Ta cần cấu hình 2 file globals.yml và multinode
+Chi tiết cấu hình xem 2 file globals.md và inventory.md
 ```
-## Lệnh tạo, kiểm tra, tái cấu hình dự án
-- kolla-ansible bootstrap-servers -i multinode
-- kolla-ansible prechecks -i multinode
-- kolla-ansible deploy -i multinode
-- kolla-ansible post-deploy -i multinode
-- kolla-ansible reconfigure -i multinode --tags neutron
+
+### 4. Lệnh tạo, kiểm tra, tái cấu hình dự án
+```
+kolla-ansible certificates -i multinode
+kolla-ansible bootstrap-servers -i multinode
+kolla-ansible prechecks -i multinode
+kolla-ansible deploy -i multinode
+kolla-ansible post-deploy -i multinode
+
+Sau đó truy cập sửa dòng
+nano /etc/kolla/admin-openrc.sh
+export OS_CACERT='/etc/kolla/certificates/ca/root.crt'
+```
+
 

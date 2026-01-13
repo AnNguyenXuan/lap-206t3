@@ -79,6 +79,9 @@ cephadm shell --mount /root/ceph-cluster.yaml:/tmp/spec.yml:ro -- ceph orch appl
 Cấu hình rõ public network
 cephadm shell -- ceph config set global public_network 10.10.210.0/24
 
+Kích hoạt module prometheus
+ceph mgr module enable prometheus
+
 Cấu hình OSD
 ceph orch device ls
 apt -y install ceph-volume

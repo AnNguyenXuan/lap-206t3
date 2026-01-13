@@ -8,6 +8,8 @@ ceph osd out 8 : loại bỏ osd ra cụm
 ceph orch daemon rm osd.8 --force : xóa daemon
 ceph osd purge 8 --yes-i-really-mean-it : xóa khỏi CRUSH map
 ceph osd pool ls detail : xem cấu hình pool
+ceph config dump
+ceph mgr module ls
 ```
 
 ## Quy trình loại bỏ osd 
