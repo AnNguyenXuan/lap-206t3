@@ -121,14 +121,16 @@ ssh 10.10.210.10 sudo tee /etc/kolla/config/glance/ceph.conf < /etc/ceph/ceph.co
 Tạo key cho user Openstack ứng với mỗi RDB Ceph để xác thực CephX trên node Mon
 ```
 ceph auth get-or-create client.cinder mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=volumes, allow rwx pool=vms, allow rx pool=images'
-ceph auth get-or-create client.cinder-backup mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=backups'
+ceph auth get-or-create client.cinder-backup mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=backups, allow rwx pool=volumes'
 ceph auth get-or-create client.glance mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=images'
+ceph auth caps client.cinder-backup mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool=backups, allow rx pool=volumes'
 ```
 
 Copy key sang node deploy
 ```
 ceph auth get-or-create client.cinder | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/cinder/cinder-volume/ceph.client.cinder.keyring >/dev/null'
 ceph auth get-or-create client.cinder-backup | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring >/dev/null'
+ceph auth get-or-create client.cinder | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder.keyring >/dev/null'
 ceph auth get-or-create client.cinder | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring >/dev/null'
 ceph auth get-or-create client.glance | sed 's/^[[:space:]]\+//' | ssh -T 10.10.210.10 'sudo tee /etc/kolla/config/glance/ceph.client.glance.keyring >/dev/null'
 ceph auth get-key client.cinder | ssh 10.10.210.10 sudo tee /etc/kolla/config/nova/client.cinder.key
@@ -161,7 +163,7 @@ cinder_rbd_secret_uuid: ffac422c-130a-494c-a716-db71935bfd43
 
 Cấu hình cinder.conf
 ```
-nano /etc/kolla/config/cinder/cinder.conf
+nano /etc/kolla/config/cinder/cinder-volume.conf
 [DEFAULT]
 enabled_backends = ceph
 glance_api_version = 2
@@ -178,6 +180,8 @@ rados_connect_timeout = -1
 rbd_user = cinder
 rbd_secret_uuid = 1ddabc08-4694-48ad-86e7-65dc24049829
 
+nano /etc/kolla/config/cinder/cinder-backup.conf
+[DEFAULT]
 backup_driver = cinder.backup.drivers.ceph
 backup_ceph_conf = /etc/ceph/ceph.conf
 backup_ceph_user = cinder-backup

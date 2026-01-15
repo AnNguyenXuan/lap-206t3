@@ -87,7 +87,21 @@ rbd pool init images
 rbd pool init backups
 rbd pool init vms
 
-Truy cập /etc/ceph/ceph.conf và xóa khoảng trắng
+Set config theo KiB (hệ nhị phân, 1KiB = 1028B)
+ceph config set client.glance rbd_default_stripe_unit 65536
+ceph config set client.glance rbd_default_stripe_count 16
+```
+
+### Test rbd
+```
+Lấy thông tin
+ceph config get client.glance rbd_default_stripe_unit
+ceph config get client.glance rbd_default_stripe_count
+
+rbd -p images create teststripe --size 1024 \
+  --object-size 8M --stripe-unit 64K --stripe-count 16
+
+rbd -p images info teststripe
 ```
 
 

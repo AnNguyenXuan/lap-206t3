@@ -21,7 +21,7 @@ Có thể hiểu, nếu ta cho phép Placement ID lưu trữ trong 3 pool khác 
 ```
 Dùng ngắn gọn: Ceph Object Storage (RGW) là kho S3/Swift-compatible, rẻ – bền – mở rộng tuyến tính. Những ứng dụng điển hình:
 
-1) Backup/Archive & DR
+1. Backup/Archive & DR
 
 Cinder-backup: dùng S3 driver (trỏ về RGW) hoặc Ceph RBD driver (backup block-level). RGW = phù hợp offsite/DR, RBD = nội bộ nhanh.
 
@@ -31,7 +31,7 @@ DB backup: MySQL/Mongo/Postgres làm PITR/streaming tới S3 (wal-g, pgBackRest�
 
 Lưu trữ dài hạn: bật Lifecycle để auto chuyển STANDARD → COLD (pool rẻ), Versioning, Object Lock (WORM) để đáp ứng tuân thủ.
 
-2) Lưu trữ tệp ứng dụng (App object store)
+2. Lưu trữ tệp ứng dụng (App object store)
 
 Nextcloud/OwnCloud: đặt primary/external storage là S3 (RGW).
 
@@ -41,19 +41,19 @@ Container Registry: Harbor/Quay sử dụng S3 backend.
 
 OpenShift/K8s: logs/artifacts, backup, model blobs.
 
-3) Phân phối nội dung & website
+3. Phân phối nội dung & website
 
 Origin cho CDN (ảnh/video/static). RGW có thể bật Website hosting cho static site nhỏ.
 
 Media pipelines: upload đa phần, multipart upload cho file lớn.
 
-4) Dữ liệu phân tích, AI/ML
+4. Dữ liệu phân tích, AI/ML
 
 Data lake: truy cập qua S3A/S3 (Hadoop, Spark, Trino/Presto, Hive).
 
 AI/ML datasets & model store: lưu checkpoint/model/embeddings; dịch vụ đọc qua SDK S3.
 
-5) OpenStack tích hợp “chuẩn bài”
+5. OpenStack tích hợp “chuẩn bài”
 
 Thay Swift: RGW cung cấp Swift API + Keystone auth → Glance/Cinder-backup có thể dùng như Swift.
 
@@ -61,7 +61,7 @@ Glance images: có thể đặt ở RGW (ít dùng hơn RBD nhưng vẫn đượ
 
 Multi-site RGW (realm/zonegroup/zone) → replication liên vùng cho DR.
 
-6) Log/metrics quy mô lớn
+6. Log/metrics quy mô lớn
 
 Thanos/Cortex/Mimir: object storage để lưu blocks của Prometheus.
 
@@ -193,105 +193,7 @@ ceph pg ls-by-pool s3.ssd.data | head
 
 oid=$(rados -p s3.ssd.data ls | head -n1)
 ```
-# Tạo bucket nextcloud để đấu nối 
-```
-# zonegroup
-radosgw-admin zonegroup placement add \
-  --rgw-realm s3 --rgw-zonegroup default \
-  --placement-id nextcloud \
-  --data-pool nextcloud.data \
-  --index-pool nextcloud.index \
-  --storage-class STANDARD
 
-# zone
-radosgw-admin zone placement add \
-  --rgw-realm s3 --rgw-zonegroup default --rgw-zone htv \
-  --placement-id nextcloud \
-  --data-pool nextcloud.data \
-  --index-pool nextcloud.index
-
-# publish
-radosgw-admin period update --commit
-systemctl restart ceph-radosgw@*
-
-# user
-radosgw-admin user create --uid=nc --display-name="Nextcloud" \
-  --access-key=NC_ACCESS --secret-key=NC_SECRET
-
-# bucket
-aws --endpoint-url=http://10.10.210.20:8080 s3api create-bucket \
-  --bucket nextcloud-data \
-  --create-bucket-configuration LocationConstraint=default:nextcloud
-
-# Lệnh này là do đang để config key cũ ở trên, nên ta phải đổi lại
-radosgw-admin bucket unlink --bucket=nextcloud-data --uid=test
-radosgw-admin bucket link   --bucket=nextcloud-data --uid=nc
-
-Lưu ý các cấu hình dưới đây là dành cho việc thay đổi cấu hình Nextcloud khi đã cài tại node 10.10.240.9
-# Xóa database cũ trong nextcloud
-drop database nextcloud;
-
-# Tạo lại database
-CREATE DATABASE nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE USER 'ncuser'@'%' IDENTIFIED BY 'Ohm_p2)6T3';
-GRANT ALL PRIVILEGES ON nextcloud.* TO 'ncuser'@'%';
-FLUSH PRIVILEGES;
-EXIT;
-
-# reconfig
-systemctl stop apache2
-rm -rf /var/www/nextcloud/data/*
-rm -f /var/www/nextcloud/config/config.php
-chown -R www-data:www-data /var/www/nextcloud
-
-sudo -u www-data php /var/www/nextcloud/occ maintenance:install \
-  --database "mysql" --database-host "localhost" \
-  --database-name "nextcloud" --database-user "ncuser" --database-pass "Ohm_p2)6T3" \
-  --admin-user "admin" --admin-pass "Ohm_p2)6T3"
-
-nano /var/www/nextcloud/config/config.php
-
-<?php
-$CONFIG = array (
-  'trusted_domains' =>
-  array (
-    0 => '10.10.240.9',
-  ),
-
-  // S3 primary object store -> Ceph RGW
-  'objectstore' => array(
-    'class' => '\\OC\\Files\\ObjectStore\\S3',
-    'arguments' => array(
-      'bucket' => 'nextcloud-data',   // bucket bạn đã tạo ở placement 'nextcloud'
-      'key'    => 'NC_ACCESS',
-      'secret' => 'NC_SECRET',
-      'hostname' => '10.10.210.20',
-      'port'     => 8080,
-      'use_ssl'  => false,
-      'region'   => 'us-east-1',      // giá trị bất kỳ, RGW bỏ qua
-      'use_path_style' => true,       // BẮT BUỘC với Ceph RGW
-      'autocreate' => false,          // bạn đã tạo sẵn bucket
-    ),
-  ),
-
-  'filelocking.enabled' => true,
-  'memcache.local'   => '\\OC\\Memcache\\APCu',
-  'memcache.locking' => '\\OC\\Memcache\\Redis',
-  'redis' => array('host' => '127.0.0.1', 'port' => 6379),
-);
-
-
-systemctl restart apache2
-
-# Test thử kết nối 
-export AWS_ACCESS_KEY_ID=NC_ACCESS
-export AWS_SECRET_ACCESS_KEY=NC_SECRET
-aws --endpoint-url=http://10.10.210.20:8080 s3 ls s3://nextcloud-data
-
-echo ok >/tmp/t.txt
-aws --endpoint-url=http://10.10.210.20:8080 s3 cp /tmp/t.txt s3://nextcloud-data/.healthcheck
-aws --endpoint-url=http://10.10.210.20:8080 s3 rm s3://nextcloud-data/.healthcheck
-```
 # Xử lý vấn đề liên quan đến hàng đợi
 ```
 Hàng đợi GC (garbage collection) của Ceph RGW

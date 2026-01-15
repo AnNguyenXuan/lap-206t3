@@ -12,6 +12,19 @@ ceph config dump
 ceph mgr module ls
 ```
 
+## Quy trình đổi password grafana
+```
+Tạo file grafana.yaml
+service_type: grafana
+spec:
+  initial_admin_password: "NEW_STRONG_PASSWORD"
+
+
+Apply cấu hình
+ceph orch apply -i grafana.yaml
+ceph orch redeploy grafana
+```
+
 ## Quy trình loại bỏ osd 
 ```
 Trong TH ta muốn loại bỏ toàn bộ cụm
