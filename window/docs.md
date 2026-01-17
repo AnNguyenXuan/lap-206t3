@@ -33,3 +33,8 @@ nslookup dcjourneys.com dnssec1.pavietnam.vn
 nslookup dcjourneys.com dnssec2.pavietnam.vn
 nslookup dcjourneys.com dnssecbak.pavietnam.net
 ```
+
+### Cấp quyền chạy script ở mức độ user
+```
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+```

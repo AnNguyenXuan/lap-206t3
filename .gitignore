@@ -1,0 +1,5 @@
+# Ignore Jupyter checkpoints
+ceph/ceph-api/.ipynb_checkpoints/
+
+# Ignore Python virtual environment
+ceph/ceph-api/venv/
