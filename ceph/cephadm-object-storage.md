@@ -109,9 +109,22 @@ radosgw-admin period update --commit
 ceph orch apply rgw s3.htv \
   --realm=s3 --zone=htv \
   --port 8080 \
-  --placement="3 openstack-mon-1 openstack-data-1 openstack-data-2"
+  --placement="3 openstack-data-1 openstack-data-2 openstack-data-3"
 
 ceph orch ps --daemon_type rgw
+```
+
+# Cấu hình cụm
+```
+ceph dashboard set-rgw-credentials
+ceph dashboard get-rgw-api-access-key
+ceph dashboard get-rgw-api-secret-key
+ceph dashboard get-rgw-api-admin-resource
+ceph dashboard get-rgw-api-ssl-verify
+
+ceph dashboard set-rgw-hostname s3.htv.openstack-data-1.lumxmy 10.10.210.18
+ceph dashboard set-rgw-hostname s3.htv.openstack-data-2.yscikp 10.10.210.19
+ceph dashboard set-rgw-hostname s3.htv.openstack-data-3.sjzblk 10.10.210.20
 ```
 
 # Tạo placement theo pool
@@ -198,7 +211,7 @@ oid=$(rados -p s3.ssd.data ls | head -n1)
 ```
 Hàng đợi GC (garbage collection) của Ceph RGW
 
-Khi ta xóa hoặc ghi đè (overwrite) một object S3, RGW không xóa ngay toàn bộ dữ liệu thô trong RADOS (các “data chunk”/“shard” phía dưới).
+Khi ta xóa hoặc ghi đè (overwrite) một object S3, RGW không xóa ngay toàn bộ dữ liệu thô trong RADOS (các data chunk/shard phía dưới).
 
 Thay vào đó RGW đưa công việc xóa dữ liệu thô vào một hàng đợi (GC queue) lưu trong pool log của zone (ví dụ htv.rgw.log).
 
@@ -216,16 +229,75 @@ radosgw-admin gc list --include-all | head
 radosgw-admin gc process --max-entries=10000
 # Xem cấu hình gc của rgw
 ```
-# Các API quản trị
+# Fix lỗi Grafana không phân giải được Ceph
 ```
-Ceph cung cấp cho ta 4 loại API chính theo mức độ tác động vào hệ thống
-S3 API, Switf API : lớp người dùng, tương tác với bucket để xử lý các vấn đề lưu trữ, quyền truy cập
-IAM API : lớp quản trị người dùng, xử lý các vấn đề user, quyền, khóa
-Admin Ops API : lớp quản trị hệ thống, cần có 1 user admin tạo
+Kiểm tra xem có cấu hình frontend-api-url chưa
+ceph dashboard get-grafana-api-url
+ceph dashboard get-grafana-frontend-api-url
+
+Cấu hình URL mà ceph-mgr dùng để check Grafana (backend)
+ceph dashboard set-grafana-api-url https://10.10.210.18:3000
+
+Cấu hình URL trả về cho trình duyệt để embed iframe (frontend) — QUAN TRỌNG với lỗi DNS
+ceph dashboard set-grafana-frontend-api-url https://10.10.210.18:3000
+
+Nếu dùng self-signed
+ceph dashboard set-grafana-api-ssl-verify False
+
+Nếu dashboard chưa update ngay
+ceph mgr module disable dashboard
+ceph mgr module enable dashboard
 ```
-# Vấn đề phân quyền
+
+# Fix lỗi trang Overview Object load chậm
 ```
-Chúng ta có user và subuser,
+Xem cấu hình 
+ceph config show-with-defaults client.rgw
+
+Hoặc
+ceph config show-with-defaults client.rgw | egrep "rgw_(user|bucket)_counters_cache"
+ceph dashboard get-rest-requests-timeout
+ceph dashboard set-rest-requests-timeout 240
+
+ceph config set mgr exporter_stats_period 15
+ceph orch daemon restart rgw.s3.htv.openstack-data-1.lumxmy
+ceph orch daemon restart rgw.s3.htv.openstack-data-2.yscikp
+ceph orch daemon restart rgw.s3.htv.openstack-data-3.sjzblk
+
+ceph config set client.rgw rgw_bucket_counters_cache true
+ceph config set client.rgw rgw_user_counters_cache true
+ceph config set client.rgw rgw_bucket_counters_cache_size 10000
+ceph config set client.rgw rgw_user_counters_cache_size 10000
+
+```
+
+# Test
+```
+apt update
+sudo apt install -y awscli
+
+Tạo file
+dd if=/dev/urandom of=/root/test-2GiB.bin bs=1M count=2048
+dd if=/dev/urandom of=/root/test-10MiB.bin bs=1M count=10
+dd if=/dev/urandom of=/root/test-900MiB.bin bs=1M count=900
+
+aws configure --profile ceph
+
+nano ~/.aws/credentials
+VCTH9WL8MIC2GKHW3P05
+gvM2e4el41ZHzs5DvBRvnPkXzUsBOAKa9RCGY5be
+
+nano ~/.aws/config
+us-east-1
+json
+
+aws --profile ceph --endpoint-url http://10.10.240.168:8080 s3 cp ~/test-2GiB.bin s3://test-bucket/
+aws --profile ceph --endpoint-url http://10.10.240.168:8080 s3 cp ~/test-10MiB.bin s3://test-bucket/
+aws --profile ceph --endpoint-url http://10.10.240.168:8080 s3 cp ~/test-900MiB.bin s3://test-bucket/
+
+aws --profile ceph --endpoint-url http://10.10.240.168:8080 s3 rm s3://test-bucket/test-2GiB.bin
+aws --profile ceph --endpoint-url http://10.10.240.168:8080 s3 rm s3://test-bucket/test-10MiB.bin
+aws --profile ceph --endpoint-url http://10.10.240.168:8080 s3 rm s3://test-bucket/test-900MiB.bin
 ```
 # Quản lý cụm
 ```

@@ -6,7 +6,7 @@ Link tạo secret key
 https://api.wordpress.org/secret-key/1.1/salt/
 ```
 
-### Lệnh cài đặt
+### Lệnh cài đặt wp cli
 ```
 cd /tmp
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
@@ -14,6 +14,15 @@ php wp-cli.phar --info
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 wp --info
+```
+
+### Cài đặt core
+```
+cd /var/www/clients/client1/web1/web
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+cp -r wordpress/* .
+rm -rf wordpress latest.tar.gz
 ```
 
 ### Lệnh thao tác 
