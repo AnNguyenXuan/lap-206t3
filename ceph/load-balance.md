@@ -27,7 +27,7 @@ Node A không nhận được VRRP advert từ node B
 Node B cũng không nhận được VRRP advert từ node A
 Khi đó, cả hai đều nghĩ bên kia chết, cả hai cùng lên MASTER, cả hai cùng add VIP, bạn thấy VIP xuất hiện trên cả node-1 và node-2.
 Nguyên nhân phổ biến :
-Multicast bị chặn/lọc trên vSwitch/portgroup (nhiều môi trường enterprise làm thế).
+Multicast bị chặn/lọc trên vSwitch/portgroup (nhiều môi trường enterprise thường làm).
 IGMP snooping bật nhưng không có IGMP join đúng cách nên switch không forward multicast đến port kia.
 Policy bảo mật chặn IP protocol 112 (nhiều firewall rule chỉ nghĩ TCP/UDP).
 Một số overlay/SDN xử lý multicast không chuẩn.

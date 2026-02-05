@@ -131,7 +131,7 @@ Giảm đọc ngẫu nhiên xuống thiết bị lưu trữ
 Cơ chế
 OSD tra metadata trong RocksDB
 RocksDB có block cache trong RAM để giảm I O xuống device
-Bạn đã tách DB và WAL ra SSD nên phần metadata nhanh hơn đáng kể
+Dù ta tách DB và WAL ra SSD nên phần metadata nhanh hơn đáng kể
 Nhưng vẫn cần RAM cache để giảm random read và giảm latency
 
 ---
