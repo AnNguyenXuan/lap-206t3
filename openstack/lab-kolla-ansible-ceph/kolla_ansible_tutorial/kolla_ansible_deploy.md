@@ -152,16 +152,19 @@ apt install uuid-runtime
 
 Tạo uuid tại node deploy chạy và gán pass 
 ```
+Tạo uuid
 uuidgen
 uuidgen
 1ddabc08-4694-48ad-86e7-65dc24049829
 ffac422c-130a-494c-a716-db71935bfd43
+
+Tạo file password sau đó copy các mã uuid vừa tạo vào 2 tham số rbd dưới
 kolla-genpwd
 rbd_secret_uuid: 1ddabc08-4694-48ad-86e7-65dc24049829
 cinder_rbd_secret_uuid: ffac422c-130a-494c-a716-db71935bfd43
 ```
 
-Cấu hình cinder.conf
+Cấu hình cinder.conf, lưu ý tham số rbd_secret_uuid copy theo uuid nhập ở trên
 ```
 nano /etc/kolla/config/cinder/cinder-volume.conf
 [DEFAULT]
@@ -268,7 +271,7 @@ kolla-ansible prechecks -i multinode
 kolla-ansible deploy -i multinode
 kolla-ansible post-deploy -i multinode
 
-Sau đó truy cập sửa dòng
+Sau đó truy cập sửa dòng cert
 nano /etc/kolla/admin-openrc.sh
 export OS_CACERT='/etc/kolla/certificates/ca/root.crt'
 ```

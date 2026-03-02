@@ -37,7 +37,7 @@ Keepalived được cấu thành từ các lớp phần mềm sau :
 
 Control Plane : Đọc config từ file keepalived.conf và ánh xạ vào bộ nhớ
 
-Scheduler / I-O Multiplexer : event-loop tập trung để lập lịch tác vụ I/O; framework tự trừu tượng hóa “thread” cho networking, không phụ thuộc POSIX threads
+Scheduler / I-O Multiplexer : event-loop tập trung để lập lịch tác vụ I/O; framework tự trừu tượng hóa thread cho networking, không phụ thuộc POSIX threads
 
 Memory management: chế độ thường & debug để truy dấu rò rỉ bộ nhớ; buffer fixed-length để giảm rủi ro overflow
 
@@ -62,15 +62,4 @@ VRRP framework
 
 ---
 ```6. Các kĩ thuật cân bằng tải```
-
-### Hướng dẫn setup 
-```
-OS : Debian 12
-Mô hình : 2 node 1 active 1 standby
-
-Cài đặt 
-apt-get install keepalived
-
-
-```
 

@@ -53,5 +53,4 @@ Could not find versioned identity endpoints when attempting to authenticate. Ple
 - Lỗi này do cấu hình trong [ceph] chưa đủ
 
 3. Lỗi ERROR nova.servicegroup.drivers.db [-] The services table record for the nova-compute service on host openstack-computer-1 is gone. You either need to stop this service if it should be deleted or restart it to recreate the record in the database.: nova.exception_Remote.ServiceNotFound_Remote
-- Lỗi này do
 
