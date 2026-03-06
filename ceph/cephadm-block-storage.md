@@ -20,7 +20,7 @@
 
 4. Replication vs Erasure Coding (EC) cho pool RBD
 - Replication: cấu hình đơn giản, phù hợp I/O ngẫu nhiên (VM, DB), đổi lại tốn dung lượng.
-- EC: tiết kiệm dung lượng, nhưng thường hợp “bulk/throughput” hơn; nếu dùng cho RBD thường cần thiết kế profile/rule kỹ.
+- EC: tiết kiệm dung lượng, nhưng thường hợp bulk/throughput hơn; nếu dùng cho RBD thường cần thiết kế profile/rule kỹ.
 - Lưu ý: CRUSH rule chi phối cả replica (replicated) lẫn shard/chunk (EC).
 
 5. BlueStore (OSD backend) và layout thiết bị
@@ -32,7 +32,7 @@
 - Nếu block.db đầy, metadata sẽ spill về block (thường làm hiệu năng tụt), nên cần sizing/giám sát dung lượng db.
 - Metadata BlueStore lưu dạng key-value trong RocksDB; RocksDB nằm trên BlueFS (filesystem tối giản cho RocksDB).
 
-6. RBD image format & image features (rất quan trọng khi vận hành)
+6. RBD image format & image features
 Các feature phổ biến (và phụ thuộc):
 - layering: hỗ trợ snapshot/clone theo kiểu copy-on-write
 - striping: striping v2
@@ -43,7 +43,7 @@ Các feature phổ biến (và phụ thuộc):
 - deep-flatten: hỗ trợ flatten clone/snapshot (lưu ý có hệ thống chỉ cho bật lúc tạo image)
 - data-pool: hỗ trợ mô hình data pool (thường dùng khi kết hợp EC)
 
-Gợi ý vận hành:
+Trong vận hành:
 - Với workload VM/ảo hóa: hầu như nên có exclusive-lock + object-map + fast-diff để tối ưu snapshot/diff và tránh ghi đè nhau.
 
 7. Network trong Ceph (chỉ xét cấu hình Ceph)
