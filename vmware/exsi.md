@@ -10,6 +10,9 @@
 
 ```
 
-### UCS Manager
-
-### CN
+### Cấu hình tạo máy ảo trên esxi
+```
+CPU : enable hot plug
+RAM : enable hot plug
+Disk : Sharing -> No sharing
+```

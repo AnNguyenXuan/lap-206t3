@@ -38,3 +38,9 @@ nslookup dcjourneys.com dnssecbak.pavietnam.net
 ```
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 ```
+
+### Một số lệnh chạy policy
+```
+rsop.msc : load cấu hình chính sách máy window hiện tại
+gpresult /r
+```
