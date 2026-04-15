@@ -16,3 +16,5 @@ CPU : enable hot plug
 RAM : enable hot plug
 Disk : Sharing -> No sharing
 ```
+
+### Giải pháp OpenUDS và Kasm
