@@ -43,4 +43,14 @@ Bước 3: Các bước cài đặt chọn đúng Server cần cài, chọn DHCP
 ## 5. Cài Portal quản trị
 
 ## 6. Cài Image
+```
+B1 : Boot iso window và cài đặt
+B2 : Cắm vmware tools và cài, chỉnh giờ, computer name rồi restart > Kiểm tra vmware tools đã nhận trên vCenter hay chưa
+B3 : Cài window feature, vmware horizon agent
+B4 : Enable Administrator và pass > reboot > login Administrator
+B5 : Disable user cài trên window 
+B6 : Ngắt kết nối datastore
+B7 : Login giao diện Portal > Import VMs > Nhập thông tin 
 
+
+```
