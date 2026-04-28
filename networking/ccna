@@ -1,0 +1,23 @@
+Vlan mod bao gồm Trunk và Access
+
+Với Access thường sẽ cấu hình từ SW -> PC
+Với Trunk thường sẽ cấu hình từ SW -> Router
+
+Native vlan : Là một gói tin không có trường tag vlan (ví dụ như vlan 1) hay gọi là 802.1Q
+
+Trong 1 mạng chỉ nên cấu hình duy nhất 1 native vlan
+
+vlan được cấu hình và định nghĩa trên l2
+
+Trunk allowed dùng để kiểm soát lưu lượng
+
+DTP là giao thức độc quyền của cisso 
+
+Sub interface giải quyết vấn đề thiếu uplink trên thiết bị Router
+Khi 2 vlan từ SW lên router, thì cấu hình sẽ có dạng g0/0.10 g0/0.20
+
+SW L3 nằm giữa SW L2 và Router, tùy thuộc cấu hình thì sẽ đóng vai trò riêng
+
+SVI + tính năng routing trên SW L3 sẽ cho phép 2 dải vlan thông nhau tương tự Router
+
+OSPF là giao thức dùng trong định tuyến động, kết nối đa dải mạng ví dụ từ dải 192.168.1.x sang 172.16.255.x

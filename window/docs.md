@@ -70,6 +70,10 @@ DISKPART> clean
 
 DiskPart succeeded in cleaning the disk.
 
+DISKPART> convert mbr
+
+DISKPART> convert gpt
+
 DISKPART> create partition primary
 
 DiskPart succeeded in creating the specified partition.

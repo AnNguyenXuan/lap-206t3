@@ -47,6 +47,8 @@ interface g0/2
  description Connection to IT
  ip address 192.168.0.193 255.255.255.224
  no shutdown
+
+copy running-config startup-config
 ```
 
 #### Cấu hình Switch

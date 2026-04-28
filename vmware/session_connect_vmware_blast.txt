@@ -1,0 +1,581 @@
+2026-04-17 16:12:24.903+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_POWERBROADCAST message.  (Nhận phiên kết nối)   
+2026-04-17 16:12:24.903+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Powering off monitor (Agent Off để chuyển phiên)
+2026-04-17 16:12:24.944+0700 [ERROR] 0x0690 AbUtil::EnumRegistryKeys: Failed to open registry key path:SOFTWARE\VMware, Inc.\VMware VDM\SessionData\1, error:0x00000002 (The system cannot find the file specified)
+2026-04-17 16:12:24.944+0700 [WARN ] 0x0690 BlastSessionMgr::GetRecordingSessionDisplays: No recording session found.
+2026-04-17 16:12:24.944+0700 [WARN ] 0x0690 MainApp::GetSessionMetadata: Failed to query recording session displays.
+2026-04-17 16:12:24.944+0700 [INFO ] 0x0690 MainApp::GetSessionMetadata: Metadata for WTSSessionID:1, Info:{"BlastExtreme_PrimarySession_EndTime":0,"BlastExtreme_PrimarySession_StartTime":1776414222,"BlastExtreme_RecordingSession_DisplayTopology":[]}
+2026-04-17 16:12:24.944+0700 [ERROR] 0x0690 MainApp::RegistryListenCallback: Unable to listen for changes on registry key SOFTWARE\VMware, Inc.\VMware VDM\SessionData\1, error:0x000003fa.
+2026-04-17 16:12:24.944+0700 [INFO ] 0x1578 MainApp::HandlePipeRequest: Received MsgTerminateSession with vAuth:ankETa*****, reason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT.
+2026-04-17 16:12:24.944+0700 [INFO ] 0x1578 BlastSessionMgr::HandleSessionTerminate: Terminating session for cnx:25, vAuth:ankETa*****, Reason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT (13)
+2026-04-17 16:12:24.944+0700 [INFO ] 0x1578 BlastSessionMgr::DestroySession: cnx:25 closeReason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT (13) flags:0x1
+2026-04-17 16:12:24.944+0700 [INFO ] 0x1578 BlastSessionMgr::DestroySession: invalidating vAuth:ankETa***** for cnx:25
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocket_InvalidateAuth: Invalidate authentication for vAuth:ankETa*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketMarkAuthTicketForInvalidation: Marked vAuth:ankETa***** in authTickethmap for invalidation.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:ankETa*****, sessionWrapper->vAuth:ankETa*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [VVCSessionManager] BlastSocketIsNetworkFailure: For vAuth:ankETa*****, isNetworkFailure: No
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketInvalidateAuthentication: Removing reconnectCookie:euI4jj*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketRemoveCookie: Removing reconnectCookie:euI4jj*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketGetViewAuthTokenFromCookieCb: Found entry with matching cookie, Returning vAuth:ankETa*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketRemoveCookie: Removing reconnectCookie:euI4jj***** from CookieInfo map succeeded, vAuth:ankETa*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketInvalidateAuthentication: Removing vAuth:ankETa*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: [Authentication] BlastSocketRemoveAuthTicket: Triggering session invalidation callback for vAuth:ankETa*****.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 BlastSessionMgr::HandleSessionInvalidated: Blast Session invalidated, vAuth:ankETa*****, Reason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT (13).
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: BlastSessionMgrBlastSessionState change request: BLASTSESSION_CONNECTED -> BLASTSESSION_INVALIDATED
+2026-04-17 16:12:24.945+0700 [ERROR] 0x1578 AbUtil::EnumRegistryKeys: Failed to open registry key path:SOFTWARE\VMware, Inc.\VMware VDM\SessionData\1, error:0x00000002 (The system cannot find the file specified)
+2026-04-17 16:12:24.945+0700 [WARN ] 0x1578 BlastSessionMgr::GetRecordingSessionDisplays: No recording session found.
+2026-04-17 16:12:24.945+0700 [WARN ] 0x1578 MainApp::GetSessionMetadata: Failed to query recording session displays.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 MainApp::GetSessionMetadata: Metadata for WTSSessionID:1, Info:{"BlastExtreme_PrimarySession_EndTime":1776417144,"BlastExtreme_PrimarySession_StartTime":1776414222,"BlastExtreme_RecordingSession_DisplayTopology":[]}
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 collector::UnregisterReporter: Unregistered a reporter 000002E143830EC0 for componentID 0x1001, count now is 6
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 collector::UnregisterReporter: Unregistered a reporter 000002E1478679E0 for componentID 0x1005, count now is 5
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 collector::UnregisterReporter: Unregistered a reporter 000002E148653260 for componentID 0x1004, count now is 4
+2026-04-17 16:12:24.945+0700 [WARN ] 0x1578 HorizonMonitoring::Cleanup: HorizonMonitoring is not initialized.
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 BlastSessionMgr::DestroySession: calling StopConnection for cnx:25
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: VNCConnectionMgr: VNCConnectionManager_StopConnection id 25
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: VNCConnectionMgr: VNCConnectionManagerRequestStop connection 25 immediate stop
+2026-04-17 16:12:24.945+0700 [INFO ] 0x1578 bora::Log: VNCConnectionMgr: VNCConnectionManagerEncoderStop id 25
+2026-04-17 16:12:24.946+0700 [INFO ] 0x1578 bora::Log: VNCConnectionMgr: VNCConnectionManagerEncoderStop call VNCEncode_Stop
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0690 bora::Log: VNCConnectionMgr: VNCConnectionManagerHandleEncoderEvent call CloseChannels
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0690 bora::Log: Blast-Transport: Request to close MKS channel for cnx:25, status:0x0
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0690 bora::Log: Blast-Transport: Request to close Audio channel for cnx:25, status:0x0
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0690 bora::Log: Blast-Transport: Closing VVClistener "blast-mks" (000000002C0DD271)
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0690 bora::Log: Blast-Transport: Closing VVClistener "blast-audio" (000000002C0DE5B1)
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Blast listener has closed for cnx:25
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0690 MainApp::UnlistenRegistryChanges: Removing watch for system settings: HKLM\SOFTWARE\VMware, Inc.\VMware VDM\SessionData\1
+2026-04-17 16:12:24.946+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Blast listener has closed for cnx:25
+2026-04-17 16:12:24.951+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Blast MKS on close for cnx:25
+2026-04-17 16:12:24.951+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Blast Audio on close for cnx:25
+2026-04-17 16:12:24.951+0700 [WARN ] 0x0f98 bora::Warning: Blast-Transport: Both channels closed for cnx:25, signalling VNCConnectionMgr.
+2026-04-17 16:12:24.951+0700 [INFO ] 0x0690 BlastSessionMgr::HandleConnectionManagerEvent: cnx:25 mgrConnectionStopped
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 BlastSessionMgr::DestroyStoppedSession: cnx:25 closeReason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT (13) flags:0x1
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 BlastSessionMgr::DestroyStoppedSession: calling StopVvcSession
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:ankETa*****, sessionWrapper->vAuth:ankETa*****.
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketIsNegotiatedNCEnabled: For vAuth:ankETa*****, negotiatedNCEnabled: Yes
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:ankETa*****, sessionWrapper->vAuth:ankETa*****.
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketStopVvcSession: BlastSocketStopVvcSession: Session with sessionId: 1 about to be Stopped, isNetworkFailure: No.
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketStopVvcSession: Triggering BlastSocketStopVvcHub() ... 
+2026-04-17 16:12:24.952+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketStopVvcHub: VvcSession with sessionId: 1, sessionHandle: 0x0000000046A5F093, vvcSessionIdHandle: 0x000002E148884F14, Closing VVCHub library.
+2026-04-17 16:12:24.953+0700 [INFO ] 0x0690 bora::Log: VVC: Proxy srv VVCPRXY_UninitServer
+2026-04-17 16:12:24.954+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-3092, sessionId: 1, sccBatcher: 0x000002E1482F1B60, status:  0x1
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-3092]   session: 1 (000002E1488890D0) state transition: [established] --> [error]
+2026-04-17 16:12:24.954+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-3092, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-3092, sessionId: 1, status: 0x1, seqNo: 102
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-3092]   session: 1 (000002E1488890D0) state transition: [error] --> [closing]
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-3092, session: 0x000002E1488890D0, sessionId: 1 close config: 1
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-3092
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-3092]   session: 1 (000002E1488890D0) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-3092, session: 0x000002E1488890D0, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E1488890D0), instance: prxy-srv-3092.
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E1488890D0), instance: prxy-srv-3092.
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-3092, session: 0x000002E1488890D0, sessionId: 1
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-3092, main: false, flags: 0x0, instance: 0x000002E14877C730
+2026-04-17 16:12:24.954+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-3684, sessionId: 1, sccBatcher: 0x000002E1481BFEB0, status:  0x1
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-3684]   session: 1 (000002E1488870B0) state transition: [established] --> [error]
+2026-04-17 16:12:24.954+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-3684, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.954+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-3684, sessionId: 1, status: 0x1, seqNo: 89
+2026-04-17 16:12:24.954+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-3684, sessionId: 1, session: 0x000002E1488870B0, listener: RDP__NLR3hv, name: RDP__NLR3hv, channelId: 10, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.955+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-3684, sessionId: 1, session: 0x000002E1488870B0, listener: RDP__NLW3hv, name: RDP__NLW3hv, channelId: 12, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-3684]   session: 1 (000002E1488870B0) state transition: [error] --> [closing]
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-3684, session: 0x000002E1488870B0, sessionId: 1 close config: 1
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-3684
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-3684]   session: 1 (000002E1488870B0) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-3684, session: 0x000002E1488870B0, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E1488870B0), instance: prxy-srv-3684.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E1488870B0), instance: prxy-srv-3684.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-3684, session: 0x000002E1488870B0, sessionId: 1
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-3684, main: false, flags: 0x0, instance: 0x000002E14877DB50
+2026-04-17 16:12:24.955+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-4848, sessionId: 1, sccBatcher: 0x000002E148778E20, status:  0x1
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-4848]   session: 1 (000002E148882060) state transition: [established] --> [error]
+2026-04-17 16:12:24.955+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-4848, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-4848, sessionId: 1, status: 0x1, seqNo: 81
+2026-04-17 16:12:24.955+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-4848, sessionId: 1, session: 0x000002E148882060, listener: RPC#MKSVchan#4848_-001, name: RPC#MKSVchan#4848_-001, channelId: 4, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-4848]   session: 1 (000002E148882060) state transition: [error] --> [closing]
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-4848, session: 0x000002E148882060, sessionId: 1 close config: 1
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-4848
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-4848]   session: 1 (000002E148882060) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-4848, session: 0x000002E148882060, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E148882060), instance: prxy-srv-4848.
+2026-04-17 16:12:24.955+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E148882060), instance: prxy-srv-4848.
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-4848, session: 0x000002E148882060, sessionId: 1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-4848, main: false, flags: 0x0, instance: 0x000002E148BFAE10
+2026-04-17 16:12:24.956+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-5288, sessionId: 1, sccBatcher: 0x000002E1481BFEB0, status:  0x1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-5288]   session: 1 (000002E14888A0E0) state transition: [established] --> [error]
+2026-04-17 16:12:24.956+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-5288, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-5288, sessionId: 1, status: 0x1, seqNo: 45
+2026-04-17 16:12:24.956+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-5288, sessionId: 1, session: 0x000002E14888A0E0, listener: RPC#HTML5MMR#5288_-001, name: RPC#HTML5MMR#5288_-001, channelId: 4, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.956+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-5288, sessionId: 1, session: 0x000002E14888A0E0, listener: RPC##html5mmr#14a8_19#PSC, name: RPC##html5mmr#14a8_19#PSC, channelId: 6, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-5288]   session: 1 (000002E14888A0E0) state transition: [error] --> [closing]
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-5288, session: 0x000002E14888A0E0, sessionId: 1 close config: 1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-5288
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-5288]   session: 1 (000002E14888A0E0) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-5288, session: 0x000002E14888A0E0, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E14888A0E0), instance: prxy-srv-5288.
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E14888A0E0), instance: prxy-srv-5288.
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-5288, session: 0x000002E14888A0E0, sessionId: 1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-5288, main: false, flags: 0x0, instance: 0x000002E148BFE060
+2026-04-17 16:12:24.956+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-4052, sessionId: 1, sccBatcher: 0x000002E148778E20, status:  0x1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-4052]   session: 1 (000002E14888B0F0) state transition: [established] --> [error]
+2026-04-17 16:12:24.956+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-4052, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-4052, sessionId: 1, status: 0x1, seqNo: 37
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-4052]   session: 1 (000002E14888B0F0) state transition: [error] --> [closing]
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-4052, session: 0x000002E14888B0F0, sessionId: 1 close config: 1
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-4052
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-4052]   session: 1 (000002E14888B0F0) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-4052, session: 0x000002E14888B0F0, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.956+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E14888B0F0), instance: prxy-srv-4052.
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E14888B0F0), instance: prxy-srv-4052.
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-4052, session: 0x000002E14888B0F0, sessionId: 1
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-4052, main: false, flags: 0x0, instance: 0x000002E148C008A0
+2026-04-17 16:12:24.957+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-8672, sessionId: 1, sccBatcher: 0x000002E14822B1D0, status:  0x1
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-8672]   session: 1 (000002E148885090) state transition: [established] --> [error]
+2026-04-17 16:12:24.957+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-8672, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-8672, sessionId: 1, status: 0x1, seqNo: 71
+2026-04-17 16:12:24.957+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-8672, sessionId: 1, session: 0x000002E148885090, listener: RPC#VMwareRde#8672_-001, name: RPC#VMwareRde#8672_-001, channelId: 4, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.957+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-8672, sessionId: 1, session: 0x000002E148885090, listener: RPC##UNITY_UPDATE_CHA#21e0_1#PSC, name: RPC##UNITY_UPDATE_CHA#21e0_1#PSC, channelId: 6, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-8672]   session: 1 (000002E148885090) state transition: [error] --> [closing]
+2026-04-17 16:12:24.957+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-8672, session: 0x000002E148885090, sessionId: 1 close config: 1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0f98 bora::Log: VVC: ReleaseListenNode proxy srv node (0x000002E143A52A90) destroyed, handle=0x0000000046A69A97, session=1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-8672
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-8672]   session: 1 (000002E148885090) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-8672, session: 0x000002E148885090, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E148885090), instance: prxy-srv-8672.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E148885090), instance: prxy-srv-8672.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-8672, session: 0x000002E148885090, sessionId: 1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-8672, main: false, flags: 0x0, instance: 0x000002E148C026D0
+2026-04-17 16:12:24.958+0700 [WARN ] 0x0690 bora::Warning: VVC: Transport send failed, instance: prxy-srv-9128, sessionId: 1, sccBatcher: 0x000002E14822B5E0, status:  0x1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-9128]   session: 1 (000002E148684B30) state transition: [established] --> [error]
+2026-04-17 16:12:24.958+0700 [WARN ] 0x0690 bora::Warning: VVC: Control channel send failed, instance: prxy-srv-9128, sessionId: 1, session state: error, channel state: open, status: 0x1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Dispatching session error event, instance: prxy-srv-9128, sessionId: 1, status: 0x1, seqNo: 37
+2026-04-17 16:12:24.958+0700 [WARN ] 0x0690 bora::Warning: VVC: Session is not established, instance: prxy-srv-9128, sessionId: 1, session: 0x000002E148684B30, listener: RPC#PrintRedir#9128_0001, name: RPC#PrintRedir#9128_0001, channelId: 4, sessionState: error. Skipping close channel sequence.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-9128]   session: 1 (000002E148684B30) state transition: [error] --> [closing]
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-9128, session: 0x000002E148684B30, sessionId: 1 close config: 1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: instanceBe's pollRemove function is NULL, VVC is probably uninitializing. Nothing to do: session:1 instance:prxy-srv-9128
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [prxy-srv-9128]   session: 1 (000002E148684B30) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: prxy-srv-9128, session: 0x000002E148684B30, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0f98 bora::Log: VVC: ReleaseListenNode proxy srv node (0x000002E1486531E0) destroyed, handle=0x0000000046A6C1F7, session=1
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E148684B30), instance: prxy-srv-9128.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E148684B30), instance: prxy-srv-9128.
+2026-04-17 16:12:24.958+0700 [INFO ] 0x0690 bora::Log: VVC: Session closed, instance: prxy-srv-9128, session: 0x000002E148684B30, sessionId: 1
+2026-04-17 16:12:24.959+0700 [INFO ] 0x0690 bora::Log: VVC: Instance released, name: prxy-srv-9128, main: false, flags: 0x0, instance: 0x000002E148BFEA70
+2026-04-17 16:12:24.959+0700 [INFO ] 0x25d8 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E143816410, received disconnect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:9128.
+2026-04-17 16:12:24.959+0700 [INFO ] 0x25d8 bora::Log: VVC: Session destroyed (0x000002E148684B30 | 0x0000000046A77B33), sessionId: 1, instance: prxy-srv-9128, sent bytes: 856, recv'ed bytes: 980, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x3584 bora::Log: VVC: Session destroyed (0x000002E148885090 | 0x0000000046A74093), sessionId: 1, instance: prxy-srv-8672, sent bytes: 1228, recv'ed bytes: 3622, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x162c bora::Log: VVC: Session destroyed (0x000002E1488890D0 | 0x0000000046A620D3), sessionId: 1, instance: prxy-srv-3092, sent bytes: 2220, recv'ed bytes: 3214, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x1fd8 bora::Log: VVC: Session destroyed (0x000002E1488870B0 | 0x0000000046A670B3), sessionId: 1, instance: prxy-srv-3684, sent bytes: 1344, recv'ed bytes: 2303, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x2824 bora::Log: VVC: Session destroyed (0x000002E148882060 | 0x0000000046A6B073), sessionId: 1, instance: prxy-srv-4848, sent bytes: 2432, recv'ed bytes: 2235, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x2c94 bora::Log: VVC: Session destroyed (0x000002E14888B0F0 | 0x0000000046A710F3), sessionId: 1, instance: prxy-srv-4052, sent bytes: 276, recv'ed bytes: 535, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x282c bora::Log: VVC: Session destroyed (0x000002E14888A0E0 | 0x0000000046A6E0F3), sessionId: 1, instance: prxy-srv-5288, sent bytes: 800, recv'ed bytes: 1449, acked bytes: 0, un-acked recv bytes: 0 vvcAckSentNr 0, mptAckSentNr 0
+2026-04-17 16:12:24.959+0700 [INFO ] 0x25d8 bora::Log: VVC: Instance destroyed (0x000002E148BFEA70 | 0x0000000046A76A70), name: prxy-srv-9128
+2026-04-17 16:12:24.959+0700 [INFO ] 0x3584 bora::Log: VVC: Instance destroyed (0x000002E148C026D0 | 0x0000000046A736D0), name: prxy-srv-8672
+2026-04-17 16:12:24.959+0700 [INFO ] 0x162c bora::Log: VVC: Instance destroyed (0x000002E14877C730 | 0x0000000046A61730), name: prxy-srv-3092
+2026-04-17 16:12:24.959+0700 [INFO ] 0x1fd8 bora::Log: VVC: Instance destroyed (0x000002E14877DB50 | 0x0000000046A64B50), name: prxy-srv-3684
+2026-04-17 16:12:24.959+0700 [INFO ] 0x2824 bora::Log: VVC: Instance destroyed (0x000002E148BFAE10 | 0x0000000046A6AE10), name: prxy-srv-4848
+2026-04-17 16:12:24.959+0700 [INFO ] 0x2c94 bora::Log: VVC: Instance destroyed (0x000002E148C008A0 | 0x0000000046A708B0), name: prxy-srv-4052
+2026-04-17 16:12:24.959+0700 [INFO ] 0x282c bora::Log: VVC: Instance destroyed (0x000002E148BFE060 | 0x0000000046A6D070), name: prxy-srv-5288
+2026-04-17 16:12:24.960+0700 [INFO ] 0x0f98 bora::Log: VVC: ReleaseListenNode proxy srv node (0x000002E148653760) destroyed, handle=0x0000000046A72777, session=1
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketStopVvcHub: VvcSession with sessionId: 1, Closing VVCHub library completed in 9 ms
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VVC: >>> [main]   session: 1 (000002E148884080) state transition: [established] --> [closing]
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VVC: Session closing, instance: main, session: 0x000002E148884080, sessionId: 1 close config: 3
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VVC: [VVC Close Seq] Session close begin, Flush Msgs. Close Reason: 13
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VVC: [VVC Close Seq] Session close begin, sending close msg. Close Reason: 13
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] Local close send complete. session: 000002E148884080, sessionId: 1
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VVC: Sent close msg with reason: 13.
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0f98 bora::Log: VVC: ReleaseListenNode proxy srv node (0x000002E143A8A360) destroyed, handle=0x0000000046A75377, session=1
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: [VVCSessionManager] BlastSocketStopVvcSession: BlastSocketStopVvcSession: Session with sessionId: 1 Stopped
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: Blast-Transport: Destroying VNCBlastTransport for cnx:25, vvcSessionId:1 (000002E14380D000)
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: Blast-Transport: VNCBlastTransport destroyed.
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 25 Destroying VNC encoder.
+2026-04-17 16:12:24.961+0700 [INFO ] 0x0690 bora::Log: VNCRegionEncoder_Destroy: region encoder h264 4:2:0. Screen 0/1 @ Resolution: 1920 x 1080. regEnc Total Encoded: 70012 kB
+2026-04-17 16:12:24.963+0700 [INFO ] 0x05dc bora::Log: VVC: [VVC Close Seq] Last message on the control channel mpt queue got acked for session: 000002E148884080, sessionId: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] Recieved VVC_CTRL_OP_CLOSE_SESSION, reason: 13
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] Peer close complete. session: 0x000002E148884080, sessionId: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] Queue session on close,Local VVC Close Seq Complete: TRUE, Session Transport down: FALSE.
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] Close sequence complete. Queue on session close event, session: 0x000002E148884080, sessionId: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: Force close the session, instance: main, sessionId: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: Session closing, instance: main, session: 0x000002E148884080, sessionId: 1 close config: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcUnregisterDeferredAcksPollCb: Unregistered VvcDeferredAcksPollCb, instance: main, session:0x000002E148884080, sessionId: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcUnregisterSessionCleanupTasksPollCb: Unregistered VvcSessionCleanupTasksPollCb, instance:main, session:0x000002E148884080, sessionId:1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: >>> [main]   session: 1 (000002E148884080) state transition: [closing] --> [closed]
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: Session closing, instance: main, session: 0x000002E148884080, sessionId: 1 Notify channels are closing.
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: Stopping send dispatch poll thread, instance: main, sessionId: 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: Stopping VvcBandwidthDetection on session: 1 (0x000002E148884080), instance: main.
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: Un-initializing VvcBandwidthDetection on session: 1 (0x000002E148884080), instance: main.
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcMultiAsockBackendClose: session 1
+2026-04-17 16:12:24.963+0700 [INFO ] 0x0584 bora::Log: VVC: Send dispatch poll thread exit, instance: main, sessionId: 1
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcSetSessionCloseReason: Setting closeReason: VvcSessionCloseNormal
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcRemoveAllAsockBackends: Start, isSocketError: No
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Heartbeats] Stopped VVC heartbeats, instance: main, sessionId: 1, asock: 56
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcAsockBackendShutdown: Doing CancelRecv for Asock 56
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcAsockBackendShutdown: Removing AsockBe (asockId 56) refcount 2
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcMultiAsockBeUnsetDscpWithQwave Done, asockID: 56, asock: 0000000000000000
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcAsockBackendClose: Doing AsyncSocket_Close() for asock 56 session 1
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: SOCKET 56 (4740) Sending websocket close frame, status code = 1000
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcAsockBackendDestroy: Freeing AsockBackend (asockId 56 session 1)
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcRemoveAllAsockBackends: Done, numAsockBeRemoved: 1
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: Session closed, instance: main, session: 0x000002E148884080, sessionId: 1
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: Dispatching session close event, instance: main, sessionId: 1
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketVvcSessionOnCloseCb: VvcSessionCloseCb for session: 0000000046A5F093, closeReason: 13
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 ServerAsyncSocket::ConnectionClosedCB: BlastSocket connection closed, vAuth:ankETa*****, vvcSessionId:1, isError:0, Reason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT (13)
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0988 BlastRdeStub::vvcOnListenerDisconnect: vvcOnListenerDisconnect called
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:ankETa*****, sessionWrapper->vAuth:ankETa*****.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketIsNegotiatedNCEnabled: For vAuth:ankETa*****, negotiatedNCEnabled: Yes
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:ankETa*****, sessionWrapper->vAuth:ankETa*****.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketStopVvcSession: BlastSocketStopVvcSession: Session with sessionId: 1 about to be Stopped, isNetworkFailure: No.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [Authentication] BlastSocketFindAuthTicket: Error getting ticket by vauth from hashmap
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [Authentication] BlastSocketGetCookieFromViewAuthToken: Could not find AuthTicket object for vAuth:ankETa*****.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [Authentication] BlastSocket_InvalidateAuth: Invalidate authentication for vAuth:ankETa*****.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [Authentication] BlastSocketFindAuthTicket: Error getting ticket by vauth from hashmap
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [Authentication] BlastSocketMarkAuthTicketForInvalidation: Failed to find vAuth:ankETa***** in authTickethmap.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [Authentication] BlastSocketInvalidateAuthentication: vAuth:ankETa***** not found or already marked for invalidation.
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketRemoveSessionMapEntry: Entry for vAuth:ankETa***** removed from SessionMap, Session count is now: 0
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: Cancel transport sends, instance: main, sessionId: 1
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: VVC: Cancelled transport recv, instance: main, sessionId: 1, context: 0x000002E14824E5B0
+2026-04-17 16:12:24.964+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketStopVvcSession: BlastSocketStopVvcSession: Session with sessionId: 1 Stopped
+2026-04-17 16:12:24.965+0700 [INFO ] 0x0690 bora::Log: VNCEncodeRegionH264UnloadLibrary: Unloading x264 shared library "libx264-157.5.dll"
+2026-04-17 16:12:24.965+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 25 Session Total Encoded: 71877 KB
+2026-04-17 16:12:24.973+0700 [INFO ] 0x34bc bora::Log: VNCSERVER-WIN32: Exiting cursor thread.
+2026-04-17 16:12:24.975+0700 [INFO ] 0x0690 bora::Log: Unsubscribing capture type 0
+2026-04-17 16:12:24.975+0700 [INFO ] 0x0690 BlastSessionMgr::DestroyStoppedSession: calling DestroyConnection for cnx:25
+2026-04-17 16:12:24.975+0700 [INFO ] 0x0690 bora::Log: VNCConnectionMgr: VNCConnectionManager_DestroyConnection 25
+2026-04-17 16:12:24.975+0700 [INFO ] 0x0690 BlastSessionMgr::HandleConnectionClose: Handle BlastSocket connection close, vAuth:ankETa*****, vvcSessionId:1, Reason:VDPCONNECT_SERVER_DISCONNECTED_RECONNECT (13)
+2026-04-17 16:12:24.975+0700 [WARN ] 0x0690 BlastSessionMgr::HandleConnectionClose: No connection matches vAuth:ankETa*****
+2026-04-17 16:12:24.975+0700 [INFO ] 0x0690 bora::Log: VNCAudio: Powering off VNCAudio
+2026-04-17 16:12:24.975+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Inputdevtap enabling console input
+2026-04-17 16:12:24.984+0700 [WARN ] 0x0690 bora::Warning: VNCSERVER-WIN32: InputDevTap detach succeeded.
+2026-04-17 16:12:25.009+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_WTSSESSION_CHANGE:WTS_CONSOLE_DISCONNECT (0x2) for WTSSessionID:1
+2026-04-17 16:12:25.676+0700 [WARN ] 0x05dc bora::Warning: VVC: (ERROR) VvcSession 0x000002E148884080 unable to collect counters as session is not yet established.
+2026-04-17 16:12:25.676+0700 [INFO ] 0x05dc bora::Log: VVC: Session destroyed (0x000002E148884080 | 0x0000000046A5F093), sessionId: 1, instance: main, sent bytes: 72084744, recv'ed bytes: 468940, acked bytes: 72084744, un-acked recv bytes: 0 vvcAckSentNr 27227, mptAckSentNr 1356
+2026-04-17 16:12:25.676+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketVvcSessionOnDestroyCb: SessionDestroyCb for VvcSession with handle: 0000000046A5F093, SessionWrapper: 000002E143816410
+2026-04-17 16:12:25.676+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketDestroySessionWrapper: BlastSocketVvcSessionWrapperDestroy done.
+2026-04-17 16:12:25.676+0700 [WARN ] 0x05dc bora::Warning: VVC: Added cancelled recv completion context to delayed cleanup list, inst: main, session: 0x000002E148884080, sessionId: 1, context: 0x000002E14824E5B0
+2026-04-17 16:12:26.601+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_WTSSESSION_CHANGE:WTS_SESSION_LOCK (0x7) for WTSSessionID:1
+2026-04-17 16:12:26.743+0700 [INFO ] 0x1d60 MainApp::HandlePipeRequest: Received MsgRequestNewToken for sessionType:1.
+2026-04-17 16:12:26.743+0700 [INFO ] 0x1d60 MainApp::GetDisplayTopology: TopologyV2 Screen:1, DPI:120, left:0, top:0, width:1920, height:1080.
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 bora::Log: [Authentication] BlastSocket_HandleNewAuthRequest: Successfully generated vAuth:lbHn9N*****.
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 bora::Log: BlastSessionMgrBlastSessionState is BLASTSESSION_PREPARED
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 bora::Log: First connect screen[0]: (0, 0, 1920, 1080), isHDR = 0
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 collector::RegisterReporter: Registered a new reporter 000002E141187910 for componentID 0x1001, count is 5
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 collector::RegisterReporter: Registered a new reporter 000002E1410A45E0 for componentID 0x1005, count is 6
+2026-04-17 16:12:26.744+0700 [INFO ] 0x0690 bora::Log: VNCAudio: Powering on VNCAudio
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 collector::RegisterReporter: Registered a new reporter 000002E143A17380 for componentID 0x1004, count is 7
+2026-04-17 16:12:26.744+0700 [INFO ] 0x1d60 HorizonMonitoring::Init: Initializing hzMonApi DLL.
+2026-04-17 16:12:26.746+0700 [INFO ] 0x1d60 HorizonMonitoring::Init: hzMonApi DLL loaded successfully, module:0xe8c40000.
+2026-04-17 16:12:26.746+0700 [INFO ] 0x1d60 HorizonMonitoring::Init: hzMonApi DLL functions loaded successfully.
+2026-04-17 16:12:26.746+0700 [INFO ] 0x1d60 HorizonMonitoring::Init: HzMonApi_QueryInterface succeeded.
+2026-04-17 16:12:26.747+0700 [INFO ] 0x2f30 bora::Log: VTHREAD 12080 "soundAudioDevTap"
+2026-04-17 16:12:26.747+0700 [INFO ] 0x0690 bora::Log: VNCAudio: Audio Stream created
+2026-04-17 16:12:26.755+0700 [ERROR] 0x1d60 HorizonMonitoring::Init: HzMon_Init failed.
+2026-04-17 16:12:26.755+0700 [INFO ] 0x1d60 HorizonMonitoring::Cleanup: hzMonApi DLL is unloaded.
+2026-04-17 16:12:26.757+0700 [INFO ] 0x1d60 BlastSessionMgr::AllowInput: AllowInput received, vAuth:lbHn9N*****
+2026-04-17 16:12:26.757+0700 [INFO ] 0x1d60 MainApp::HandlePipeRequest: Set input control: vAuth:lbHn9N*****, allowInput:1.
+2026-04-17 16:12:27.379+0700 [INFO ] 0x1578 MainApp::HandlePipeRequest: Received MsgGetWorkerLoopback.
+2026-04-17 16:12:27.382+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketHandleUpgradeRequest: Handle websocket upgrade request.
+2026-04-17 16:12:27.383+0700 [INFO ] 0x05dc bora::Log: [Authentication] BlastSocketProcessAuthRequest: vAuth:lbHn9N***** routeSpecifier:D9DC2E*****.
+2026-04-17 16:12:27.383+0700 [INFO ] 0x05dc bora::Log: [Authentication] BlastSocketProcessAuthRequest: No cookie found in Authentication request.
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc bora::Log: [Authentication] BlastSocketClaimAuthTicket: New reconnectCookie:UYxY7v***** created and added for vAuth:lbHn9N*****. Triggering callback for cookie on first use event.
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc ServerAsyncSocket::GetTransportSwitchPolicyFromConfig: Retrieved Transport Switch Policy Params from Config
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetTransportSwitchPolicy: TransportSwitchPolicyParams Set for vAuth:lbHn9N*****
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc ServerAsyncSocket::SetTransportSwitchPolicyToBlastSocket: Pushed Transport Switch Policy Params to BlastSockets.
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc ServerAsyncSocket::GetVvcQoSPolicyFromConfig: Retrieved QoS Policy Params from Config
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetVvcQoSPolicy: QoSPolicyParams Accepted by BlastSockets for vAuth:lbHn9N*****
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc ServerAsyncSocket::SetVvcQoSPolicyToBlastSocket: Pushed QoS Policy Params to BlastSockets.
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc ServerAsyncSocket::GetVvcDeferredAcksParamsFromConfig: Retrieved Vvc Deferred Acks Params from Config
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetVvcDeferredAcksParams: VVC Deferred Acks Params Accepted by BlastSockets for vAuth:lbHn9N*****
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc ServerAsyncSocket::SetVvcDeferredAcksParamsToBlastSocket: Pushed Vvc DeferredAcks Params to BlastSockets.
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc BlastSessionMgr::HandleSessionStarted: Blast Session started, vAuth:lbHn9N*****
+2026-04-17 16:12:27.384+0700 [INFO ] 0x05dc bora::Log: BlastSessionMgrBlastSessionState change request: BLASTSESSION_PREPARED -> BLASTSESSION_CONNECTED
+2026-04-17 16:12:27.384+0700 [INFO ] 0x0690 MainApp::ListenRegistryChanges: Adding watch for system settings: HKLM\SOFTWARE\VMware, Inc.\VMware VDM\SessionData\1
+2026-04-17 16:12:27.743+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_POWERBROADCAST message.
+2026-04-17 16:12:27.743+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Powering on monitor
+2026-04-17 16:12:27.821+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_WTSSESSION_CHANGE:WTS_CONSOLE_CONNECT (0x1) for WTSSessionID:1
+2026-04-17 16:12:27.821+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received and handling WTS_CONSOLE_CONNECT for WTSSessionID:1
+2026-04-17 16:12:27.822+0700 [INFO ] 0x0690 bora::Log: VNCConnectionMgr: VNC_SERVEROS_WIN32_WTSSESSION_ACTIVE received
+2026-04-17 16:12:27.825+0700 [INFO ] 0x0690 BlastSessionMgr::HandleConnectionManagerEvent: mgrNotifyWin32WTSSessionActive
+2026-04-17 16:12:27.916+0700 [INFO ] 0x0690 MainApp::OnUserLogon: User:annx has logged on to WTSSessionID:1.
+2026-04-17 16:12:28.074+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_WTSSESSION_CHANGE:WTS_SESSION_UNLOCK (0x8) for WTSSessionID:1
+2026-04-17 16:12:28.112+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_DISPLAYCHANGE 1920x1080.
+2026-04-17 16:12:28.170+0700 [INFO ] 0x0690 MainApp::ListenRegistryChanges: Adding watch for user settings: HKCU\SOFTWARE\VMware, Inc.\VMware Blast\Config
+2026-04-17 16:12:28.242+0700 [INFO ] 0x0690 MainApp::ListenRegistryChanges: Adding watch for user settings: HKCU\SOFTWARE\Policies\VMware, Inc.\VMware Blast\Config
+2026-04-17 16:12:28.353+0700 [WARN ] 0x0690 MainApp::ListenRegistryChanges: Failed to create registry key:SOFTWARE\Policies\VMware, Inc.\VMware Blast\Config, error:0x00000005 (Access is denied)
+2026-04-17 16:12:28.507+0700 [ERROR] 0x0690 AbUtil::GetRegistryValue: Failed to get registry value for ProfilerData, error:0x000000ea (More data is available)
+2026-04-17 16:12:28.507+0700 [WARN ] 0x0690 MainApp::GetSessionMetadata: Failed to query ProfilerData for WTSSessionID:1, error:0x000000ea (More data is available)
+2026-04-17 16:12:28.507+0700 [WARN ] 0x0690 BlastSessionMgr::GetRecordingSessionDisplays: No recording session found.
+2026-04-17 16:12:28.507+0700 [WARN ] 0x0690 MainApp::GetSessionMetadata: Failed to query recording session displays.
+2026-04-17 16:12:28.507+0700 [INFO ] 0x0690 MainApp::GetSessionMetadata: Metadata for WTSSessionID:1, Info:{"BlastExtreme_PrimarySession_EndTime":0,"BlastExtreme_PrimarySession_StartTime":1776417146,"BlastExtreme_RecordingSession_DisplayTopology":[],"ProfilerData":"","ViewClient_Broker_DNS_Name":"VDI-RP.vtdc.local","ViewClient_Broker_DomainName":"VTDC","ViewClient_Broker_Farm_ID":"staffs","ViewClient_Broker_GatewayHost":"beta-cloud.viettelidc.com.vn","ViewClient_Broker_GatewayLocation":"External","ViewClient_Broker_GatewayType":"AP","ViewClient_Broker_Gateway_IP_Address":"172.16.79.2","ViewClient_Broker_Remote_IP_Address":"171.226.8.70","ViewClient_Broker_Request_Path":"171.226.8.70, 172.16.79.2, 172.16.36.12","ViewClient_Broker_Tags":"external","ViewClient_Broker_Tunneled":"false","ViewClient_Broker_URL":"https://vdi-rp.vtdc.local:443","ViewClient_Broker_UserName":"annx","ViewClient_Client_ID":"AgAAAJIHURAU5SIgAxYCEUkAAAA=","ViewClient_Client_Version":"5.3.0-15208953","ViewClient_Device_UUID":"10-51-07-92-E5-14","ViewClient_Displays.Number":"1","ViewClient_Displays.SystemDpi":"120","ViewClient_Displays.Topology":"{1920,1080,0,0,32,1}","ViewClient_Displays.TopologyV2":"{1920,1080,0,0,32,1,120}","ViewClient_IP_Address":"192.168.102.52","ViewClient_Info_ID":"fb063ddb-c9ec-4fb1-a806-24b9dedfafe8","ViewClient_Keyboard.KeyDelayToRepeat":"1","ViewClient_Keyboard.KeyRepeatRate":"31","ViewClient_Keyboard.Language":"1033","ViewClient_Keyboard.Layout":"00000409","ViewClient_Keyboard.NumFuncKeys":"12","ViewClient_Keyboard.NumIndicators":"3","ViewClient_Keyboard.NumKeys":"101","ViewClient_Keyboard.ScanCodeMode":"1","ViewClient_Keyboard.SubType":"0","ViewClient_Keyboard.Type":"4","ViewClient_Language":"vi-VN","ViewClient_Launch_ID":"Staffs","ViewClient_Launch_SessionType":"DESKTOP","ViewClient_LoggedOn_Domainname":"WORKGROUP","ViewClient_LoggedOn_Username":"nguye_ax","ViewClient_MAC_Address":"10-51-07-92-E5-14","ViewClient_Machine_Domain":"WORKGROUP","ViewClient_Machine_Name":"nguyenxuanan","ViewClient_Mouse.Identifier":"128","ViewClient_Mouse.NumButtons":"2","ViewClient_Protocol":"BLAST","ViewClient_TZID":"DAVT","ViewClient_Type":"Windows","ViewClient_Windows_Timezone":"SE Asia Standard Time"}
+2026-04-17 16:12:28.847+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_WTSSESSION_CHANGE:WTS_SESSION_LOCK (0x7) for WTSSessionID:1
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [Authentication] BlastSocketProcessAuthRequest: Claimed vAuth:lbHn9N*****, cookieOut:UYxY7v*****.
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [Authentication] BlastSocketProcessAuthRequest: Completed processing authentication request for vAuth:lbHn9N***** returning cookie:UYxY7v*****.
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildBlastWSResponse: Blast Headers found in the WSUPgradeRequest.
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildBlastWSResponse: Sending QoSPolicy via Blast Headers: QoSPolicy in Blast E2E: dscpCOutTCPv4=-1,dscpCOutUDPv4=-1,dscpCOutTCPv6=-1,dscpCOutUDPv6=-1 QoSPolicy in Blast Hop: dscpBUpTCPv4=-1,dscpBUpUDPv4=-1,dscpBDownTCPv4=-1,dscpBDownUDPv4=-1,dscpBUpTCPv6=-1,dscpBUpUDPv6=-1,dscpBDownTCPv6=-1,dscpBDownUDPv6=-1 
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildBlastWSResponse: Sending Mpt version via Blast Headers: MptVersion in Blast E2E: mptVersion=3 
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildBlastWSResponse: Sending Vvc Deferred Acks Params via Blast Headers: Vvc DeferredAcksParams in Blast E2E: vvcEnableDeferredAcks=1,vvcMptAckQuietPeriod=5000,vvcMptAckUnackedBytes=32768,vvcMptAckSeqGap=4 
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildBlastWSResponse: [Blast E2E Headers] Local MPTVersion: 3, Negotiated MPTVersion: 3
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildUDPResponse: UDP Headers found in the WSUPgradeRequest.
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketChooseSubProtocol: ClientList: udpv2
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildUDPResponse: Final Chosen Subprotocol: udpv2
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildUDPResponse: BENIT offered by peer: Yes, negotiatedBENIT: 1.
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildUDPResponse: [BEAT] UDP is enabled by server and client, send UDP meta-data in the upgrade header response
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildUDPResponse: Handled UDP related parts of the websocket upgrade, UDP Response Headers present: Yes
+2026-04-17 16:12:28.957+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketBuildBlastWSResponse: Handled Blast related parts of the websocket upgrade
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketExistsWSPeerConfigMapEntry: WSPeerConfigMap does not have entry for vAuth:lbHn9N*****.
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketAddWSPeerConfigMapEntry: Entry added to wsPeerConfigMap for vAuth:lbHn9N*****, wsPeerConfig->vAuth:lbHn9N*****, WSPeerConfigMap entry count is now: 1
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: SOCKET 57 (4688) AsyncTCPSocketSetOption: Option layer/level [6], option/name [1]: successfully set OS option for TCP socket.
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketAcceptConnection: Start: isWebSocket 1
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketAcceptConnection: WebSocket path
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketProcessWebSocketConnection: BlastSocketProcessWebSocketConnection: Start.
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketGetWSPeerConfigMapEntry: WSPeerConfigMap does have entry for vAuth:lbHn9N*****, wsPeerConfig->vAuth:lbHn9N*****.
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketRemoveWSPeerConfigMapEntry: Entry for vAuth:lbHn9N***** removed from WSPeerConfigMap, Entry count is now: 0
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetupSession: Network Intelligence is Negotiated.
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketGenerateVvcSessionId: BlastSocketGenerateVvcSessionId START
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketGenerateVvcSessionId: ShadowInstanceId: 0, IsShadowSession: No
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketGenerateUniqueSessionId: Using VVCSessionId:1(1) for WTSSessionId:1 and ShadowInstanceId:0.
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetupSession: Done with SessionId generation, VvcSessionId: 1, shadowInstanceId: 0
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetupSession: isBwe: 0 isEndToEndConnection: 0 negotiatedNCEnabled: 1
+2026-04-17 16:12:28.959+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketSetupSession: Starting BlastSession with vvcSessionID:1, shadowInstanceID:0
+2026-04-17 16:12:28.960+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does not have entry for vAuth:lbHn9N*****.
+2026-04-17 16:12:28.960+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketIsNegotiatedNCEnabled: SessionMap does not have entry for vAuth:lbHn9N*****.
+2026-04-17 16:12:28.960+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketIsNewVvcSessionNeeded: VvcSession Not Found for vvcSessionId: 1 and newVvcSessionRequired: Yes. 
+2026-04-17 16:12:28.960+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Opening VVCSession using VVCSessionID:1, vAuth:lbHn9N*****, negotiatedNCEnabled: Yes, negotiatedBENITEnabled: Yes, negotiatedMPTVersion: 3.
+2026-04-17 16:12:28.961+0700 [WARN ] 0x05dc bora::Warning: VVC: Removing cancelled recv completion context from delayed cleanup list, context: 0x000002E143B03090
+2026-04-17 16:12:28.966+0700 [INFO ] 0x05dc bora::Log: VVC: Init of session counters complete
+2026-04-17 16:12:28.966+0700 [INFO ] 0x05dc bora::Log: VVC: Multi-Protocol TransportBe. Overwriting TransportBackend function pointers with VvcMultiAsockBackend function pointers.
+2026-04-17 16:12:28.966+0700 [INFO ] 0x05dc bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: main, session: 0x000002E148C01E80, sessionId: 1, transportBe: 0x000000F03ECFF8F0, bandwidth detection disabled: false, session->enableQoSPolicy: Yes, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: enabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: enabled, receive window: disabled, channel resync: enabled, concurrent transports: enabled, mptVersion: 3, enableDeferredAcks: 1, mptAckQuietPeriod: 5000ms, mptAckSeqGap: 4, mptAckUnackedBytes: 32768, Vvc batching: enabled
+2026-04-17 16:12:28.973+0700 [INFO ] 0x05dc bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:28.973+0700 [INFO ] 0x16c0 bora::Log: VTHREAD 5824 "VVC dispatch send"
+2026-04-17 16:12:28.973+0700 [INFO ] 0x05dc bora::Log: VVC: Session created (0x000002E148C01E80 | 0x0000000046A78E93), sessionId: 1, instance: main, shadow index: 0, transportBe: 0x000000F03ECFF8F0
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Opened VVCSession:0000000046A78E93 with VVCSessionID:1.VVCSessionIdHandle: 000002E148C02D14
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketExistsSessionMapEntry: SessionMap does not have entry for vAuth:lbHn9N*****.
+2026-04-17 16:12:28.974+0700 [INFO ] 0x16c0 bora::Log: VVC: Send dispatch poll thread start using poll 15000us, instance: main
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketAddSessionMapEntry: Entry added to sessionMap for vAuth:lbHn9N*****, sessionWrapper->vAuth:lbHn9N*****, Session count is now: 1
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:lbHn9N*****, sessionWrapper->vAuth:lbHn9N*****.
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Session (0x000002E148C01E80 | 0x0000000046A78E93) min BW set to 256 kbps
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Session 0x000002E148C01E80 BW detection minimum rate: 31KBps low bw probe rate: 64KBps
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Session (0x000002E148C01E80 | 0x0000000046A78E93) max BW set to 1000000 kbps. Send bucket max = 122070KB
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Session 0x000002E148C01E80 BW detection maximum rate: 122070KBps
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Succeeded in setting Transport Switch Policy.
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketPushTransportSwitchPolicyToVvcSession: VVCLIB_SetTransportSwitchPolicy() Succeeded for vvcSessionHandle: 0000000046A78E93
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Pushed Transport Switch Policy Params to VvcSession for vAuth:lbHn9N*****, sessionId: 1
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: [VVC QoSPolicy] Succeeded in setting Qos Policy, QoS Policy Version: 1
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketPushQoSPolicyToVvcSession: VVCLIB_SetQoSPolicy() Succeeded for vvcSessionHandle: 0000000046A78E93
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Pushed QoS Policy Params to VvcSession for vAuth:lbHn9N*****, sessionId: 1
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Adding AsockBackend: asock: 58 (000002E143AA3C90), asockLock: 000002E14117B630, isEndToEndConnection: False, isControlAsock: True, isDataAsock: False
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: SOCKET 57 (4688) AsyncTCPSocketSetOption: sendLowLatencyMode set to [1].
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: SOCKET 57 (4688) AsyncTCPSocketSetOption: Option layer/level [6], option/name [1]: successfully set OS option for TCP socket.
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: [VVC QoSPolicy] Invalid Dscp value for TCP AsockBe, No Dscp Value applied, session: 000002E148C01E80, sessionId: 1
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: VvcAddAsockBackend: Success
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Pushed Asock: 000002E143AA3C90 to VvcSession: 0000000046A78E93
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: >>> [main]   session: 1 (000002E148C01E80) state transition: [init] --> [started]
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: VVC: Session started, instance: main, session: 0x000002E148C01E80, sessionId: 1
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Started VVCSession:0000000046A78E93 with VVCSessionID:1, VVCSessionIdHandle: 000002E148C02D14
+2026-04-17 16:12:28.974+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcSession: Triggering BlastSocketStartVvcHub() ... 
+2026-04-17 16:12:28.975+0700 [WARN ] 0x05dc bora::Warning: VVC: Proxy srv VVCPRXY_InitServer vvcMain parameter should to be upgraded to a newer version
+2026-04-17 16:12:28.975+0700 [INFO ] 0x05dc bora::Log: VVC: Proxy srv VVCPRXY_InitServer Ok
+2026-04-17 16:12:28.975+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketStartVvcHub: For VvcSession with sessionId: 1, Initializing VVCHub succeeded after 0 ms
+2026-04-17 16:12:28.975+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketProcessWebSocketConnection: Done with Setup Session with VvcSessionId: 1, shadowInstanceId: 0, vAuth:lbHn9N*****.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: VVC: VvcDispatchDataSockActivatedCb: Session 1 setting isDataAsock flag for asockBe (asock=000002E143AA3C90, asockID=58), reason=1; This is also the control socket
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: VVC: VvcSetSessionCloseReason: Setting closeReason: VvcSessionCloseInvalid
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: VVC: VvcSession=000002E148C01E80, Asock=000002E143AA3C90, AsockID=58, isEndToEndConnection: False, Vvc's Bw Detection is Enabled, activeAsockBackendIndex: 0.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketDataSockActivatedCb: Asock 000002E143AA3C90 is now Data Socket for VvcSessionId: 1, isControlAsock: Yes, isReconnect: No.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: [VVCSessionManager] BlastSocketDataSockActivatedCb: Data Connection:TCP
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: [Authentication] BlastSocketGrabCookie: Cookie:UYxY7v***** grabbed. Ref Count = 1.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: VVC: [VVC Heartbeats] In multiasock, value of negotiatedDoVVCHeartbeats: 0
+2026-04-17 16:12:28.989+0700 [INFO ] 0x05dc bora::Log: VVC: VvcIsCtrlKeepAliveNeeded: VvcSession: 000002E148C01E80, CtrlKeepAlive is not needed
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: Negotiated MPT Version is 3 for session: 0x000002E148C01E80
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: >>> [main]   session: 1 (000002E148C01E80) state transition: [started] --> [established]
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: main, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: Added SwitchPolicy OP_INIT_ACK extension header.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: RTT polling (on) interval 2000ms / history 30, bandwidth stats logging (on) interval 30s, inst: main, session:0x000002E148C01E80 sessionHandle: 0x0000000046A78E93, sessionId: 1 transportBe: 0x000002E148C01EE0
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC MPTv3/PauseResume/Heartbeats] Cap exchange occurred, negotiatedMptVersion: 3, negotiatedEnableVVCPauseResume: 0, negotiatedDoVVCHeartbeats: 1, VvcSession: 0x000002E148C01E80, sessionId: 1, concurrent transports is negotiated.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcDataTransportSwitch_Start: DataTransportSwitch Started for VvcSession: 000002E148C01E80, isVvcBweUsed for TCP: Yes, dataTransportSwitchCbPeriodMS: 3000.00, beatToTcp Bw in Kbps: 200000.00, beatToTcp Bw in KBps: 25000.00, beatToTcp PktLossPercentage: 1.00, beatToTcp RttMS: 2.00, beatToTcp RttVarPercentage: 5.00, 
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcDataTransportSwitch_Start: tcpToBeat Bw in Kbps: 80000.00, tcpToBeat Bw in KBps: 10000.00, tcpToBeat RttVarPercentage: 25.00, tcpToBeat RttMS: 2.00, beatToTcp Threshold: 1, tcpToBeat Threshold: 3, isSwitchingAlwaysEnabled: No, switchCountMax: 1. 
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: VvcIsCtrlKeepAliveNeeded: VvcSession: 000002E148C01E80, CtrlKeepAlive is not needed
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: Dispatching session established event, instance: main, sessionId: 1
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketVvcSessionOnEstablishedCb: SessionEstablishedCb for VvcSession with handle: 0000000046A78E93, SessionWrapper: 000002E1439E9F90
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] VVCLIB_GetInfo succeeded, value of negotiatedEnableVVCCloseSeq: 1
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC PauseResume] VVCLIB_GetInfo succeeded, value of negotiatedEnableVVCPauseResume: 0
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketVvcSessionOnEstablishedCb: VVC Session Established, triggering acceptFn.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocketGetSessionMapEntry: SessionMap does have entry for vAuth:lbHn9N*****, sessionWrapper->vAuth:lbHn9N*****.
+2026-04-17 16:12:28.989+0700 [INFO ] 0x0f98 bora::Log: [VVCSessionManager] BlastSocket_GetBlastConnectionInfo: Entry for vAuth:lbHn9N***** is present in SessionMap, vvcSessionId: 1, vvcSessionHandle: 0000000046A78E93
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 ServerAsyncSocket::DoConnectionAccepted: usermode:0, brokerProtocol:0, primaryProtocol:1, secondaryProtocol:0, generationID:0
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 ServerAsyncSocket::DoConnectionAccepted: Accepting new connection, vvcSessionID:1, isPrimary:Yes
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 ServerAsyncSocket::DoConnectionAccepted: vAuth:lbHn9N*****, cookie:UYxY7v*****
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 BlastSessionMgr::HandleConnectionAccepted: BlastSocket accepted client connection: cnx:26, reconnectCount:0, vAuth:lbHn9N*****, vvcSessionId:1
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC NetworkContinuity] VVCLIB_GetInfo succeeded, value of negotiatedEnableNetworkContinuity: 1
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: VVC: [VVC Close Seq] VVCLIB_GetInfo succeeded, value of negotiatedEnableVVCCloseSeq: 1
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Creating listeners for cnx:26, vvcSessionId:1
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: VVCListener "blast-mks" created for cnx:26 with handle:000000002C13E071
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: VVCListener "blast-mks" activated for cnx:26
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0988 BlastRdeStub::vvcOnListenerConnect: vvcOnListenerConnect called
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: VVCListener "blast-audio" created for cnx:26 with handle:000000002C13F551
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: VVCListener "blast-audio" activated for cnx:26
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Created VNCBlastTransport for cnx:26, vvcSessionId:1 (000002E1439A5070)
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: VVCListener "blast-mks" connected, doing VNC session setup.
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Opening MKS channel, vvcChannelId:3
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: VVCListener "blast-audio" connected, doing VNC session setup.
+2026-04-17 16:12:28.990+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Opening audio channel blast-audio, vvcChannelId:5
+2026-04-17 16:12:28.998+0700 [INFO ] 0x05dc bora::Log: VVC: VvcQueueRecvMessage: Detected change in peer active transport type to [TCP].
+2026-04-17 16:12:28.999+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Blast MKS on open for cnx:26
+2026-04-17 16:12:28.999+0700 [INFO ] 0x0f98 bora::Log: Blast-Transport: Blast Audio on open for cnx:26
+2026-04-17 16:12:28.999+0700 [INFO ] 0x0690 bora::Log: VVC: [VVC Heartbeats] VVCLIB_GetInfo succeeded, value of negotiatedDoVVCHeartbeats: 1
+2026-04-17 16:12:28.999+0700 [INFO ] 0x0690 bora::Log: VVC: [VVC Close Seq] VVCLIB_GetInfo succeeded, value of negotiatedEnableVVCCloseSeq: 1
+2026-04-17 16:12:28.999+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 Creating VNC encoder.
+2026-04-17 16:12:29.000+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: InputDevTap attach succeeded.
+2026-04-17 16:12:29.000+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Inputdevtap supports touch.
+2026-04-17 16:12:29.000+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Inputdevtap CAD enable state = 1
+2026-04-17 16:12:29.000+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Inputdevtap disabling console input
+2026-04-17 16:12:29.002+0700 [INFO ] 0x2758 bora::Log: VVC: Instance created (0x000002E148C0CC50 | 0x0000000046A7AC50), name: prxy-srv-3092, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:29.003+0700 [INFO ] 0x37ec bora::Log: VVC: Instance created (0x000002E148C0D660 | 0x0000000046A7C670), name: prxy-srv-5288, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:29.004+0700 [INFO ] 0x0f28 bora::Log: VVC: Instance created (0x000002E148C0E070 | 0x0000000046A7F070), name: prxy-srv-4848, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:29.004+0700 [INFO ] 0x37a0 bora::Log: VVC: Instance created (0x000002E148C0EA80 | 0x0000000046A80A90), name: prxy-srv-3684, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:29.011+0700 [INFO ] 0x2758 bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148C00E70, instance: 0x000002E148C0CC50, instance->name: prxy-srv-3092.
+2026-04-17 16:12:29.011+0700 [INFO ] 0x2758 bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-3092, session: 0x000002E148C00E70, sessionId: 1, transportBe: 0x000000F03F9FF820, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:29.012+0700 [INFO ] 0x37ec bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148BFAE10, instance: 0x000002E148C0D660, instance->name: prxy-srv-5288.
+2026-04-17 16:12:29.012+0700 [INFO ] 0x37ec bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-5288, session: 0x000002E148BFAE10, sessionId: 1, transportBe: 0x000000F0403FF940, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:29.013+0700 [INFO ] 0x37a0 bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148C02E90, instance: 0x000002E148C0EA80, instance->name: prxy-srv-3684.
+2026-04-17 16:12:29.013+0700 [INFO ] 0x37a0 bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-3684, session: 0x000002E148C02E90, sessionId: 1, transportBe: 0x000000F0404FF8F0, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:29.014+0700 [INFO ] 0x0f28 bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148BFDE40, instance: 0x000002E148C0E070, instance->name: prxy-srv-4848.
+2026-04-17 16:12:29.014+0700 [INFO ] 0x0f28 bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-4848, session: 0x000002E148BFDE40, sessionId: 1, transportBe: 0x000000F0405FF290, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: Session created (0x000002E148C00E70 | 0x0000000046A83E73), sessionId: 1, instance: prxy-srv-3092, shadow index: 0, transportBe: 0x000000F03F9FF820
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-3092, session: 0x000002E148C00E70, sessionId: 1
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: >>> [prxy-srv-3092]   session: 1 (000002E148C00E70) state transition: [init] --> [started]
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-3092
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: Session started, instance: prxy-srv-3092, session: 0x000002E148C00E70, sessionId: 1
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E14824ABD0, handle=0x0000000046A79BD7, session=1, control channel=VvcProxyControlChannel3092
+2026-04-17 16:12:29.021+0700 [INFO ] 0x2758 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:3092.
+2026-04-17 16:12:29.021+0700 [INFO ] 0x3658 bora::Log: VVC: Instance created (0x000002E148C0B830 | 0x0000000046A82830), name: prxy-srv-4052, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: Session created (0x000002E148BFAE10 | 0x0000000046A84E13), sessionId: 1, instance: prxy-srv-5288, shadow index: 0, transportBe: 0x000000F0403FF940
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-5288, session: 0x000002E148BFAE10, sessionId: 1
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: >>> [prxy-srv-5288]   session: 1 (000002E148BFAE10) state transition: [init] --> [started]
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-5288
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: Session started, instance: prxy-srv-5288, session: 0x000002E148BFAE10, sessionId: 1
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E143A53610, handle=0x0000000046A7B617, session=1, control channel=VvcProxyControlChannel5288
+2026-04-17 16:12:29.022+0700 [INFO ] 0x37ec bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:5288.
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: Session created (0x000002E148C02E90 | 0x0000000046A85E93), sessionId: 1, instance: prxy-srv-3684, shadow index: 0, transportBe: 0x000000F0404FF8F0
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-3684, session: 0x000002E148C02E90, sessionId: 1
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: >>> [prxy-srv-3684]   session: 1 (000002E148C02E90) state transition: [init] --> [started]
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-3684
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: Session started, instance: prxy-srv-3684, session: 0x000002E148C02E90, sessionId: 1
+2026-04-17 16:12:29.023+0700 [INFO ] 0x37a0 bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E143A16F00, handle=0x0000000046A7EF17, session=1, control channel=VvcProxyControlChannel3684
+2026-04-17 16:12:29.023+0700 [INFO ] 0x0f28 bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:29.024+0700 [INFO ] 0x37a0 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:3684.
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: VVC: Session created (0x000002E148BFDE40 | 0x0000000046A86E53), sessionId: 1, instance: prxy-srv-4848, shadow index: 0, transportBe: 0x000000F0405FF290
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-4848, session: 0x000002E148BFDE40, sessionId: 1
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: VVC: >>> [prxy-srv-4848]   session: 1 (000002E148BFDE40) state transition: [init] --> [started]
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-4848
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: VVC: Session started, instance: prxy-srv-4848, session: 0x000002E148BFDE40, sessionId: 1
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E148653C60, handle=0x0000000046A7DC77, session=1, control channel=VvcProxyControlChannel4848
+2026-04-17 16:12:29.024+0700 [INFO ] 0x0f28 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:4848.
+2026-04-17 16:12:29.029+0700 [INFO ] 0x3658 bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148BFBE20, instance: 0x000002E148C0B830, instance->name: prxy-srv-4052.
+2026-04-17 16:12:29.029+0700 [INFO ] 0x3658 bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-4052, session: 0x000002E148BFBE20, sessionId: 1, transportBe: 0x000000F0406FF510, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:29.037+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Total PCI\VEN_10DE device ids found: 0
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: Session created (0x000002E148BFBE20 | 0x0000000046A87E33), sessionId: 1, instance: prxy-srv-4052, shadow index: 0, transportBe: 0x000000F0406FF510
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-4052, session: 0x000002E148BFBE20, sessionId: 1
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: >>> [prxy-srv-4052]   session: 1 (000002E148BFBE20) state transition: [init] --> [started]
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-4052
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: Session started, instance: prxy-srv-4052, session: 0x000002E148BFBE20, sessionId: 1
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E148653260, handle=0x0000000046A81277, session=1, control channel=VvcProxyControlChannel4052
+2026-04-17 16:12:29.039+0700 [INFO ] 0x3658 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:4052.
+2026-04-17 16:12:29.046+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-3092]   session: 1 (000002E148C00E70) state transition: [started] --> [established]
+2026-04-17 16:12:29.046+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-3092, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:29.049+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Total PCI\VEN_1002 device ids found: 0
+2026-04-17 16:12:29.057+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-5288]   session: 1 (000002E148BFAE10) state transition: [started] --> [established]
+2026-04-17 16:12:29.057+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-5288, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:29.062+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Total PCI\VEN_8086 device ids found: 0
+2026-04-17 16:12:29.062+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Total VMware SVGA 3D displays found: 1
+2026-04-17 16:12:29.068+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Topology support from VMware SVGA 3D available
+2026-04-17 16:12:29.069+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Topology support from Horizon Indirect Display available
+2026-04-17 16:12:29.070+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-4052]   session: 1 (000002E148BFBE20) state transition: [started] --> [established]
+2026-04-17 16:12:29.070+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-4052, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:29.084+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Total Horizon Display Driver displays found: 0
+2026-04-17 16:12:29.113+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Current topology session 0
+2026-04-17 16:12:29.113+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Screen 0 : (0,0) 1920x1080 HDR: 0 DPI: 96
+2026-04-17 16:12:29.113+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Transform display #1/1 will be at (0,0) resolution 1920x1080
+2026-04-17 16:12:29.138+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-3684]   session: 1 (000002E148C02E90) state transition: [started] --> [established]
+2026-04-17 16:12:29.138+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-3684, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:29.146+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Duplicate topology request received
+2026-04-17 16:12:29.148+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-4848]   session: 1 (000002E148BFDE40) state transition: [started] --> [established]
+2026-04-17 16:12:29.148+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-4848, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:29.183+0700 [INFO ] 0x1c70 BlastRdeStub::StartRdeServer: RdeServer process started.
+2026-04-17 16:12:29.189+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 VNC heartbeats disallowed.
+2026-04-17 16:12:29.189+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 VNC close message disallowed.
+2026-04-17 16:12:29.268+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Screen ID 0. Display name: "\\.\DISPLAY1", Device String: "VMware SVGA 3D", Device Id: "PCI\VEN_15AD&DEV_0405&SUBSYS_040515AD&REV_00", HDR: 0
+2026-04-17 16:12:29.303+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 ServerSetTopology - original root: (0, 0) size: (1920, 1080)
+2026-04-17 16:12:29.303+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 Number of screens changed from 0 to 1
+2026-04-17 16:12:29.303+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 screen: 0 BoundingBox: (1920x1080) Screen (1920x1080) @ (0,0) HDR: 0
+2026-04-17 16:12:29.334+0700 [INFO ] 0x0f98 bora::Log: VNCENCODE 26 initialized by ClientInitialized cap
+2026-04-17 16:12:29.350+0700 [INFO ] 0x0690 bora::Log: NvEnc: VNCEncodeRegionNvEncLoadLibrary: Library "nvEncodeAPI64.dll" unavailable (The specified module could not be found)
+2026-04-17 16:12:29.351+0700 [INFO ] 0x0690 bora::Log: VNCEncodeRegionH264LoadLibrary: Loaded x264 shared library "libx264-157.5.dll"
+2026-04-17 16:12:29.351+0700 [INFO ] 0x0690 bora::Log: VNCEncodeRegionH264_Create: Disabling deblocking filter.
+2026-04-17 16:12:29.355+0700 [INFO ] 0x0690 bora::Log: VNCRegionEncoder_Create: region encoder h264 4:2:0. Screen 0/1 @ Resolution: 1920 x 1080 Capture type: 0 Pixel format: 0x00000000
+2026-04-17 16:12:29.356+0700 [INFO ] 0x0690 bora::Log: Subscribing capture type 0
+2026-04-17 16:12:29.356+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Creating WDDM backend
+2026-04-17 16:12:29.356+0700 [INFO ] 0x06f0 bora::Log: VNCSERVER-WIN32: FindDisplayID display \\.\DISPLAY1 position X=0, Y=0, Width=1920, Height=1080
+2026-04-17 16:12:29.356+0700 [INFO ] 0x06f0 bora::Log: VNCSERVER-WIN32: Normalized position X=0, Y=0
+2026-04-17 16:12:29.356+0700 [INFO ] 0x06f0 bora::Log: VNCSERVER-WIN32: Initialization of capture WDDM backend for \\.\DISPLAY1 completed
+2026-04-17 16:12:29.824+0700 [INFO ] 0x0f98 bora::Log: VNCENCODE 26 TopologyRequest Screen 0 (0,0 1920x1080) HDR: 0
+2026-04-17 16:12:29.824+0700 [INFO ] 0x0f98 bora::Log: VNCSERVER-WIN32: Transform display #1/1 will be at (0,0) resolution 1920x1080
+2026-04-17 16:12:29.852+0700 [INFO ] 0x0f98 bora::Log: VNCSERVER-WIN32: Duplicate topology request received
+2026-04-17 16:12:29.892+0700 [WARN ] 0x0f98 bora::Warning: VNCENCODE 26 VNCEncodeRequestTopology: failed to set topology
+2026-04-17 16:12:29.924+0700 [INFO ] 0x3658 bora::Log: VVC: Instance created (0x000002E1439C3990 | 0x0000000046A89990), name: prxy-srv-10620, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:29.930+0700 [INFO ] 0x3658 bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148C04EB0, instance: 0x000002E1439C3990, instance->name: prxy-srv-10620.
+2026-04-17 16:12:29.930+0700 [INFO ] 0x3658 bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-10620, session: 0x000002E148C04EB0, sessionId: 1, transportBe: 0x000000F0406FF510, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: Session created (0x000002E148C04EB0 | 0x0000000046A8AEB3), sessionId: 1, instance: prxy-srv-10620, shadow index: 0, transportBe: 0x000000F0406FF510
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-10620, session: 0x000002E148C04EB0, sessionId: 1
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: >>> [prxy-srv-10620]   session: 1 (000002E148C04EB0) state transition: [init] --> [started]
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-10620
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: Session started, instance: prxy-srv-10620, session: 0x000002E148C04EB0, sessionId: 1
+2026-04-17 16:12:29.938+0700 [INFO ] 0x3658 bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E143A53890, handle=0x0000000046A88897, session=1, control channel=VvcProxyControlChannel10620
+2026-04-17 16:12:29.939+0700 [INFO ] 0x3658 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:10620.
+2026-04-17 16:12:29.954+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-10620]   session: 1 (000002E148C04EB0) state transition: [started] --> [established]
+2026-04-17 16:12:29.954+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-10620, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:30.001+0700 [WARN ] 0x0690 bora::Warning: VNCSERVER-WIN32: SetThreadDesktop failed: The requested resource is in use (0xaa)
+2026-04-17 16:12:30.224+0700 [WARN ] 0x0f98 bora::Warning: VVC: Proxy srv OnChannelOpenedCb FAILED, status=0x8
+2026-04-17 16:12:30.224+0700 [WARN ] 0x0f98 bora::Warning: VVC: Proxy srv OnChannelOpenedCb FAILED, status=0x8
+2026-04-17 16:12:30.887+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_WTSSESSION_CHANGE:WTS_SESSION_UNLOCK (0x8) for WTSSessionID:1
+2026-04-17 16:12:31.088+0700 [INFO ] 0x0f98 bora::Log: VNCENCODE 26 TopologyRequest Screen 0 (0,0 1536x864) HDR: 0
+2026-04-17 16:12:31.088+0700 [INFO ] 0x0f98 bora::Log: VNCSERVER-WIN32: Transform display #1/1 will be at (0,0) resolution 1536x864
+2026-04-17 16:12:31.171+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32: ***Setting topology***
+2026-04-17 16:12:31.171+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32: Screen 0 : (0,0) 1536x864 HDR: 0 DPI: 0
+2026-04-17 16:12:31.171+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32: Total VMware SVGA 3D displays found: 1
+2026-04-17 16:12:31.323+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_DISPLAYCHANGE 1920x1080.
+2026-04-17 16:12:31.381+0700 [INFO ] 0x0a98 bora::Log: VVC: Instance created (0x000002E1439C75F0 | 0x0000000046A8C5F0), name: prxy-srv-6708, main: false, protocol version: 3.0, API version: 2.0, defer event disp: false, defer send disp: false, defer event thread disp: false, defer send thread disp: false, load extensions: false, flags: 0x0, config enable perf counters: false
+2026-04-17 16:12:31.388+0700 [INFO ] 0x0a98 bora::Log: VVC: Disabled localAllowChannelResync for VvcSession: 0x000002E148C05EC0, instance: 0x000002E1439C75F0, instance->name: prxy-srv-6708.
+2026-04-17 16:12:31.389+0700 [INFO ] 0x0a98 bora::Log: VVC: Message dispatch poll settings, interval: 15000.000000us, interval slop: 100.000000us, inst: prxy-srv-6708, session: 0x000002E148C05EC0, sessionId: 1, transportBe: 0x000000F0407FF390, bandwidth detection disabled: true, session->enableQoSPolicy: No, pseudo packet length: 128, pseudo packet length high bw: 1024, max in-flight: 0, latency timeout period ms: 10000, channel BW min update interval ms: 200, fixed timer res: 0, min timer res: 0, channel recv buffer initial size: 262144, Vvc close seq: disabled, Vvc reconnect token: disabled, Plugin reconnect token: disabled, Vvc heartbeats: disabled, receive window: disabled, channel resync: disabled, concurrent transports: disabled, mptVersion: 0, enableDeferredAcks: 0, mptAckQuietPeriod: 0ms, mptAckSeqGap: 0, mptAckUnackedBytes: 0, Vvc batching: disabled
+2026-04-17 16:12:31.394+0700 [INFO ] 0x04c4 bora::Log: VNCSERVER-WIN32: Received WM_DISPLAYCHANGE 1536x864.
+2026-04-17 16:12:31.396+0700 [INFO ] 0x0a98 bora::Log: VVC: b/w multiplier: 2.000000, b/w probe multiplier: 1.400000, minimum byte rate: 19.531250KBps, maximum byte rate: 0.000000KBps, event history count 2000, stable event count threshold 50, probe interval: 10000000us, rate reduction probe interval: 5000000us, probe rate reduction: 0.800000, average event send time max increase: 2, min average event time size: 500, bandwidth stats logging period sec: 30, fixed rate: 0.000000KBps, max event send time increase 20, low b/w probe probe enabled: true, low b/w probe rate floor: 64.000000KBps, low b/w probe msg size bytes: 65536, low b/w probe msg count: 1, low b/w probe msg period ms: 100, low b/w probe min period ms: 30000, min probe period bytes to send: 512, max event send time increase stable event count 5
+2026-04-17 16:12:31.396+0700 [INFO ] 0x0a98 bora::Log: VVC: Session created (0x000002E148C05EC0 | 0x0000000046A8DED3), sessionId: 1, instance: prxy-srv-6708, shadow index: 0, transportBe: 0x000000F0407FF390
+2026-04-17 16:12:31.396+0700 [INFO ] 0x0a98 bora::Log: VVC: VvcSessionStartAsyncRead: Session kicked off async read, instance: prxy-srv-6708, session: 0x000002E148C05EC0, sessionId: 1
+2026-04-17 16:12:31.396+0700 [INFO ] 0x0a98 bora::Log: VVC: >>> [prxy-srv-6708]   session: 1 (000002E148C05EC0) state transition: [init] --> [started]
+2026-04-17 16:12:31.397+0700 [INFO ] 0x0a98 bora::Log: VVC: VvcRegisterSessionCleanupTasksPollCb: instanceBe's pollCallback is NULL, VVC is probably uninitializing. Don't register transport pollCb for session:1 instance:prxy-srv-6708
+2026-04-17 16:12:31.397+0700 [INFO ] 0x0a98 bora::Log: VVC: Session started, instance: prxy-srv-6708, session: 0x000002E148C05EC0, sessionId: 1
+2026-04-17 16:12:31.397+0700 [INFO ] 0x0a98 bora::Log: VVC: Proxy srv ConnectNode Ok, node=0x000002E147B70D50, handle=0x0000000046A8BD57, session=1, control channel=VvcProxyControlChannel6708
+2026-04-17 16:12:31.397+0700 [INFO ] 0x0a98 bora::Log: [VVCSessionManager] BlastSocketHubLibCallback: For VvcSession with sessionWrapper: 0x000002E1439E9F90, received connect notification from VVCHub with no error for NodeWTSSessionID:1, NodeProcessID:6708.
+2026-04-17 16:12:31.432+0700 [INFO ] 0x0658 bora::Log: VVC: >>> [prxy-srv-6708]   session: 1 (000002E148C05EC0) state transition: [started] --> [established]
+2026-04-17 16:12:31.432+0700 [INFO ] 0x0658 bora::Log: VVC: Received VVC_CTRL_OP_INIT instance: prxy-srv-6708, message, negotiated protocol version: 3.0, peer protocol version: 3.0, negotiated probe: supported
+2026-04-17 16:12:31.889+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32: GetTopology reporting following topology. Total display 1
+2026-04-17 16:12:31.889+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32:    Screen (0) (0, 0), 1536x864
+2026-04-17 16:12:31.889+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32: ***Setting topology completed by VMware SVGA 3D***
+2026-04-17 16:12:31.889+0700 [INFO ] 0x0690 bora::Log: Unsubscribing capture type 0
+2026-04-17 16:12:31.934+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Screen ID 0. Display name: "\\.\DISPLAY1", Device String: "VMware SVGA 3D", Device Id: "PCI\VEN_15AD&DEV_0405&SUBSYS_040515AD&REV_00", HDR: 0
+2026-04-17 16:12:31.934+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 ServerSetTopology - original root: (0, 0) size: (1536, 864)
+2026-04-17 16:12:31.934+0700 [INFO ] 0x0690 bora::Log: VNCENCODE 26 screen: 0 BoundingBox: (1536x864) Screen (1536x864) @ (0,0) HDR: 0
+2026-04-17 16:12:31.934+0700 [INFO ] 0x0690 bora::Log: VNCRegionEncoder_Destroy: region encoder h264 4:2:0. Screen 0/1 @ Resolution: 1920 x 1080. regEnc Total Encoded: 1066 kB
+2026-04-17 16:12:31.937+0700 [INFO ] 0x0690 bora::Log: VNCEncodeRegionH264UnloadLibrary: Unloading x264 shared library "libx264-157.5.dll"
+2026-04-17 16:12:31.942+0700 [INFO ] 0x0690 bora::Log: NvEnc: VNCEncodeRegionNvEncLoadLibrary: Library "nvEncodeAPI64.dll" unavailable (The specified module could not be found)
+2026-04-17 16:12:31.943+0700 [INFO ] 0x0690 bora::Log: VNCEncodeRegionH264LoadLibrary: Loaded x264 shared library "libx264-157.5.dll"
+2026-04-17 16:12:31.944+0700 [INFO ] 0x0690 bora::Log: VNCEncodeRegionH264_Create: Disabling deblocking filter.
+2026-04-17 16:12:31.947+0700 [INFO ] 0x0690 bora::Log: VNCRegionEncoder_Create: region encoder h264 4:2:0. Screen 0/1 @ Resolution: 1536 x 864 Capture type: 0 Pixel format: 0x00000000
+2026-04-17 16:12:31.947+0700 [INFO ] 0x0690 bora::Log: Subscribing capture type 0
+2026-04-17 16:12:31.947+0700 [INFO ] 0x0690 bora::Log: VNCSERVER-WIN32: Creating WDDM backend
+2026-04-17 16:12:31.948+0700 [INFO ] 0x32d0 bora::Log: VNCSERVER-WIN32: FindDisplayID display \\.\DISPLAY1 position X=0, Y=0, Width=1536, Height=864
+2026-04-17 16:12:31.948+0700 [INFO ] 0x32d0 bora::Log: VNCSERVER-WIN32: Normalized position X=0, Y=0
+2026-04-17 16:12:31.948+0700 [INFO ] 0x32d0 bora::Log: VNCSERVER-WIN32: Initialization of capture WDDM backend for \\.\DISPLAY1 completed
+2026-04-17 16:12:31.990+0700 [INFO ] 0x2680 bora::Log: VNCSERVER-WIN32: Apply topology request received
+2026-04-17 16:12:37.992+0700 [INFO ] 0x05dc bora::Log: VVC: VvcDataTransportSwitchPollCb: VvcSession: 000002E148C01E80 has 1 AsockBackends, activeAsockBackendIndex 0, DataTransportSwitch is Not Applicable.
+2026-04-17 16:12:58.992+0700 [INFO ] 0x05dc bora::Log: VVC: Bandwidth stat poll logger: Rate 5262.6 KBps. Multiplier 2.00. RTT 4.53 ms.
+2026-04-17 16:13:28.994+0700 [INFO ] 0x05dc bora::Log: VVC: Bandwidth stat poll logger: Rate 5262.6 KBps. Multiplier 2.00. RTT 3.64 ms.
+2026-04-17 16:14:58.996+0700 [INFO ] 0x05dc bora::Log: VVC: Bandwidth stat poll logger: Rate 5635.1 KBps. Multiplier 2.00. RTT 3.25 ms.
