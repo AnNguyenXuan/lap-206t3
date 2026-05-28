@@ -1,0 +1,263 @@
+Cách xóa cấu hình port
+enable
+conf t
+default interface fa0/1
+end
+wr
+
+1. Cấu hình VLAN, trunk và LACP giữa 2 switch LAN A
+
+Trên SW1
+enable
+conf t
+hostname SW1
+
+vlan 100
+ name VLAN100
+exit
+
+vlan 200
+ name VLAN200
+exit
+
+interface fa0/1
+ description TRUNK_TO_ROUTER0
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+ spanning-tree portfast trunk
+ no shutdown
+exit
+
+interface range fa0/21-24
+ description LACP_TO_SW
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+ channel-group 1 mode active
+ no shutdown
+exit
+
+interface port-channel 1
+ description LACP_TO_SW
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+exit
+
+end
+wr
+
+Trên SW0
+enable
+conf t
+hostname SW0
+
+vlan 100
+ name VLAN10
+exit
+
+vlan 200
+ name VLAN200
+exit
+
+interface range fa0/21-24
+ description LACP_TO_SW1
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+ channel-group 1 mode active
+ no shutdown
+exit
+
+interface port-channel 1
+ description LACP_TO_SW1
+ switchport mode trunk
+ switchport trunk allowed vlan 100,200
+exit
+
+interface fa0/6
+ description PC3_VLAN100
+ switchport mode access
+ switchport access vlan 100
+ spanning-tree portfast
+ no shutdown
+exit
+
+interface fa0/7
+ description PC4_VLAN200
+ switchport mode access
+ switchport access vlan 200
+ spanning-tree portfast
+ no shutdown
+exit
+
+end
+wr
+
+Kiểm tra cấu hình
+show etherchannel summary
+show interfaces trunk
+show vlan brief
+
+2. Cấu hình Inter-VLAN Routing trên Router0
+
+enable
+conf t
+hostname R0
+
+interface fa0/0
+ description TO_SW1
+ no ip address
+ no shutdown
+exit
+
+interface fa0/0.100
+ description GATEWAY_VLAN100
+ encapsulation dot1Q 100
+ ip address 172.16.10.1 255.255.255.0
+exit
+
+interface fa0/0.200
+ description GATEWAY_VLAN200
+ encapsulation dot1Q 200
+ ip address 172.16.20.1 255.255.255.0
+exit
+
+interface fa0/1
+ description TO_R1
+ ip address 209.165.2.1 255.255.255.252
+ clock rate 64000
+ no shutdown
+exit
+
+end
+wr
+
+3. Cấu hình Router1 cho LAN B
+
+enable
+conf t
+hostname R1
+
+interface fa0/1
+ description TO_R0
+ ip address 209.165.2.2 255.255.255.252
+ no shutdown
+exit
+
+interface fa0/0
+ description TO_SW3
+ no ip address
+ no shutdown
+exit
+
+interface fa0/0.300
+ description GATEWAY_VLAN300
+ encapsulation dot1Q 300
+ ip address 172.16.30.1 255.255.255.0
+exit
+
+end
+wr
+
+4. Cấu hình Switch2 cho LAN B
+
+enable
+conf t
+hostname SW2
+
+vlan 300
+ name LANB
+exit
+
+interface fa0/1
+ switchport mode trunk
+ switchport trunk allowed vlan 300
+ spanning-tree portfast trunk
+ no shutdown
+exit
+
+interface range fa0/2-4
+ switchport mode access
+ switchport access vlan 300
+ spanning-tree portfast
+ no shutdown
+exit
+
+end
+wr
+
+5. Cấu hình DHCP trên Router
+
+Trên R1
+enable
+conf t
+
+ip dhcp excluded-address 172.16.10.1 172.16.10.20
+ip dhcp excluded-address 172.16.30.1 172.16.30.20
+ip dhcp excluded-address 172.16.30.254
+
+ip dhcp pool VLAN100
+ network 172.16.10.0 255.255.255.0
+ default-router 172.16.10.1
+ dns-server 172.16.30.10
+exit
+
+ip dhcp pool LANB
+ network 172.16.30.0 255.255.255.0
+ default-router 172.16.30.1
+ dns-server 172.16.30.10
+exit
+
+end
+wr
+
+Trên R0
+interface fa0/0.100
+ip helper-address 209.165.2.2
+
+6. Cấu hình Static Route giữa LAN A và LAN B
+
+Trên R0
+conf t
+ip route 172.16.30.0 255.255.255.0 209.165.2.2
+ip route 192.168.1.0 255.255.255.0 209.165.2.2
+end
+wr
+
+Trên R1
+conf t
+ip route 172.16.10.0 255.255.255.0 209.165.2.1
+ip route 172.16.20.0 255.255.255.0 209.165.2.1
+ip route 192.168.1.0 255.255.255.0 172.16.30.254
+end
+wr
+
+show ip route
+ping 209.165.2.1
+ping 209.165.2.2
+
+7. Cấu hình WRT300N WiFi cho Laptop
+
+Internet IP Address: 172.16.30.254
+Subnet Mask: 255.255.255.0
+Default Gateway: 172.16.30.1
+DNS Server: 172.16.30.10
+
+Router IP: 192.168.1.1
+Subnet Mask: 255.255.255.0
+DHCP Server: Enable
+Start IP Address: 192.168.1.100
+Maximum Number of Users: 50
+
+8. Cấu hình Web Server và Mail Server
+
+web server
+IP Address: 172.16.30.10
+Subnet Mask: 255.255.255.0
+Default Gateway: 172.16.30.1
+DNS Server: 172.16.30.10
+
+
+mail server
+IP Address: 172.16.30.20
+Subnet Mask: 255.255.255.0
+Default Gateway: 172.16.30.1
+DNS Server: 172.16.30.10

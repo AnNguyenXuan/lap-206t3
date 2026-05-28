@@ -135,3 +135,5 @@ exit
 
 # Trỏ về IP của cổng Router tương ứng (G0/1 của Town Hall)
 ip default-gateway 192.168.1.158
+
+
