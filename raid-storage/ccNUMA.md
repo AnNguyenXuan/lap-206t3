@@ -74,3 +74,9 @@ cat /sys/block/sdb/queue/scheduler
 cat /sys/block/sdb/queue/nr_requests
 cat /sys/block/sdb/queue/read_ahead_kb
 ```
+
+## Kiến trúc RAM
+```
+Do cơ chế truy cập Local memory access, CPU sẽ ưu tiên truy cập RAM gần nó   
+Kiến trúc cắm RAM nên ưu tiên full kênh trước -> Sau đó sẽ đẩy full slot theo thứ tự 1,2,3
+```
