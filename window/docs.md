@@ -88,3 +88,23 @@ DISKPART>
 
 
 ```
+
+## Lỗi Sysprep Window
+```
+Truy cập C:\Windows\System32\Sysprep\Panther\setupact.log
+```
+
+## Cách gỡ bỏ các App Windows
+```
+Truy cập và nhập lệnh
+C:\Program Files (x86)\Microsoft\Edge\Application\83.0.478.58\Installer\setup.exe --uninstall --system-level --verbose-logging --force-uninstall
+
+get-appxpackage *store | remove-appxpackage
+```
+
+## Đóng gói ISO
+```
+Tải bộ cài đóng gói
+Windows Assessment and Deployment Kit (ADK)
+
+```
