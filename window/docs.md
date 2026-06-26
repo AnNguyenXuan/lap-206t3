@@ -100,6 +100,11 @@ Truy cập và nhập lệnh
 C:\Program Files (x86)\Microsoft\Edge\Application\83.0.478.58\Installer\setup.exe --uninstall --system-level --verbose-logging --force-uninstall
 
 get-appxpackage *store | remove-appxpackage
+
+Off Reserved Storage
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\ReserveManager
+
+ShippedWithReserves = 0
 ```
 
 ## Đóng gói ISO
