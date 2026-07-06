@@ -1,0 +1,117 @@
+enable
+conf t
+hostname R1
+no ip domain-lookup
+
+interface g0/0
+ description LAN1
+ ip address 172.16.1.1 255.255.255.0
+ no shutdown
+
+interface g0/1
+ description TO-SW3-OSPF
+ ip address 172.16.0.1 255.255.255.0
+ no shutdown
+
+interface loopback0
+ ip address 10.10.10.10 255.255.255.255
+
+router ospf 10
+ router-id 1.1.1.1
+ network 172.16.1.0 0.0.0.255 area 0
+ network 172.16.0.0 0.0.0.255 area 0
+ network 10.10.10.10 0.0.0.0 area 0
+
+end
+wr
+
+
+enable
+conf t
+hostname R2
+no ip domain-lookup
+
+interface g0/0
+ description TO-SW3-OSPF
+ ip address 172.16.0.2 255.255.255.0
+ no shutdown
+
+interface g0/1
+ description LAN2
+ ip address 172.16.2.1 255.255.255.0
+ no shutdown
+
+interface loopback0
+ ip address 20.20.20.20 255.255.255.255
+
+router ospf 10
+ router-id 2.2.2.2
+ network 172.16.0.0 0.0.0.255 area 0
+ network 172.16.2.0 0.0.0.255 area 0
+ network 20.20.20.20 0.0.0.0 area 0
+
+end
+wr
+
+
+
+enable
+conf t
+hostname R3
+no ip domain-lookup
+
+interface g0/0
+ description TO-SW3-INSIDE
+ ip address 172.16.0.3 255.255.255.0
+ ip nat inside
+ ip access-group ACL_TO_SERVER in
+ no shutdown
+
+interface g0/1
+ description TO-SERVER-INTERNET
+ ip address 10.0.0.1 255.255.255.252
+ ip nat outside
+ no shutdown
+
+interface loopback0
+ ip address 50.80.80.80 255.255.255.255
+
+router ospf 10
+ router-id 3.3.3.3
+ network 172.16.0.0 0.0.0.255 area 0
+ network 10.0.0.0 0.0.0.3 area 0
+ network 50.80.80.80 0.0.0.0 area 0
+
+ip access-list standard NAT_LAN
+ permit 172.16.1.0 0.0.0.255
+ permit 172.16.2.0 0.0.0.255
+
+ip nat inside source list NAT_LAN interface g0/1 overload
+
+ip access-list extended ACL_TO_SERVER
+ remark LAN1 khong duoc ping Server
+ deny icmp 172.16.1.0 0.0.0.255 host 10.0.0.2
+
+ remark LAN1 chi duoc dung HTTP den Server
+ permit tcp 172.16.1.0 0.0.0.255 host 10.0.0.2 eq 80
+
+ remark LAN2 duoc dung HTTPS den Server
+ permit tcp 172.16.2.0 0.0.0.255 host 10.0.0.2 eq 443
+
+ remark LAN2 duoc dung mail SMTP va POP3
+ permit tcp 172.16.2.0 0.0.0.255 host 10.0.0.2 eq 25
+ permit tcp 172.16.2.0 0.0.0.255 host 10.0.0.2 eq 110
+
+ remark Neu Server co DNS thi mo DNS cho LAN1 va LAN2
+ permit udp 172.16.0.0 0.0.255.255 host 10.0.0.2 eq 53
+ permit tcp 172.16.0.0 0.0.255.255 host 10.0.0.2 eq 53
+
+ remark Chan cac dich vu khac tu LAN1 va LAN2 den Server
+ deny ip 172.16.1.0 0.0.0.255 host 10.0.0.2
+ deny ip 172.16.2.0 0.0.0.255 host 10.0.0.2
+
+ remark Cho phep cac traffic khac de khong lam hong OSPF/lab
+ permit ip any any
+
+end
+wr
