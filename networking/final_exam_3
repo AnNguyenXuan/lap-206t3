@@ -13,11 +13,10 @@ interface g0/1
  ip address 172.16.0.1 255.255.255.0
  no shutdown
 
-interface loopback0
- ip address 10.10.10.10 255.255.255.255
-
-router ospf 10
- router-id 1.1.1.1
+router ospf 20
+ passive-interface default          ! Biến TẤT CẢ các cổng trên Router thành Passive
+ no passive-interface GigabitEthernet0/1  ! Chỉ mở lại OSPF cho cổng kết nối với Router khác
+ no passive-interface GigabitEthernet0/2  ! Chỉ mở lại OSPF cho cổng kết nối với Router khác
  network 172.16.1.0 0.0.0.255 area 0
  network 172.16.0.0 0.0.0.255 area 0
  network 10.10.10.10 0.0.0.0 area 0
@@ -41,77 +40,91 @@ interface g0/1
  ip address 172.16.2.1 255.255.255.0
  no shutdown
 
-interface loopback0
- ip address 20.20.20.20 255.255.255.255
-
-router ospf 10
- router-id 2.2.2.2
+router ospf 20
+ passive-interface default          ! Biến TẤT CẢ các cổng trên Router thành Passive
+ no passive-interface GigabitEthernet0/1  ! Chỉ mở lại OSPF cho cổng kết nối với Router khác
+ no passive-interface GigabitEthernet0/2  ! Chỉ mở lại OSPF cho cổng kết nối với Router khác
+ network 172.16.1.0 0.0.0.255 area 0
  network 172.16.0.0 0.0.0.255 area 0
- network 172.16.2.0 0.0.0.255 area 0
- network 20.20.20.20 0.0.0.0 area 0
+ network 10.10.10.10 0.0.0.0 area 0
 
 end
 wr
 
 
-
 enable
 conf t
-hostname R3
+hostname EDGE
 no ip domain-lookup
 
-interface g0/0
- description TO-SW3-INSIDE
- ip address 172.16.0.3 255.255.255.0
+interface s0/0/0
+ description TO_R1
+ ip address 13.0.0.2 255.255.255.0
  ip nat inside
- ip access-group ACL_TO_SERVER in
  no shutdown
 
-interface g0/1
- description TO-SERVER-INTERNET
- ip address 10.0.0.1 255.255.255.252
+interface s0/0/1
+ description TO_R2
+ ip address 14.0.0.2 255.255.255.0
+ ip nat inside
+ no shutdown
+
+interface fa0/0
+ description TO_SERVER
+ ip address 209.165.10.1 255.255.255.252
  ip nat outside
  no shutdown
 
-interface loopback0
- ip address 50.80.80.80 255.255.255.255
-
-router ospf 10
+router ospf 20
  router-id 3.3.3.3
- network 172.16.0.0 0.0.0.255 area 0
- network 10.0.0.0 0.0.0.3 area 0
- network 50.80.80.80 0.0.0.0 area 0
+ network 13.0.0.0 0.0.0.255 area 0
+ network 14.0.0.0 0.0.0.255 area 0
+ network 209.165.10.0 0.0.0.3 area 0
+ passive-interface fa0/0
 
-ip access-list standard NAT_LAN
- permit 172.16.1.0 0.0.0.255
- permit 172.16.2.0 0.0.0.255
+end
+wr
 
-ip nat inside source list NAT_LAN interface g0/1 overload
+conf t
 
-ip access-list extended ACL_TO_SERVER
- remark LAN1 khong duoc ping Server
- deny icmp 172.16.1.0 0.0.0.255 host 10.0.0.2
+ip access-list extended EDGE_POLICY
+ remark Permit OSPF routing
+ permit ospf any any
 
- remark LAN1 chi duoc dung HTTP den Server
- permit tcp 172.16.1.0 0.0.0.255 host 10.0.0.2 eq 80
+ remark Block PC1 ping Server
+ deny icmp host 192.168.10.10 host 209.165.10.2
 
- remark LAN2 duoc dung HTTPS den Server
- permit tcp 172.16.2.0 0.0.0.255 host 10.0.0.2 eq 443
+ remark Allow PC2 ping Server
+ permit icmp host 192.168.11.10 host 209.165.10.2
 
- remark LAN2 duoc dung mail SMTP va POP3
- permit tcp 172.16.2.0 0.0.0.255 host 10.0.0.2 eq 25
- permit tcp 172.16.2.0 0.0.0.255 host 10.0.0.2 eq 110
+ remark Allow PC1 and PC2 to use mail SMTP
+ permit tcp host 192.168.10.10 host 209.165.10.2 eq 25
+ permit tcp host 192.168.11.10 host 209.165.10.2 eq 25
 
- remark Neu Server co DNS thi mo DNS cho LAN1 va LAN2
- permit udp 172.16.0.0 0.0.255.255 host 10.0.0.2 eq 53
- permit tcp 172.16.0.0 0.0.255.255 host 10.0.0.2 eq 53
+ remark Allow PC1 and PC2 to use POP3
+ permit tcp host 192.168.10.10 host 209.165.10.2 eq 110
+ permit tcp host 192.168.11.10 host 209.165.10.2 eq 110
 
- remark Chan cac dich vu khac tu LAN1 va LAN2 den Server
- deny ip 172.16.1.0 0.0.0.255 host 10.0.0.2
- deny ip 172.16.2.0 0.0.0.255 host 10.0.0.2
+ remark Allow PC1 and PC2 to use IMAP
+ permit tcp host 192.168.10.10 host 209.165.10.2 eq 143
+ permit tcp host 192.168.11.10 host 209.165.10.2 eq 143
 
- remark Cho phep cac traffic khac de khong lam hong OSPF/lab
+ remark Block PC1 web access to Server
+ deny tcp host 192.168.10.10 host 209.165.10.2 eq 80
+
+ remark Allow PC2 web access to Server
+ permit tcp host 192.168.11.10 host 209.165.10.2 eq 80
+
+ remark Allow other traffic
  permit ip any any
+
+exit
+
+interface s0/0/0
+ ip access-group EDGE_POLICY in
+
+interface s0/0/1
+ ip access-group EDGE_POLICY in
 
 end
 wr
