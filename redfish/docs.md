@@ -1,5 +1,0 @@
-## Giới thiệu redfish
-```
-
-
-```

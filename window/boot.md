@@ -45,3 +45,8 @@ bcdboot C:\Windows /s S: /f UEFI
 wpeutil reboot
 
 ```
+
+## Feature Enabel
+```
+dism /online /enable-feature /featurename:NetFx3 /All /Source:D:\sources\sxs /LimitAccess
+```

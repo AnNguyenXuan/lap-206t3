@@ -19,6 +19,6 @@ Nhấn P  → lọc Nonpaged Pool
 Nhấn B  → sort theo Bytes
 
 findstr /m /l "VFil" c:\Windows\System32\drivers\*.sys
-
-
+fltmc filters
+fltmc unload vsepflt
 ```
