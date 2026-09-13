@@ -22,3 +22,14 @@ findstr /m /l "VFil" c:\Windows\System32\drivers\*.sys
 fltmc filters
 fltmc unload vsepflt
 ```
+
+## Disable Services 
+```
+Cách tắt anti malware services
+
+Computer Configuration -> Administrative Templates -> Windows Components -> Microsoft Defender Antivirus
+
+Turn off Microsoft Defender Antivirus -> Enable
+Real-time Protection -> Turn off real-time protection -> Enable
+
+```
