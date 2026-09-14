@@ -274,3 +274,13 @@ set /a FAIL+=1
 exit /b %RC%
 ```
 
+## Bypass TPM 2.0
+```
+Sau khi boot vào ISO
+Bước 1: Shift + F10
+Bước 2: regedit.exe
+Bước 3: HKLM\SYSTEM\Setup
+Bước 4: New Key > Nhập LabConfig
+Bước 5: Tạo DWORD (32 bit) > BypassTPMCheck = 1 && BypassSecureBootCheck = 1
+```
+
