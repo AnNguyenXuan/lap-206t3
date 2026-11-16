@@ -14,7 +14,7 @@ Horizon Cloud = Portal liên quan đến quản trị Cloud Desktop cung cấp c
 2. Settings
 3. Chọn cấu hình, nhấn + chọn tenants
 4. Add interface unlink
-uplink : chọn dải internet 
+uplink : chọn dải internet
 Add IP primary, secondary theo quy hoạch
 5. Add interface internal
 internal : dải đã quy hoạch nội bộ cho khách hàng

@@ -31,5 +31,45 @@ Computer Configuration -> Administrative Templates -> Windows Components -> Micr
 
 Turn off Microsoft Defender Antivirus -> Enable
 Real-time Protection -> Turn off real-time protection -> Enable
+```
 
+## Optimized Windows
+```
+powercfg /hibernate off
+powercfg /hibernate on
+powercfg /a
+
+DISM /Online /Set-ReservedStorageState /State:Disabled
+DISM /Online /Set-ReservedStorageState /State:Enabled
+DISM /Online /Get-ReservedStorageState
+
+Get-AppxPackage | Select Name, PackageFullName
+Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like "*tên_app*" | Remove-AppxProvisionedPackage -Online
+
+$apps = @(
+  "Microsoft.GetHelp","Microsoft.Getstarted","Microsoft.BingWeather","Microsoft.BingSearch",
+  "Microsoft.WindowsFeedbackHub","Microsoft.549981C3F5F10","Microsoft.Wallet","Microsoft.People",
+  "Microsoft.WindowsMaps","microsoft.windowscommunicationsapps","Microsoft.Microsoft3DViewer",
+  "Microsoft.MixedReality.Portal","Microsoft.MicrosoftSolitaireCollection","Microsoft.ZuneMusic",
+  "Microsoft.ZuneVideo","Microsoft.XboxApp","Microsoft.YourPhone","MicrosoftWindows.CrossDevice",
+  "Microsoft.Windows.DevHome"
+)
+
+foreach ($a in $apps) {
+  Get-AppxPackage -AllUsers -Name $a | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+  Get-AppxProvisionedPackage -Online | Where-Object DisplayName -eq $a | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+}
+
+$apps = @(
+  "Microsoft.GetHelp","Microsoft.Getstarted","Microsoft.BingWeather","Microsoft.BingSearch",
+  "Microsoft.WindowsFeedbackHub","Microsoft.549981C3F5F10","Microsoft.Wallet","Microsoft.People",
+  "Microsoft.WindowsMaps","microsoft.windowscommunicationsapps","Microsoft.Microsoft3DViewer",
+  "Microsoft.MixedReality.Portal","Microsoft.MicrosoftSolitaireCollection","Microsoft.ZuneMusic",
+  "Microsoft.ZuneVideo","Microsoft.XboxApp","Microsoft.YourPhone","MicrosoftWindows.CrossDevice",
+  "Microsoft.Windows.DevHome"
+)
+
+foreach ($a in $apps) {
+  Get-AppxPackage -Name $a | Remove-AppxPackage -ErrorAction Continue
+}
 ```
